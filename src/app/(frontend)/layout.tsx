@@ -2,7 +2,7 @@ import React from 'react'
 import { Noto_Serif, Playfair_Display } from 'next/font/google'
 import '@/app/globals.css'
 import { cn } from '@/lib/utils'
-import Header from '@/components/header'
+import Header from '@/components/Header'
 
 const playfair_display = Playfair_Display({
   display: 'swap',

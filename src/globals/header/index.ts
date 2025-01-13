@@ -80,6 +80,15 @@ export const Header: GlobalConfig = {
               required: true,
               validate: validateURL,
             },
+            {
+              type: 'textarea',
+              name: 'description',
+              label: 'Description',
+              admin: {
+                description: 'A description of the link',
+              },
+              maxLength: 200,
+            },
           ],
         },
       ],

@@ -371,6 +371,10 @@ export interface Header {
       | {
           label: string;
           href: string;
+          /**
+           * A description of the link
+           */
+          description?: string | null;
           id?: string | null;
         }[]
       | null;
@@ -398,6 +402,7 @@ export interface HeaderSelect<T extends boolean = true> {
           | {
               label?: T;
               href?: T;
+              description?: T;
               id?: T;
             };
         id?: T;
