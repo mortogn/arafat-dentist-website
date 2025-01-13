@@ -22,7 +22,7 @@ export function validateURL(value?: string | string[] | null) {
     new URL(value)
     return true
   } catch {
-    if (value.startsWith('/') && /^\/[\w-/]*$/.test(value)) {
+    if (value.startsWith('/') && /^\/[\w-/#]*$/.test(value)) {
       return true
     }
     return 'Please enter a valid URL (e.g., https://example.com) or pathname (e.g., /about)'

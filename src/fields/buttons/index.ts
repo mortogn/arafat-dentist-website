@@ -9,6 +9,7 @@ export const buttonsField = ({ overrides = {} }: ButtonsFieldParams) => {
     type: 'array',
     name: 'buttons',
     label: 'Buttons',
+    interfaceName: 'ButtonsField',
     ...(overrides || {}),
     fields: [
       {
@@ -38,16 +39,19 @@ export const buttonsField = ({ overrides = {} }: ButtonsFieldParams) => {
           description: 'The variant of the button',
         },
         label: 'Variant',
+        required: true,
       },
       {
         type: 'radio',
         name: 'size',
-        options: ['small', 'medium', 'large'],
-        defaultValue: 'medium',
+        options: ['default', 'small', 'large'],
+        defaultValue: 'default',
         admin: {
           description: 'The size of the button',
         },
+
         label: 'Size',
+        required: true,
       },
       {
         type: 'radio',

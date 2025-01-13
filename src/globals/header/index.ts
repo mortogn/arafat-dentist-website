@@ -1,6 +1,7 @@
 import { buttonsField } from '@/fields/buttons'
 import { validateURL } from '@/utilities/validateURL'
 import type { GlobalConfig } from 'payload'
+import { revalidateHeader } from './hooks/revalidateHeader'
 
 export const Header: GlobalConfig = {
   slug: 'header',
@@ -10,7 +11,9 @@ export const Header: GlobalConfig = {
   admin: {
     description: 'The header of the site',
   },
-
+  hooks: {
+    afterChange: [revalidateHeader],
+  },
   fields: [
     {
       type: 'upload',

@@ -6,6 +6,36 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ButtonsField".
+ */
+export type ButtonsField =
+  | {
+      /**
+       * The text to display on the button
+       */
+      label: string;
+      /**
+       * The URL to link to
+       */
+      href: string;
+      /**
+       * The variant of the button
+       */
+      variant: 'default' | 'secondary' | 'ghost' | 'outline';
+      /**
+       * The size of the button
+       */
+      size: 'default' | 'small' | 'large';
+      /**
+       * The icon to display on the button
+       */
+      icon?: 'none' | null;
+      id?: string | null;
+    }[]
+  | null;
+
 export interface Config {
   auth: {
     users: UserAuthOperations;
@@ -132,31 +162,7 @@ export interface Page {
 export interface HeroBlock {
   heading: string;
   subheading: string;
-  buttons?:
-    | {
-        /**
-         * The text to display on the button
-         */
-        label: string;
-        /**
-         * The URL to link to
-         */
-        href: string;
-        /**
-         * The variant of the button
-         */
-        variant?: ('default' | 'secondary' | 'ghost' | 'outline') | null;
-        /**
-         * The size of the button
-         */
-        size?: ('small' | 'medium' | 'large') | null;
-        /**
-         * The icon to display on the button
-         */
-        icon?: 'none' | null;
-        id?: string | null;
-      }[]
-    | null;
+  buttons?: ButtonsField;
   underButtonText: string;
   id?: string | null;
   blockName?: string | null;
@@ -290,19 +296,22 @@ export interface PagesSelect<T extends boolean = true> {
 export interface HeroBlockSelect<T extends boolean = true> {
   heading?: T;
   subheading?: T;
-  buttons?:
-    | T
-    | {
-        label?: T;
-        href?: T;
-        variant?: T;
-        size?: T;
-        icon?: T;
-        id?: T;
-      };
+  buttons?: T | ButtonsFieldSelect<T>;
   underButtonText?: T;
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ButtonsField_select".
+ */
+export interface ButtonsFieldSelect<T extends boolean = true> {
+  label?: T;
+  href?: T;
+  variant?: T;
+  size?: T;
+  icon?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -367,31 +376,7 @@ export interface Header {
       | null;
     id?: string | null;
   }[];
-  buttons?:
-    | {
-        /**
-         * The text to display on the button
-         */
-        label: string;
-        /**
-         * The URL to link to
-         */
-        href: string;
-        /**
-         * The variant of the button
-         */
-        variant?: ('default' | 'secondary' | 'ghost' | 'outline') | null;
-        /**
-         * The size of the button
-         */
-        size?: ('small' | 'medium' | 'large') | null;
-        /**
-         * The icon to display on the button
-         */
-        icon?: 'none' | null;
-        id?: string | null;
-      }[]
-    | null;
+  buttons?: ButtonsField;
   _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -417,16 +402,7 @@ export interface HeaderSelect<T extends boolean = true> {
             };
         id?: T;
       };
-  buttons?:
-    | T
-    | {
-        label?: T;
-        href?: T;
-        variant?: T;
-        size?: T;
-        icon?: T;
-        id?: T;
-      };
+  buttons?: T | ButtonsFieldSelect<T>;
   _status?: T;
   updatedAt?: T;
   createdAt?: T;

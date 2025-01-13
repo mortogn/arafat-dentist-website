@@ -21,22 +21,32 @@
     "@payloadcms/plugin-seo": "^3.16.0",
     "@payloadcms/richtext-lexical": "latest",
     "@payloadcms/storage-s3": "^3.16.0",
+    "@radix-ui/react-navigation-menu": "^1.2.3",
+    "@radix-ui/react-slot": "^1.1.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "cross-env": "^7.0.3",
     "graphql": "^16.8.1",
+    "lucide-react": "^0.471.1",
     "next": "15.1.0",
     "payload": "latest",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "sharp": "0.32.6"
+    "sharp": "0.32.6",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
     "@types/node": "^22.5.4",
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.1",
+    "autoprefixer": "^10.4.20",
     "eslint": "^9.16.0",
     "eslint-config-next": "15.1.0",
+    "postcss": "^8.4.49",
     "prettier": "^3.4.2",
+    "tailwindcss": "^3.4.17",
     "typescript": "5.7.2"
   },
   "engines": {
