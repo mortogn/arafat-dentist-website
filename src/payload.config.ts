@@ -9,6 +9,9 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Pages } from './collections/Pages'
+import { plugins } from './plugins'
+import { Header } from './globals/header'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,7 +23,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Pages],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -29,9 +32,25 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
+  localization: {
+    locales: [
+      {
+        code: 'en-US',
+        label: 'English',
+      },
+      {
+        code: 'bn-BD',
+        label: 'Bangla',
+      },
+    ],
+    defaultLocale: 'en-US',
+    fallback: true,
+  },
   sharp,
+  globals: [Header],
   plugins: [
     payloadCloudPlugin(),
+    ...plugins,
     // storage-adapter-placeholder
   ],
 })
