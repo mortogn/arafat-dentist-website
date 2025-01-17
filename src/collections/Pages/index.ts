@@ -1,7 +1,9 @@
+import { BookingFormBlock } from '@/blocks/BookingFormBlock'
 import { HeroBlock } from '@/blocks/HeroBlock'
 import { SEOFields } from '@/fields/seo'
 import { slugFields } from '@/fields/slug'
 import { CollectionConfig } from 'payload'
+import { populateBookAppointmentBlock } from './hooks/populate-book-appointment-block'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -16,6 +18,9 @@ export const Pages: CollectionConfig = {
     // useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'published'],
   },
+  hooks: {
+    afterRead: [populateBookAppointmentBlock],
+  },
   fields: [
     {
       type: 'text',
@@ -29,15 +34,13 @@ export const Pages: CollectionConfig = {
       type: 'tabs',
       tabs: [
         {
-          name: 'content',
           label: 'Content',
-
           fields: [
             {
               type: 'blocks',
               name: 'layout',
               localized: true,
-              blocks: [HeroBlock],
+              blocks: [HeroBlock, BookingFormBlock],
             },
           ],
         },

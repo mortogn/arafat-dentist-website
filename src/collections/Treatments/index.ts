@@ -1,3 +1,5 @@
+import { SEOFields } from '@/fields/seo'
+import { slugFields } from '@/fields/slug'
 import { CollectionConfig } from 'payload'
 
 export const Treatments: CollectionConfig = {
@@ -15,22 +17,22 @@ export const Treatments: CollectionConfig = {
   },
   fields: [
     {
+      type: 'text',
+      name: 'title',
+      label: 'Title',
+      required: true,
+      localized: true,
+      admin: {
+        description: 'The title of the treatment',
+      },
+    },
+    ...slugFields({ fieldToUse: 'title' }),
+    {
       type: 'tabs',
       tabs: [
         {
-          name: 'details',
           label: 'Details',
           fields: [
-            {
-              type: 'text',
-              name: 'title',
-              label: 'Title',
-              required: true,
-              localized: true,
-              admin: {
-                description: 'The title of the treatment',
-              },
-            },
             {
               type: 'textarea',
               name: 'description',
@@ -42,6 +44,20 @@ export const Treatments: CollectionConfig = {
               maxLength: 250,
             },
             {
+              type: 'upload',
+              name: 'thumbnail',
+              relationTo: 'media',
+              required: true,
+              filterOptions: {
+                mimeType: { contains: 'image' },
+              },
+            },
+          ],
+        },
+        {
+          label: 'Content',
+          fields: [
+            {
               type: 'richText',
               name: 'content',
               label: 'Content',
@@ -52,6 +68,11 @@ export const Treatments: CollectionConfig = {
               },
             },
           ],
+        },
+        {
+          name: 'meta',
+          fields: SEOFields,
+          label: 'SEO',
         },
       ],
     },

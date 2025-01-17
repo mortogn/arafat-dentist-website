@@ -30,6 +30,7 @@ export const slugFields = ({ overrides = {}, fieldToUse }: SlugFieldsParams) => 
     name: 'slug',
     label: 'Slug',
     index: true,
+    unique: true,
     required: true,
     ...(slugOverrides || {}),
     hooks: {

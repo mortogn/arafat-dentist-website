@@ -44,6 +44,7 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
+    treatments: Treatment;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -53,6 +54,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    treatments: TreatmentsSelect<false> | TreatmentsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -141,9 +143,7 @@ export interface Page {
    * The page's URL
    */
   slug: string;
-  content?: {
-    layout?: HeroBlock[] | null;
-  };
+  layout?: (HeroBlock | BookingFormBlock)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -170,6 +170,81 @@ export interface HeroBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BookingFormBlock".
+ */
+export interface BookingFormBlock {
+  /**
+   * The title of the booking form
+   */
+  title: string;
+  /**
+   * The subtitle of the booking form
+   */
+  subtitle: string;
+  image: string | Media;
+  /**
+   * Show all treatments in the booking form
+   */
+  allTreatments?: boolean | null;
+  /**
+   * Select the treatments to show in the booking form
+   */
+  treatments?: (string | Treatment)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'booking-form';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "treatments".
+ */
+export interface Treatment {
+  id: string;
+  /**
+   * The title of the treatment
+   */
+  title: string;
+  lock?: boolean | null;
+  /**
+   * The page's URL
+   */
+  slug: string;
+  /**
+   * A short description of the treatment
+   */
+  description?: string | null;
+  thumbnail: string | Media;
+  /**
+   * All the details about the treatment including price, duration and benefits
+   */
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -186,6 +261,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: string | Page;
+      } | null)
+    | ({
+        relationTo: 'treatments';
+        value: string | Treatment;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -270,14 +349,11 @@ export interface PagesSelect<T extends boolean = true> {
   title?: T;
   lock?: T;
   slug?: T;
-  content?:
+  layout?:
     | T
     | {
-        layout?:
-          | T
-          | {
-              hero?: T | HeroBlockSelect<T>;
-            };
+        hero?: T | HeroBlockSelect<T>;
+        'booking-form'?: T | BookingFormBlockSelect<T>;
       };
   meta?:
     | T
@@ -312,6 +388,40 @@ export interface ButtonsFieldSelect<T extends boolean = true> {
   size?: T;
   icon?: T;
   id?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BookingFormBlock_select".
+ */
+export interface BookingFormBlockSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  image?: T;
+  allTreatments?: T;
+  treatments?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "treatments_select".
+ */
+export interface TreatmentsSelect<T extends boolean = true> {
+  title?: T;
+  lock?: T;
+  slug?: T;
+  description?: T;
+  thumbnail?: T;
+  content?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
