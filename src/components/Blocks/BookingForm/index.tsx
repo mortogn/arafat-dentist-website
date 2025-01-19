@@ -9,9 +9,9 @@ type BookingFormProps = {
 
 const BookingForm: FC<BookingFormProps> = ({ data }) => {
   return (
-    <div className="flex items-center my-10 justify-between h-[55rem] rounded-md border border-border overflow-hidden shadow-md">
-      <div className="w-1/2 px-10 flex items-center flex-col justify-center ">
-        <div className="space-y-2  text-center">
+    <div className="flex items-center my-10 justify-between h-[58rem] rounded-md border border-border overflow-hidden shadow-md">
+      <div className="w-1/2 px-10 flex items-center flex-col justify-center gap-5">
+        <div className="space-y-2  text-center max-w-[450px]">
           <h1 className="text-3xl font-medium tracking-tighter">{data.title}</h1>
           <p className="text-muted-foreground tracking-wide">{data.subtitle}</p>
         </div>
