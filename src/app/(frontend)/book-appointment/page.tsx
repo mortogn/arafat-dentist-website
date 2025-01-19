@@ -11,8 +11,6 @@ export default async function BookingPage() {
     notFound()
   }
 
-  console.log(page)
-
   return (
     <MaxWidthWrapper>
       {page.layout?.map((block) => renderBookAppointmentPage(block))}

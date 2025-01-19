@@ -21,6 +21,10 @@ export const Pages: CollectionConfig = {
   hooks: {
     afterRead: [populateBookAppointmentBlock],
   },
+  versions: {
+    drafts: true,
+    maxPerDoc: 50,
+  },
   fields: [
     {
       type: 'text',
