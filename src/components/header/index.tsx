@@ -26,7 +26,7 @@ const Header = async () => {
               <Logo
                 src={(headerData.logo as Media).url!}
                 alt={(headerData.logo as Media).alt}
-                className="h-[75px]"
+                className="h-[40px]"
               />
             </Link>
 

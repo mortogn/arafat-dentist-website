@@ -11,7 +11,7 @@ type Props = {
 
 const Topbar: FC<Props> = ({ data }) => {
   return (
-    <div className="bg-primary py-3.5 text-primary-foreground my-auto">
+    <div className="bg-primary py-3 text-primary-foreground my-auto">
       <MaxWidthWrapper className="flex items-center justify-between">
         <div className="font-medium tracking-wide text-sm">{data.text}</div>
         {data.callToAction && data.buttons && <Buttons data={data.buttons} />}
