@@ -2,6 +2,7 @@ import { buttonsField } from '@/fields/buttons'
 import { validateURL } from '@/utilities/validateURL'
 import type { GlobalConfig } from 'payload'
 import { revalidateHeader } from './hooks/revalidateHeader'
+import { populateSocials } from './hooks/populate-socials'
 
 export const Header: GlobalConfig = {
   slug: 'header',
@@ -13,8 +14,48 @@ export const Header: GlobalConfig = {
   },
   hooks: {
     afterChange: [revalidateHeader],
+    afterRead: [populateSocials],
   },
   fields: [
+    {
+      type: 'group',
+      name: 'topbar',
+      label: 'Topbar',
+      fields: [
+        {
+          name: 'text',
+          type: 'text',
+          label: 'Text',
+          localized: true,
+          required: true,
+        },
+        {
+          name: 'callToAction',
+          type: 'checkbox',
+          label: 'Call To Action',
+          defaultValue: false,
+          admin: {
+            condition: (_, siblingData) => !Boolean(siblingData.showSocials),
+          },
+        },
+        buttonsField({
+          overrides: {
+            admin: {
+              condition: (_, siblingData) => Boolean(siblingData.callToAction),
+            },
+            maxRows: 2,
+          },
+        }),
+        {
+          name: 'showSocials',
+          type: 'checkbox',
+          defaultValue: true,
+          admin: {
+            condition: (_, siblingData) => !Boolean(siblingData.callToAction),
+          },
+        },
+      ],
+    },
     {
       type: 'upload',
       name: 'logo',
@@ -53,18 +94,33 @@ export const Header: GlobalConfig = {
           required: true,
           validate: validateURL,
         },
+
+        {
+          type: 'checkbox',
+          name: 'showTreatments',
+          label: 'Show Treatments',
+          admin: {
+            description: 'Show the treatments dropdown',
+          },
+          defaultValue: false,
+        },
+
         {
           type: 'checkbox',
           name: 'hasChildren',
           label: 'Has Children',
           defaultValue: false,
+          admin: {
+            condition: (_, siblingData) => !Boolean(siblingData.showTreatments),
+          },
         },
 
         {
           type: 'array',
           name: 'children',
           admin: {
-            condition: (_, siblingData) => Boolean(siblingData.hasChildren),
+            condition: (_, siblingData) =>
+              Boolean(siblingData.hasChildren) && !Boolean(siblingData.showTreatments),
           },
           fields: [
             {
@@ -97,5 +153,6 @@ export const Header: GlobalConfig = {
   ],
   versions: {
     drafts: true,
+    max: 50,
   },
 }

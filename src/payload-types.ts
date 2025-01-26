@@ -64,9 +64,11 @@ export interface Config {
   };
   globals: {
     header: Header;
+    socials: Social;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
+    socials: SocialsSelect<false> | SocialsSelect<true>;
   };
   locale: 'en-US' | 'bn-BD';
   user: User & {
@@ -465,6 +467,12 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: string;
+  topbar: {
+    text: string;
+    callToAction?: boolean | null;
+    buttons?: ButtonsField;
+    showSocials?: boolean | null;
+  };
   /**
    * The logo of the site
    */
@@ -478,6 +486,10 @@ export interface Header {
      * The URL to link to
      */
     href: string;
+    /**
+     * Show the treatments dropdown
+     */
+    showTreatments?: boolean | null;
     hasChildren?: boolean | null;
     children?:
       | {
@@ -499,15 +511,42 @@ export interface Header {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "socials".
+ */
+export interface Social {
+  id: string;
+  socials?:
+    | {
+        icon: 'facebook' | 'instagram' | 'youtube' | 'twitter' | 'none';
+        platform: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
+  topbar?:
+    | T
+    | {
+        text?: T;
+        callToAction?: T;
+        buttons?: T | ButtonsFieldSelect<T>;
+        showSocials?: T;
+      };
   logo?: T;
   links?:
     | T
     | {
         label?: T;
         href?: T;
+        showTreatments?: T;
         hasChildren?: T;
         children?:
           | T
@@ -520,6 +559,24 @@ export interface HeaderSelect<T extends boolean = true> {
         id?: T;
       };
   buttons?: T | ButtonsFieldSelect<T>;
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "socials_select".
+ */
+export interface SocialsSelect<T extends boolean = true> {
+  socials?:
+    | T
+    | {
+        icon?: T;
+        platform?: T;
+        url?: T;
+        id?: T;
+      };
   _status?: T;
   updatedAt?: T;
   createdAt?: T;

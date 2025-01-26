@@ -1,33 +1,42 @@
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import React from 'react'
 
-import type { Header as HeaderData, Media } from '@/payload-types'
+import type { Header as HeaderData, Media, Social } from '@/payload-types'
 import Logo from '../Logo'
 import Navbar from './navbar'
 
 import Buttons from '../Buttons'
 import MaxWidthWrapper from '../MaxWidthWrapper'
 import Link from 'next/link'
+import Topbar from './Topbar'
 
 const Header = async () => {
-  const headerData: HeaderData = await getCachedGlobal('header', 2)()
+  //@ts-expect-error - This is the correct header header data
+  const headerData: HeaderData & {
+    topbar: HeaderData['topbar'] & { socials?: Social['socials'] }
+  } = await getCachedGlobal('header', 2)()
 
   return (
-    <header className="">
-      <MaxWidthWrapper className="flex items-center justify-between h-[80px] py-4">
-        <Link href={'/'}>
-          <Logo
-            src={(headerData.logo as Media).url!}
-            alt={(headerData.logo as Media).alt}
-            className="h-[75px]"
-          />
-        </Link>
+    <>
+      {headerData.topbar && <Topbar data={headerData.topbar} />}
+      <header className="">
+        <MaxWidthWrapper className="flex items-center justify-between h-[80px] py-4">
+          <div className="flex items-center gap-10">
+            <Link href={'/'}>
+              <Logo
+                src={(headerData.logo as Media).url!}
+                alt={(headerData.logo as Media).alt}
+                className="h-[75px]"
+              />
+            </Link>
 
-        <Navbar data={headerData} />
+            <Navbar data={headerData} />
+          </div>
 
-        {headerData.buttons && <Buttons data={headerData.buttons} />}
-      </MaxWidthWrapper>
-    </header>
+          {headerData.buttons && <Buttons data={headerData.buttons} />}
+        </MaxWidthWrapper>
+      </header>
+    </>
   )
 }
 

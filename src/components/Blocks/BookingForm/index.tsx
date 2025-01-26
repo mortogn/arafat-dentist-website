@@ -18,7 +18,7 @@ const BookingForm: FC<BookingFormProps> = ({ data }) => {
         <ActualBookForm treatments={data.treatments as Treatment[]} />
       </div>
 
-      <div className="relative h-full  w-1/2">
+      <div className="relative h-full w-1/2">
         <Image
           src={(data.image as Media).url!}
           alt={(data.image as Media).alt}

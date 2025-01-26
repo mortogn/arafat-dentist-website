@@ -13,6 +13,7 @@ import { Pages } from './collections/Pages'
 import { plugins } from './plugins'
 import { Header } from './globals/header'
 import { Treatments } from './collections/Treatments'
+import { Socials } from './globals/socials'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -48,7 +49,7 @@ export default buildConfig({
     fallback: true,
   },
   sharp,
-  globals: [Header],
+  globals: [Header, Socials],
   plugins: [
     payloadCloudPlugin(),
     ...plugins,
