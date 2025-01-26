@@ -5,7 +5,7 @@ export const populateBookAppointmentBlock: CollectionAfterReadHook<Page> = async
   doc,
   req: { payload },
 }) => {
-  if (!doc?.layout) return doc
+  if (!doc || !doc?.layout) return doc
 
   const bookingFormBlock = doc.layout.find((block) => block.blockType === 'booking-form')
 

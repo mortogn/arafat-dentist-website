@@ -1,27 +1,50 @@
-import { buttonsField } from '@/fields/buttons'
+import {
+  BlocksFeature,
+  BoldFeature,
+  FixedToolbarFeature,
+  HeadingFeature,
+  ItalicFeature,
+  lexicalEditor,
+  ParagraphFeature,
+  StrikethroughFeature,
+} from '@payloadcms/richtext-lexical'
 import { Block } from 'payload'
+import { ButtonBlocks } from './richtext/ButtonsBlock'
 
 export const HeroBlock: Block = {
   slug: 'hero',
   interfaceName: 'HeroBlock',
   fields: [
     {
-      type: 'text',
-      label: 'Heading',
-      name: 'heading',
+      type: 'richText',
+      name: 'text',
+      localized: true,
+      editor: lexicalEditor({
+        features: () => {
+          return [
+            FixedToolbarFeature(),
+            HeadingFeature({
+              enabledHeadingSizes: ['h1', 'h2', 'h3'],
+            }),
+            ParagraphFeature(),
+            BoldFeature(),
+            ItalicFeature(),
+            StrikethroughFeature(),
+            BlocksFeature({
+              blocks: [ButtonBlocks],
+            }),
+          ]
+        },
+      }),
       required: true,
     },
     {
-      type: 'textarea',
-      label: 'Subheading',
-      name: 'subheading',
-      required: true,
-    },
-    buttonsField({ overrides: { maxRows: 2 } }),
-    {
-      type: 'text',
-      label: 'Under Button Text',
-      name: 'underButtonText',
+      type: 'upload',
+      name: 'image',
+      relationTo: 'media',
+      filterOptions: {
+        mimeType: { contains: 'image' },
+      },
       required: true,
     },
   ],

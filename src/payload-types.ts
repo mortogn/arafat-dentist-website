@@ -163,10 +163,22 @@ export interface Page {
  * via the `definition` "HeroBlock".
  */
 export interface HeroBlock {
-  heading: string;
-  subheading: string;
-  buttons?: ButtonsField;
-  underButtonText: string;
+  text: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  image: string | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero';
@@ -374,24 +386,10 @@ export interface PagesSelect<T extends boolean = true> {
  * via the `definition` "HeroBlock_select".
  */
 export interface HeroBlockSelect<T extends boolean = true> {
-  heading?: T;
-  subheading?: T;
-  buttons?: T | ButtonsFieldSelect<T>;
-  underButtonText?: T;
+  text?: T;
+  image?: T;
   id?: T;
   blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ButtonsField_select".
- */
-export interface ButtonsFieldSelect<T extends boolean = true> {
-  label?: T;
-  href?: T;
-  variant?: T;
-  size?: T;
-  icon?: T;
-  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -566,6 +564,18 @@ export interface HeaderSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ButtonsField_select".
+ */
+export interface ButtonsFieldSelect<T extends boolean = true> {
+  label?: T;
+  href?: T;
+  variant?: T;
+  size?: T;
+  icon?: T;
+  id?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "socials_select".
  */
 export interface SocialsSelect<T extends boolean = true> {
@@ -581,6 +591,16 @@ export interface SocialsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ButtonsBlock".
+ */
+export interface ButtonsBlock {
+  buttons?: ButtonsField;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'buttons';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

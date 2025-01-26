@@ -19,7 +19,7 @@ export const Pages: CollectionConfig = {
     defaultColumns: ['title', 'slug', 'published'],
   },
   hooks: {
-    afterRead: [populateBookAppointmentBlock],
+    // afterRead: [populateBookAppointmentBlock],
   },
   versions: {
     drafts: true,
@@ -43,7 +43,7 @@ export const Pages: CollectionConfig = {
             {
               type: 'blocks',
               name: 'layout',
-              localized: true,
+
               blocks: [HeroBlock, BookingFormBlock],
             },
           ],
