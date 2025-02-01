@@ -4,6 +4,7 @@ import { SEOFields } from '@/fields/seo'
 import { slugFields } from '@/fields/slug'
 import { CollectionConfig } from 'payload'
 import { populateBookAppointmentBlock } from './hooks/populate-book-appointment-block'
+import { TreatmentsBlock } from '@/blocks/TreatmentsBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -44,7 +45,7 @@ export const Pages: CollectionConfig = {
               type: 'blocks',
               name: 'layout',
 
-              blocks: [HeroBlock, BookingFormBlock],
+              blocks: [HeroBlock, BookingFormBlock, TreatmentsBlock],
             },
           ],
         },

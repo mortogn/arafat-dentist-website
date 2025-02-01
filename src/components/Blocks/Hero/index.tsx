@@ -10,8 +10,6 @@ type Props = {
 }
 
 const HeroSection: FC<Props> = ({ data }) => {
-  console.log(data)
-
   return (
     <MaxWidthWrapper element="section" className="flex items-center justify-between gap-10">
       <div className="w-1/2">

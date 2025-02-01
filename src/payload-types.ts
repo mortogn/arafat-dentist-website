@@ -145,7 +145,7 @@ export interface Page {
    * The page's URL
    */
   slug: string;
-  layout?: (HeroBlock | BookingFormBlock)[] | null;
+  layout?: (HeroBlock | BookingFormBlock | TreatmentsBlock)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -260,6 +260,45 @@ export interface Treatment {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TreatmentsBlock".
+ */
+export interface TreatmentsBlock {
+  /**
+   * The title of the section
+   */
+  title: string;
+  /**
+   * The description of the section
+   */
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Check this box to show all treatments
+   */
+  showAllTreatments?: boolean | null;
+  /**
+   * Select the treatments to display
+   */
+  treatments?: (string | Treatment)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'treatments';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -369,6 +408,7 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         hero?: T | HeroBlockSelect<T>;
         'booking-form'?: T | BookingFormBlockSelect<T>;
+        treatments?: T | TreatmentsBlockSelect<T>;
       };
   meta?:
     | T
@@ -400,6 +440,18 @@ export interface BookingFormBlockSelect<T extends boolean = true> {
   subtitle?: T;
   image?: T;
   allTreatments?: T;
+  treatments?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TreatmentsBlock_select".
+ */
+export interface TreatmentsBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  showAllTreatments?: T;
   treatments?: T;
   id?: T;
   blockName?: T;
