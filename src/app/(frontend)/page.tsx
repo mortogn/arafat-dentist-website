@@ -1,4 +1,5 @@
 import HeroSection from '@/components/Blocks/Hero'
+import TreatmentsSection from '@/components/Blocks/Treatments'
 import { BookingFormBlock, HeroBlock, TreatmentsBlock } from '@/payload-types'
 import { getPageBySlug } from '@/utilities/getPageBySlug'
 import { getLocale } from '@/utilities/locales'
@@ -21,6 +22,8 @@ function renderer(block: Blocks) {
     case 'hero':
       return <HeroSection key={block.id} data={block} />
 
+    case 'treatments':
+      return <TreatmentsSection key={block.id} data={block} />
     default:
       return null
   }

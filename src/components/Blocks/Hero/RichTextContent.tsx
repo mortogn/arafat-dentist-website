@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { RichText, type JSXConvertersFunction } from '@payloadcms/richtext-lexical/react'
 import Buttons from '@/components/Buttons'
-import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import { cn } from '@/lib/utils'
 
 const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => {
   return {
@@ -13,16 +13,20 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => {
   }
 }
 
-type Props = {
-  data: SerializedEditorState
-}
-
-const RichTextContent: FC<Props> = ({ data }) => {
+const RichTextContent: FC<React.ComponentPropsWithRef<typeof RichText>> = ({
+  data,
+  className,
+  ...props
+}) => {
   return (
     <RichText
       converters={jsxConverters}
       data={data}
-      className="[&_h1]:text-5xl [&_h1]:font-extrabold [&_p]:my-4 [&_p]:leading-loose [&_p]:text-base [&_p]:text-muted-foreground [&_p]:tracking-wide"
+      {...props}
+      className={cn(
+        'md:[&_h1]:text-5xl [&_h1]:text-3xl [&_h1]:font-extrabold [&_p]:my-4 [&_p]:leading-loose [&_p]:text-sm md:[&_p]:text-base [&_p]:text-muted-foreground [&_p]:tracking-wide',
+        className,
+      )}
     />
   )
 }

@@ -5,6 +5,7 @@ import { slugFields } from '@/fields/slug'
 import { CollectionConfig } from 'payload'
 import { populateBookAppointmentBlock } from './hooks/populate-book-appointment-block'
 import { TreatmentsBlock } from '@/blocks/TreatmentsBlock'
+import { populateTreaments } from '@/blocks/TreatmentsBlock/hooks/populateTreatments'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -20,7 +21,7 @@ export const Pages: CollectionConfig = {
     defaultColumns: ['title', 'slug', 'published'],
   },
   hooks: {
-    // afterRead: [populateBookAppointmentBlock],
+    afterRead: [populateBookAppointmentBlock, populateTreaments],
   },
   versions: {
     drafts: true,

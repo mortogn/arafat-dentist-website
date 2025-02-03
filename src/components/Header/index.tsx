@@ -30,7 +30,9 @@ const Header = async () => {
               />
             </Link>
 
-            <Navbar data={headerData} />
+            <div className="hidden lg:block">
+              <Navbar data={headerData} />
+            </div>
           </div>
 
           {headerData.buttons && <Buttons data={headerData.buttons} />}

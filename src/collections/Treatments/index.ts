@@ -51,6 +51,7 @@ export const Treatments: CollectionConfig = {
               filterOptions: {
                 mimeType: { contains: 'image' },
               },
+              displayPreview: true,
             },
           ],
         },

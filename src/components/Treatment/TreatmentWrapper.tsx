@@ -9,7 +9,10 @@ type Props = HTMLAttributes<HTMLDivElement> & {
 
 const TreatmentWrapper: FC<Props> = ({ treatments, className, ...props }) => {
   return (
-    <div className={cn('', className)} {...props}>
+    <div
+      className={cn('grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3', className)}
+      {...props}
+    >
       {treatments.map((treatment) => (
         <TreatmentCard treatment={treatment} key={treatment.id} />
       ))}
