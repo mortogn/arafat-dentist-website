@@ -6,6 +6,7 @@ import { CollectionConfig } from 'payload'
 import { populateBookAppointmentBlock } from './hooks/populate-book-appointment-block'
 import { TreatmentsBlock } from '@/blocks/TreatmentsBlock'
 import { populateTreaments } from '@/blocks/TreatmentsBlock/hooks/populateTreatments'
+import { VideoReviewBlock } from '@/blocks/VideoReviewBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -46,7 +47,7 @@ export const Pages: CollectionConfig = {
               type: 'blocks',
               name: 'layout',
 
-              blocks: [HeroBlock, BookingFormBlock, TreatmentsBlock],
+              blocks: [HeroBlock, BookingFormBlock, TreatmentsBlock, VideoReviewBlock],
             },
           ],
         },

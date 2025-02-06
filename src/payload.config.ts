@@ -14,6 +14,7 @@ import { plugins } from './plugins'
 import { Header } from './globals/header'
 import { Treatments } from './collections/Treatments'
 import { Socials } from './globals/socials'
+import { Reviews } from './collections/Reviews'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,7 +26,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pages, Treatments],
+  collections: [Users, Media, Pages, Treatments, Reviews],
   editor: lexicalEditor({
     features({ defaultFeatures, rootFeatures }) {
       return [...defaultFeatures, ...rootFeatures, FixedToolbarFeature()]

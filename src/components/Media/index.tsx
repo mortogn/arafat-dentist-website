@@ -1,12 +1,10 @@
 import { cn } from '@/lib/utils'
 import { type Media as MediaType } from '@/payload-types'
-import Image from 'next/image'
+import Image, { type ImageProps } from 'next/image'
 import React, { FC } from 'react'
 
-type Props = {
+type Props = Omit<ImageProps, 'src' | 'alt' | 'resource'> & {
   resource?: MediaType | string
-  height: number
-  width: number
   className?: string
 }
 

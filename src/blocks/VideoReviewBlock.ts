@@ -5,50 +5,34 @@ export const VideoReviewBlock: Block = {
   interfaceName: 'VideoReviewBlock',
   fields: [
     {
+      type: 'text',
+      name: 'title',
+      label: 'Section Title',
+      required: true,
+      localized: true,
+    },
+    {
+      type: 'richText',
+      name: 'description',
+      label: 'Section Description',
+      required: false,
+      localized: true,
+    },
+    {
+      type: 'relationship',
       name: 'reviews',
-      type: 'array',
-      label: 'Reviews',
-      fields: [
-        {
-          type: 'upload',
-          name: 'thumbnail',
-          relationTo: 'media',
-          label: 'Video Thumbnail',
-          admin: {
-            description: 'The thumbnail image for the video',
-          },
+      relationTo: 'reviews',
+      filterOptions: {
+        type: {
+          equals: 'Video',
         },
-        {
-          type: 'text',
-          name: 'videoId',
-          label: 'Youtube Video ID',
-          admin: {
-            description:
-              'The ID of the Youtube video. For example, if the video URL is https://www.youtube.com/watch?v=abc123, the ID is abc123.',
-          },
-          required: true,
-        },
-        {
-          type: 'text',
-          name: 'title',
-          label: 'Title',
-          required: true,
-          localized: true,
-          admin: {
-            description: 'The title of the review',
-          },
-        },
-        {
-          type: 'richText',
-          name: 'description',
-          label: 'Description',
-          localized: true,
-          required: true,
-          admin: {
-            description: 'The short description of the review',
-          },
-        },
-      ],
+      },
+      label: 'Video Reviews',
+      required: true,
+      hasMany: true,
+      admin: {
+        isSortable: true,
+      },
     },
   ],
 }

@@ -45,6 +45,7 @@ export interface Config {
     media: Media;
     pages: Page;
     treatments: Treatment;
+    reviews: Review;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -55,6 +56,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     treatments: TreatmentsSelect<false> | TreatmentsSelect<true>;
+    reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -145,7 +147,7 @@ export interface Page {
    * The page's URL
    */
   slug: string;
-  layout?: (HeroBlock | BookingFormBlock | TreatmentsBlock)[] | null;
+  layout?: (HeroBlock | BookingFormBlock | TreatmentsBlock | VideoReviewBlock)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -299,6 +301,125 @@ export interface TreatmentsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoReviewBlock".
+ */
+export interface VideoReviewBlock {
+  title: string;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  reviews: (string | Review)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'video-review';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews".
+ */
+export interface Review {
+  id: string;
+  /**
+   * The title of the review
+   */
+  title?: string | null;
+  type?: ('Video' | 'Text' | 'Image') | null;
+  /**
+   * Information about the video review
+   */
+  video?: {
+    /**
+     * The thumbnail image for the video review
+     */
+    thumbnail: string | Media;
+    /**
+     * The ID of the Youtube video. For example, if the video URL is https://www.youtube.com/watch?v=abc123, the ID is abc123.
+     */
+    videoId: string;
+    /**
+     * The title of the review
+     */
+    title: string;
+    /**
+     * The short description of the review
+     */
+    description: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+  };
+  /**
+   * Information about the text review
+   */
+  text?: {
+    /**
+     * The title of the review
+     */
+    title: string;
+    /**
+     * The short description of the review
+     */
+    description: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    patient: {
+      /**
+       * The image of the patient
+       */
+      image?: (string | null) | Media;
+      name: string;
+      location: string;
+    };
+  };
+  /**
+   * Information about the image review
+   */
+  image?: {
+    /**
+     * The image for the review
+     */
+    image?: (string | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -319,6 +440,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'treatments';
         value: string | Treatment;
+      } | null)
+    | ({
+        relationTo: 'reviews';
+        value: string | Review;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -409,6 +534,7 @@ export interface PagesSelect<T extends boolean = true> {
         hero?: T | HeroBlockSelect<T>;
         'booking-form'?: T | BookingFormBlockSelect<T>;
         treatments?: T | TreatmentsBlockSelect<T>;
+        'video-review'?: T | VideoReviewBlockSelect<T>;
       };
   meta?:
     | T
@@ -458,6 +584,17 @@ export interface TreatmentsBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoReviewBlock_select".
+ */
+export interface VideoReviewBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  reviews?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "treatments_select".
  */
 export interface TreatmentsSelect<T extends boolean = true> {
@@ -472,6 +609,42 @@ export interface TreatmentsSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews_select".
+ */
+export interface ReviewsSelect<T extends boolean = true> {
+  title?: T;
+  type?: T;
+  video?:
+    | T
+    | {
+        thumbnail?: T;
+        videoId?: T;
+        title?: T;
+        description?: T;
+      };
+  text?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        patient?:
+          | T
+          | {
+              image?: T;
+              name?: T;
+              location?: T;
+            };
+      };
+  image?:
+    | T
+    | {
         image?: T;
       };
   updatedAt?: T;
