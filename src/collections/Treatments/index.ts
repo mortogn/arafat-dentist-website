@@ -51,6 +51,9 @@ export const Treatments: CollectionConfig = {
               filterOptions: {
                 mimeType: { contains: 'image' },
               },
+              admin: {
+                description: "The treatment's thumbnail image. The aspect ratio should be 5:3",
+              },
               displayPreview: true,
             },
           ],

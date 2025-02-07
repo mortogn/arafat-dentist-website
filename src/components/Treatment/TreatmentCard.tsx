@@ -3,6 +3,7 @@ import React, { FC, HTMLAttributes } from 'react'
 import Media from '../Media'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card'
 
 type TreatmentCardProps = HTMLAttributes<HTMLDivElement> & {
   treatment: Pick<Treatment, 'id' | 'title' | 'description' | 'slug' | 'thumbnail'>
@@ -11,7 +12,25 @@ type TreatmentCardProps = HTMLAttributes<HTMLDivElement> & {
 const TreatmentCard: FC<TreatmentCardProps> = ({ treatment, className, ...props }) => {
   return (
     <Link href={`/treatments/${treatment.slug}`}>
-      <div className={cn('', className)} {...props}>
+      <Card className={cn('h-full', className)} {...props}>
+        <div>
+          <Media
+            height={400}
+            width={400}
+            resource={treatment.thumbnail}
+            className="aspect-[5/3] rounded-md"
+          />
+        </div>
+        <CardHeader className="">
+          <CardTitle className="text-center">{treatment.title}</CardTitle>
+          <CardDescription>
+            <p className="text-muted-foreground text-sm tracking-wide line-clamp-2">
+              {treatment.description}
+            </p>
+          </CardDescription>
+        </CardHeader>
+      </Card>
+      {/* <div className={cn('', className)} {...props}>
         <Media
           height={400}
           width={400}
@@ -25,7 +44,7 @@ const TreatmentCard: FC<TreatmentCardProps> = ({ treatment, className, ...props 
             {treatment.description}
           </p>
         </div>
-      </div>
+      </div> */}
     </Link>
   )
 }

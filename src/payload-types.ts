@@ -230,6 +230,9 @@ export interface Treatment {
    * A short description of the treatment
    */
   description?: string | null;
+  /**
+   * The treatment's thumbnail image. The aspect ratio should be 5:3
+   */
   thumbnail: string | Media;
   /**
    * All the details about the treatment including price, duration and benefits
