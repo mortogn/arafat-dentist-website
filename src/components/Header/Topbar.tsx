@@ -1,4 +1,4 @@
-import { Header, Social } from '@/payload-types'
+import { Header, Socials } from '@/payload-types'
 import React, { FC } from 'react'
 import Buttons from '../Buttons'
 import Icon from '../Icons/Icon'
@@ -6,7 +6,7 @@ import MaxWidthWrapper from '../MaxWidthWrapper'
 import Link from 'next/link'
 
 type Props = {
-  data: Header['topbar'] & { socials?: Social['socials'] }
+  data: Header['topbar'] & { socials?: Socials['socials'] }
 }
 
 const Topbar: FC<Props> = ({ data }) => {

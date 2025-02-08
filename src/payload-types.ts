@@ -66,11 +66,15 @@ export interface Config {
   };
   globals: {
     header: Header;
-    socials: Social;
+    socials: Socials;
+    contacts: Contacts;
+    footer: Footer;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     socials: SocialsSelect<false> | SocialsSelect<true>;
+    contacts: ContactsSelect<false> | ContactsSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
   };
   locale: 'en-US' | 'bn-BD';
   user: User & {
@@ -739,13 +743,75 @@ export interface Header {
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "socials".
  */
-export interface Social {
+export interface Socials {
   id: string;
   socials?:
     | {
         icon: 'facebook' | 'instagram' | 'youtube' | 'twitter' | 'none';
         platform: string;
         url: string;
+        id?: string | null;
+      }[]
+    | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts".
+ */
+export interface Contacts {
+  id: string;
+  contacts?:
+    | {
+        /**
+         * The name of the contact
+         */
+        name: string;
+        /**
+         * The text to display for the link
+         */
+        label: string;
+        /**
+         * The URL to link to
+         */
+        url: string;
+        /**
+         * The icon to display next to the contact
+         */
+        icon: 'none' | 'phone' | 'email' | 'map' | 'whatsapp';
+        id?: string | null;
+      }[]
+    | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  logo: string | Media;
+  links?:
+    | {
+        /**
+         * The title of the group of links. For example, Quick Link, Useful Links, etc.
+         */
+        groupTitle: string;
+        groupLinks: {
+          /**
+           * The text to display for the link
+           */
+          label: string;
+          /**
+           * The URL to link to
+           */
+          url: string;
+          id?: string | null;
+        }[];
         id?: string | null;
       }[]
     | null;
@@ -813,6 +879,49 @@ export interface SocialsSelect<T extends boolean = true> {
         icon?: T;
         platform?: T;
         url?: T;
+        id?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts_select".
+ */
+export interface ContactsSelect<T extends boolean = true> {
+  contacts?:
+    | T
+    | {
+        name?: T;
+        label?: T;
+        url?: T;
+        icon?: T;
+        id?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  logo?: T;
+  links?:
+    | T
+    | {
+        groupTitle?: T;
+        groupLinks?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+              id?: T;
+            };
         id?: T;
       };
   _status?: T;

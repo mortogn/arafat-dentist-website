@@ -5,9 +5,20 @@ import InstagramIcon from './InstagramIcon'
 import YoutubeIcon from './YoutubeIcon'
 import TwitterIcon from './TwitterIcon'
 import { cn } from '@/lib/utils'
+import WhatsAppIcon from './WhatsAppIcon'
+import { BuildingIcon, MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react'
 
 type Props = {
-  icon: 'facebook' | 'instagram' | 'youtube' | 'twitter' | 'none'
+  icon:
+    | 'facebook'
+    | 'instagram'
+    | 'youtube'
+    | 'twitter'
+    | 'none'
+    | 'map'
+    | 'whatsapp'
+    | 'phone'
+    | 'email'
 } & IconProps
 
 const Icon: FC<Props> = ({ icon, ...props }) => {
@@ -24,6 +35,14 @@ function renderIcon(icon: Props['icon'], props: IconProps) {
       return <YoutubeIcon {...props} />
     case 'twitter':
       return <TwitterIcon {...props} />
+    case 'whatsapp':
+      return <WhatsAppIcon {...props} />
+    case 'map':
+      return <BuildingIcon {...props} />
+    case 'phone':
+      return <PhoneIcon {...props} />
+    case 'email':
+      return <MailIcon {...props} />
     default:
       return null
   }

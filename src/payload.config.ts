@@ -15,6 +15,8 @@ import { Header } from './globals/header'
 import { Treatments } from './collections/Treatments'
 import { Socials } from './globals/socials'
 import { Reviews } from './collections/Reviews'
+import { Contacts } from './globals/contacts'
+import { Footer } from './globals/footer'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -54,7 +56,7 @@ export default buildConfig({
     fallback: true,
   },
   sharp,
-  globals: [Header, Socials],
+  globals: [Header, Socials, Contacts, Footer],
   plugins: [
     payloadCloudPlugin(),
     ...plugins,

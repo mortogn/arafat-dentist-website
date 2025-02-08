@@ -7,6 +7,9 @@ export const Socials: GlobalConfig = {
   hooks: {
     afterChange: [revalidateSocials],
   },
+  typescript: {
+    interface: 'Socials',
+  },
   fields: [
     {
       name: 'socials',
