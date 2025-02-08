@@ -26,7 +26,10 @@ export const Treatments: CollectionConfig = {
         description: 'The title of the treatment',
       },
     },
-    ...slugFields({ fieldToUse: 'title' }),
+    ...slugFields({
+      fieldToUse: 'title',
+      overrides: { slugOverrides: { localized: true }, checkboxOverrides: { localized: true } },
+    }),
     {
       type: 'tabs',
       tabs: [

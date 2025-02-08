@@ -1,6 +1,15 @@
 import { FieldHook } from 'payload'
 
+function isEnglishText(value: string): boolean {
+  // Basic check that text contains only Latin letters, digits, spaces, dashes or underscores
+  return /^[a-zA-Z0-9\s\-_]+$/.test(value)
+}
+
 export const formatSlug = (value: string) => {
+  if (!isEnglishText(value)) {
+    // If text is not English, skip transformation
+    return value
+  }
   return value
     .toLowerCase()
     .trim()

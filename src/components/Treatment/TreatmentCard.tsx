@@ -18,7 +18,7 @@ const TreatmentCard: FC<TreatmentCardProps> = ({ treatment, className, ...props 
             height={400}
             width={400}
             resource={treatment.thumbnail}
-            className="aspect-[5/3] rounded-md"
+            className="aspect-[5/3] rounded-md w-full"
           />
         </div>
         <CardHeader className="">

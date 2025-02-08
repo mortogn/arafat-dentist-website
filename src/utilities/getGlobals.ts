@@ -18,4 +18,6 @@ export const getGlobal = async (slug: Global, depth = 0, locale?: 'en-US' | 'bn-
 }
 
 export const getCachedGlobal = (slug: Global, depth = 0, locale?: 'en-US' | 'bn-BD') =>
-  unstable_cache(async () => getGlobal(slug, depth, locale), [slug], { tags: [`globals_${slug}`] })
+  unstable_cache(async () => getGlobal(slug, depth, locale), [slug, ...(locale ? [locale] : [])], {
+    tags: [`globals_${slug}`],
+  })

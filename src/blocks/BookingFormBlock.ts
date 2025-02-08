@@ -16,6 +16,7 @@ export const BookingFormBlock: Block = {
       admin: {
         description: 'The title of the booking form',
       },
+      localized: true,
     },
     {
       name: 'subtitle',
@@ -25,6 +26,7 @@ export const BookingFormBlock: Block = {
         description: 'The subtitle of the booking form',
       },
       required: true,
+      localized: true,
     },
     {
       type: 'upload',

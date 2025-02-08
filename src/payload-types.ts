@@ -146,7 +146,7 @@ export interface Media {
 export interface Page {
   id: string;
   title: string;
-  lock?: boolean | null;
+  slugLock?: boolean | null;
   /**
    * The page's URL
    */
@@ -225,7 +225,7 @@ export interface Treatment {
    * The title of the treatment
    */
   title: string;
-  lock?: boolean | null;
+  slugLock?: boolean | null;
   /**
    * The page's URL
    */
@@ -533,7 +533,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
-  lock?: T;
+  slugLock?: T;
   slug?: T;
   layout?:
     | T
@@ -606,7 +606,7 @@ export interface VideoReviewBlockSelect<T extends boolean = true> {
  */
 export interface TreatmentsSelect<T extends boolean = true> {
   title?: T;
-  lock?: T;
+  slugLock?: T;
   slug?: T;
   description?: T;
   thumbnail?: T;

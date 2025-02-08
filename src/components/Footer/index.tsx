@@ -16,9 +16,9 @@ const Footer = async () => {
   if (!footer || !contacts || !socials) return null
 
   return (
-    <footer className="bg-secondary/40 py-20">
-      <MaxWidthWrapper className="flex items-start justify-between">
-        <div className="max-w-xs">
+    <footer className="bg-secondary/40 py-10 md:py-20">
+      <MaxWidthWrapper className="flex items-center md:items-start flex-col md:flex-row gap-10 justify-between">
+        <div className="max-w-xs flex flex-col items-center md:items-start gap-4 md:gap-6">
           <Media resource={footer.logo} height={100} width={100} className="h-[40px] w-auto" />
           <div className="space-y-4 mt-8">
             {contacts.contacts?.map((contact) => (
@@ -30,9 +30,9 @@ const Footer = async () => {
           </div>
         </div>
         {footer.links?.map((group) => (
-          <div key={group.id}>
+          <div key={group.id} className="flex flex-col items-center md:items-start">
             <h3 className="text-xl tracking-tight font-medium">{group.groupTitle}</h3>
-            <div className="flex items-start flex-col gap-2 mt-3">
+            <div className="flex items-center md:items-start flex-col gap-2 mt-3 ">
               {group.groupLinks?.map((link) => (
                 <Link key={link.id} href={link.url} className="block">
                   {link.label}
@@ -41,7 +41,7 @@ const Footer = async () => {
             </div>
           </div>
         ))}
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-center md:items-start">
           <h3 className="text-xl tracking-tight font-medium">Follow us on social media</h3>
           <div className="flex items-start flex-col gap-2 mt-3">
             {socials.socials &&

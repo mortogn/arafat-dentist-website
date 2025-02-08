@@ -20,6 +20,7 @@ export const buttonsField = ({ overrides = {} }: ButtonsFieldParams) => {
         admin: {
           description: 'The text to display on the button',
         },
+        localized: true,
       },
       {
         type: 'text',
