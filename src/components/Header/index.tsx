@@ -1,7 +1,7 @@
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import React from 'react'
 
-import type { Header as HeaderData, Media, Social } from '@/payload-types'
+import type { Header as HeaderData, Media, Socials } from '@/payload-types'
 import Logo from '../Logo'
 import Navbar from './navbar'
 
@@ -10,11 +10,15 @@ import MaxWidthWrapper from '../MaxWidthWrapper'
 import Link from 'next/link'
 import Topbar from './Topbar'
 
-const Header = async () => {
+type HeaderProps = {
+  locale: 'en-US' | 'bn-BD'
+}
+
+const Header = async ({ locale }: HeaderProps) => {
   //@ts-expect-error - This is the correct header header data
   const headerData: HeaderData & {
-    topbar: HeaderData['topbar'] & { socials?: Social['socials'] }
-  } = await getCachedGlobal('header', 2)()
+    topbar: HeaderData['topbar'] & { socials?: Socials['socials'] }
+  } = await getCachedGlobal('header', 2, locale)()
 
   return (
     <>

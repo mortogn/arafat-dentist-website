@@ -4,6 +4,7 @@ import React, { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { bookFormSchema, BookFormValues } from './bookFormSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useTranslations } from 'next-intl'
 import {
   Form,
   FormControl,
@@ -32,6 +33,8 @@ type Props = {
 }
 
 const ActualBookForm: FC<Props> = ({ treatments }) => {
+  const t = useTranslations('BookingPage.form')
+
   const form = useForm<BookFormValues>({
     defaultValues: {
       fullName: '',
@@ -56,9 +59,9 @@ const ActualBookForm: FC<Props> = ({ treatments }) => {
           name="fullName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Full name</FormLabel>
+              <FormLabel>{t('fullname')}</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input placeholder={t('placeholders.fullname')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -70,9 +73,9 @@ const ActualBookForm: FC<Props> = ({ treatments }) => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{t('email')}</FormLabel>
               <FormControl>
-                <Input type="email" {...field} />
+                <Input type="email" placeholder={t('placeholders.email')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -84,9 +87,9 @@ const ActualBookForm: FC<Props> = ({ treatments }) => {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Phone</FormLabel>
+              <FormLabel>{t('phone')}</FormLabel>
               <FormControl>
-                <Input type="tel" {...field} />
+                <Input type="tel" placeholder={t('placeholders.phone')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -98,11 +101,11 @@ const ActualBookForm: FC<Props> = ({ treatments }) => {
           name="treatmentId"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Treatment</FormLabel>
+              <FormLabel>{t('treatment')}</FormLabel>
               <Select defaultValue={field.value} onValueChange={field.onChange}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a treatment" />
+                    <SelectValue placeholder={t('placeholders.treatment')} />
                   </SelectTrigger>
                 </FormControl>
 
@@ -125,7 +128,7 @@ const ActualBookForm: FC<Props> = ({ treatments }) => {
             name="date"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Appointment Date</FormLabel>
+                <FormLabel>{t('date')}</FormLabel>
                 <FormControl>
                   <div>
                     <DatePicker
@@ -134,11 +137,7 @@ const ActualBookForm: FC<Props> = ({ treatments }) => {
                         selected: field.value,
                         onSelect: field.onChange,
                       }}
-                      placeholder={
-                        field.value
-                          ? format(field.value, 'PPP')
-                          : 'Select the date for your appointment'
-                      }
+                      placeholder={field.value ? format(field.value, 'PPP') : t('date')}
                     />
                   </div>
                 </FormControl>
@@ -153,19 +152,16 @@ const ActualBookForm: FC<Props> = ({ treatments }) => {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Message</FormLabel>
+              <FormLabel>{t('notes')}</FormLabel>
               <FormControl>
-                <Textarea {...field} />
+                <Textarea placeholder={t('placeholders.notes')} {...field} />
               </FormControl>
-              <FormDescription>
-                Please provide any additional information that you think we should know.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button className="w-full">Submit</Button>
+        <Button className="w-full">{t('submit')}</Button>
       </form>
     </Form>
   )

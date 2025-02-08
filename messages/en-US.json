@@ -1,0 +1,21 @@
+{
+  "BookingPage": {
+    "form": {
+      "fullname": "Full Name",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "treatment": "Select Treatment",
+      "date": "Preferred Date",
+      "time": "Preferred Time",
+      "notes": "Additional Notes",
+      "submit": "Book Appointment",
+      "placeholders": {
+        "fullname": "Enter your full name",
+        "phone": "Enter your phone number",
+        "email": "Enter your email address",
+        "notes": "Any special requirements or concerns?",
+        "treatment": "Choose your treatment"
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { ButtonsField } from '@/payload-types'
-import Link from 'next/link'
+import { Link } from '@/i18n/routing'
 import { buttonVariants } from '../ui/button'
 import { sizeMapper } from './sizeMapper'
 import { cn } from '@/lib/utils'

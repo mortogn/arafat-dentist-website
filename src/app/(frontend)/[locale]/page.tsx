@@ -3,13 +3,10 @@ import TreatmentsSection from '@/components/Blocks/Treatments'
 import VideoReviewSection from '@/components/Blocks/VideoReview'
 import { BookingFormBlock, HeroBlock, TreatmentsBlock, VideoReviewBlock } from '@/payload-types'
 import { getPageBySlug } from '@/utilities/getPageBySlug'
-import { getLocale } from '@/utilities/locales'
 import React from 'react'
 
-export default async function Home() {
-  const locale = await getLocale()
-
-  console.log({ locale })
+export default async function Home({ params }: { params: Promise<{ locale: 'en-US' | 'bn-BD' }> }) {
+  const { locale } = await params
 
   const homePage = await getPageBySlug('home', 2, locale)
 

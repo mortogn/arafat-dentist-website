@@ -5,16 +5,17 @@ import { unstable_cache } from 'next/cache'
 
 type Global = keyof Config['globals']
 
-export const getGlobal = async (slug: Global, depth = 0) => {
+export const getGlobal = async (slug: Global, depth = 0, locale?: 'en-US' | 'bn-BD') => {
   const payload = await getPayload({ config: configPromise })
 
   const global = await payload.findGlobal({
     slug,
     depth,
+    locale,
   })
 
   return global
 }
 
-export const getCachedGlobal = (slug: Global, depth = 0) =>
-  unstable_cache(async () => getGlobal(slug, depth), [slug], { tags: [`globals_${slug}`] })
+export const getCachedGlobal = (slug: Global, depth = 0, locale?: 'en-US' | 'bn-BD') =>
+  unstable_cache(async () => getGlobal(slug, depth, locale), [slug], { tags: [`globals_${slug}`] })
