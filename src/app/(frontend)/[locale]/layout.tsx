@@ -6,7 +6,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
-import { getMessages } from 'next-intl/server'
+import { getMessages, setRequestLocale } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 
 const playfair_display = Playfair_Display({
@@ -41,13 +41,15 @@ export default async function MainLayout({
   params,
 }: {
   children: React.ReactNode
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: 'en-US' | 'bn-BD' }>
 }) {
   const { locale } = await params
 
   if (!routing.locales.includes(locale as 'en-US' | 'bn-BD')) {
     notFound()
   }
+
+  setRequestLocale(locale)
 
   const messages = await getMessages()
 
