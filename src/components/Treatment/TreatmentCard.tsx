@@ -2,7 +2,7 @@ import { Treatment } from '@/payload-types'
 import React, { FC, HTMLAttributes } from 'react'
 import Media from '../Media'
 import { cn } from '@/lib/utils'
-import Link from 'next/link'
+import { Link } from '@/i18n/routing'
 import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card'
 
 type TreatmentCardProps = HTMLAttributes<HTMLDivElement> & {

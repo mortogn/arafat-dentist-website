@@ -7,6 +7,7 @@ import { populateBookAppointmentBlock } from './hooks/populate-book-appointment-
 import { TreatmentsBlock } from '@/blocks/TreatmentsBlock'
 import { populateTreaments } from '@/blocks/TreatmentsBlock/hooks/populateTreatments'
 import { VideoReviewBlock } from '@/blocks/VideoReviewBlock'
+import { StatsBlock } from '@/blocks/StatsBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -47,7 +48,7 @@ export const Pages: CollectionConfig = {
               type: 'blocks',
               name: 'layout',
 
-              blocks: [HeroBlock, BookingFormBlock, TreatmentsBlock, VideoReviewBlock],
+              blocks: [HeroBlock, BookingFormBlock, TreatmentsBlock, VideoReviewBlock, StatsBlock],
             },
           ],
         },

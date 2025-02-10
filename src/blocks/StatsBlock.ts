@@ -14,6 +14,14 @@ export const StatsBlock: Block = {
           name: 'label',
           label: 'Stat Label',
           required: true,
+          localized: true,
+        },
+        {
+          type: 'text',
+          name: 'value',
+          label: 'Value',
+          required: true,
+          localized: true,
         },
         {
           type: 'upload',

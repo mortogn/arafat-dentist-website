@@ -151,7 +151,7 @@ export interface Page {
    * The page's URL
    */
   slug: string;
-  layout?: (HeroBlock | BookingFormBlock | TreatmentsBlock | VideoReviewBlock)[] | null;
+  layout?: (HeroBlock | BookingFormBlock | TreatmentsBlock | VideoReviewBlock | StatsBlock)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -427,6 +427,23 @@ export interface Review {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsBlock".
+ */
+export interface StatsBlock {
+  stats?:
+    | {
+        label: string;
+        value: string;
+        icon: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -542,6 +559,7 @@ export interface PagesSelect<T extends boolean = true> {
         'booking-form'?: T | BookingFormBlockSelect<T>;
         treatments?: T | TreatmentsBlockSelect<T>;
         'video-review'?: T | VideoReviewBlockSelect<T>;
+        stats?: T | StatsBlockSelect<T>;
       };
   meta?:
     | T
@@ -597,6 +615,22 @@ export interface VideoReviewBlockSelect<T extends boolean = true> {
   title?: T;
   description?: T;
   reviews?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsBlock_select".
+ */
+export interface StatsBlockSelect<T extends boolean = true> {
+  stats?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        icon?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

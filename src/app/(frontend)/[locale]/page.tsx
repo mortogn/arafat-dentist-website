@@ -1,7 +1,14 @@
 import HeroSection from '@/components/Blocks/Hero'
+import StatsSection from '@/components/Blocks/Stats'
 import TreatmentsSection from '@/components/Blocks/Treatments'
 import VideoReviewSection from '@/components/Blocks/VideoReview'
-import { BookingFormBlock, HeroBlock, TreatmentsBlock, VideoReviewBlock } from '@/payload-types'
+import {
+  BookingFormBlock,
+  HeroBlock,
+  StatsBlock,
+  TreatmentsBlock,
+  VideoReviewBlock,
+} from '@/payload-types'
 import { getPageBySlug } from '@/utilities/getPageBySlug'
 import { setRequestLocale } from 'next-intl/server'
 import React from 'react'
@@ -16,7 +23,7 @@ export default async function Home({ params }: { params: Promise<{ locale: 'en-U
   return homePage.layout?.map((block) => renderer(block))
 }
 
-type Blocks = HeroBlock | BookingFormBlock | TreatmentsBlock | VideoReviewBlock
+type Blocks = HeroBlock | BookingFormBlock | TreatmentsBlock | VideoReviewBlock | StatsBlock
 
 function renderer(block: Blocks) {
   switch (block.blockType) {
@@ -28,6 +35,9 @@ function renderer(block: Blocks) {
 
     case 'video-review':
       return <VideoReviewSection data={block} key={block.id} />
+
+    case 'stats':
+      return <StatsSection data={block} key={block.id} />
     default:
       return null
   }

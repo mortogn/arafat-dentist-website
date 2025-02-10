@@ -1,5 +1,5 @@
 import React from 'react'
-import { Anek_Bangla, Noto_Serif, Playfair_Display } from 'next/font/google'
+import { Anek_Bangla, Playfair_Display, Poppins } from 'next/font/google'
 import '@/app/globals.css'
 import { cn } from '@/lib/utils'
 import Header from '@/components/Header'
@@ -16,7 +16,7 @@ const playfair_display = Playfair_Display({
   subsets: ['latin'],
 })
 
-const noto_serif = Noto_Serif({
+const poppins = Poppins({
   display: 'swap',
   variable: '--font-body',
   weight: ['400', '500', '600'],
@@ -58,13 +58,13 @@ export default async function MainLayout({
       <NextIntlClientProvider messages={messages}>
         <body
           className={cn({
-            [`${playfair_display.variable} ${noto_serif.variable}`]: locale === 'en-US',
+            [`${playfair_display.variable} ${poppins.variable}`]: locale === 'en-US',
             [`${anek_bangla_heading.variable} ${anek_bangla_body.variable}`]: locale === 'bn-BD',
           })}
         >
           <Header locale={locale} />
           <main className="mt-10">{children}</main>
-          <Footer />
+          <Footer locale={locale} />
         </body>
       </NextIntlClientProvider>
     </html>

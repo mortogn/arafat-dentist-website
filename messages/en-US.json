@@ -17,5 +17,8 @@
         "treatment": "Choose your treatment"
       }
     }
+  },
+  "Footer": {
+    "follow_socials": "Follow us on social media"
   }
 }
