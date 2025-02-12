@@ -3,7 +3,6 @@ import { HeroBlock } from '@/blocks/HeroBlock'
 import { SEOFields } from '@/fields/seo'
 import { slugFields } from '@/fields/slug'
 import { CollectionConfig } from 'payload'
-import { populateBookAppointmentBlock } from './hooks/populate-book-appointment-block'
 import { TreatmentsBlock } from '@/blocks/TreatmentsBlock'
 import { populateTreaments } from '@/blocks/TreatmentsBlock/hooks/populateTreatments'
 import { VideoReviewBlock } from '@/blocks/VideoReviewBlock'
@@ -23,7 +22,7 @@ export const Pages: CollectionConfig = {
     defaultColumns: ['title', 'slug', 'published'],
   },
   hooks: {
-    afterRead: [populateBookAppointmentBlock, populateTreaments],
+    afterRead: [populateTreaments],
   },
   versions: {
     drafts: true,

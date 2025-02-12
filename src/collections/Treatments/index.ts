@@ -1,6 +1,12 @@
+import { FaqBlock } from '@/blocks/FaqBlock'
+import { CheckListBlock } from '@/blocks/richtext/CheckListBlock'
+import { ImageBlock } from '@/blocks/richtext/ImageBlock'
+import { YoutubeEmbedBlock } from '@/blocks/richtext/YoutubeEmbedBlock'
 import { SEOFields } from '@/fields/seo'
 import { slugFields } from '@/fields/slug'
+import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload'
+import { revalidateTreatment } from './hooks/revalidateTreatment'
 
 export const Treatments: CollectionConfig = {
   slug: 'treatments',
@@ -14,6 +20,9 @@ export const Treatments: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['thumbnail', 'title', 'slug', 'status'],
+  },
+  hooks: {
+    afterChange: [revalidateTreatment],
   },
   fields: [
     {
@@ -73,6 +82,17 @@ export const Treatments: CollectionConfig = {
                 description:
                   'All the details about the treatment including price, duration and benefits',
               },
+              editor: lexicalEditor({
+                features({ defaultFeatures, rootFeatures }) {
+                  return [
+                    ...defaultFeatures,
+                    ...rootFeatures,
+                    BlocksFeature({
+                      blocks: [CheckListBlock, YoutubeEmbedBlock, ImageBlock, FaqBlock],
+                    }),
+                  ]
+                },
+              }),
             },
           ],
         },
@@ -84,4 +104,8 @@ export const Treatments: CollectionConfig = {
       ],
     },
   ],
+  versions: {
+    drafts: true,
+    maxPerDoc: 50,
+  },
 }

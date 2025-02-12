@@ -266,6 +266,7 @@ export interface Treatment {
   };
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -654,6 +655,7 @@ export interface TreatmentsSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -972,6 +974,139 @@ export interface ButtonsBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'buttons';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CheckListBlock".
+ */
+export interface CheckListBlock {
+  alignment?: ('left' | 'center') | null;
+  /**
+   * Choose the size of the check icon
+   */
+  size?: ('small' | 'medium' | 'large') | null;
+  checklist?:
+    | {
+        /**
+         * Provide the details for the checklist item
+         */
+        label: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'checklist';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "YoutubeEmbedBlock".
+ */
+export interface YoutubeEmbedBlock {
+  /**
+   * The ID of the Youtube video. Example: https://www.youtube.com/watch?v=abc, here abc is the ID
+   */
+  videoId: string;
+  /**
+   * Upload a thumbnail image for the Youtube video.
+   */
+  thumbnail?: (string | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'youtube-embed';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageBlock".
+ */
+export interface ImageBlock {
+  image: string | Media;
+  width: number;
+  height: number;
+  alignment?: ('left' | 'center' | 'right') | null;
+  /**
+   * Optional caption for the image.
+   */
+  caption?: string | null;
+  /**
+   * Alternative text for the image, improving accessibility.
+   */
+  altText?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'image';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FaqBlock".
+ */
+export interface FaqBlock {
+  /**
+   * The title of this FAQ section
+   */
+  title: string;
+  /**
+   * The description of this FAQ section
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  faq?:
+    | {
+        /**
+         * The question of this FAQ
+         */
+        question: string;
+        /**
+         * The answer of this FAQ
+         */
+        answer: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

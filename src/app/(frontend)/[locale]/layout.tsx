@@ -8,6 +8,7 @@ import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
+import ScrollToTop from '@/components/ScrollToTop'
 
 const playfair_display = Playfair_Display({
   display: 'swap',
@@ -64,6 +65,7 @@ export default async function MainLayout({
         >
           <Header locale={locale} />
           <main className="mt-10">{children}</main>
+          <ScrollToTop />
           <Footer locale={locale} />
         </body>
       </NextIntlClientProvider>

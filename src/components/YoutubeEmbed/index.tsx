@@ -5,7 +5,7 @@ import Media from '@/components/Media'
 import { Media as MediaType } from '@/payload-types'
 
 interface YoutubeEmbedProps {
-  image?: MediaType | undefined | string
+  image?: MediaType | undefined | string | null
   videoId: string
   isPlaying?: boolean
   isActive?: boolean
@@ -41,7 +41,7 @@ const YoutubeEmbed = ({
             <Media
               resource={image}
               fill
-              className="object-cover"
+              className="object-cover h-full w-full aspect-video"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
             />
             <div className="absolute inset-0 flex items-center justify-center w-full h-full bg-black/30">

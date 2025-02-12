@@ -4,7 +4,7 @@ import Image, { type ImageProps } from 'next/image'
 import React, { FC } from 'react'
 
 type Props = Omit<ImageProps, 'src' | 'alt' | 'resource'> & {
-  resource?: MediaType | string
+  resource?: MediaType | string | null
   className?: string
 }
 
