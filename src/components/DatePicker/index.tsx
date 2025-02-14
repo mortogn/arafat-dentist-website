@@ -10,6 +10,10 @@ type Props = {
 }
 
 const DatePicker: FC<Props> = ({ calenderProps, placeholder }) => {
+  const today = new Date()
+  const maxDate = new Date(today)
+  maxDate.setDate(today.getDate() + 10)
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -19,7 +23,11 @@ const DatePicker: FC<Props> = ({ calenderProps, placeholder }) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
-        <Calendar initialFocus disabled={(date) => date < new Date()} {...calenderProps} />
+        <Calendar
+          initialFocus
+          disabled={(date) => date < today || date > maxDate}
+          {...calenderProps}
+        />
       </PopoverContent>
     </Popover>
   )

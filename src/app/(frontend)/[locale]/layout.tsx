@@ -49,7 +49,6 @@ export default async function MainLayout({
   if (!routing.locales.includes(locale as 'en-US' | 'bn-BD')) {
     notFound()
   }
-
   setRequestLocale(locale)
 
   const messages = await getMessages()

@@ -9,17 +9,13 @@ type Props = {
 
 const FAQSection: FC<Props> = ({ data }) => {
   return (
-    <div className="container py-12">
-      <h2 className="text-xl text-center font-bold mb-6">{data.title}</h2>
-      {data.description && (
-        <div className="mb-8">
-          <RichTextContent data={data.description} />
-        </div>
-      )}
+    <div className="container py-12 space-y-3 not-prose">
+      <h2 className="text-3xl text-center font-bold mb-6">{data.title}</h2>
+      {data.description && <RichTextContent data={data.description} />}
       <Accordion type="single" collapsible className="w-full">
         {data.faq?.map((faq, index) => (
-          <AccordionItem key={index} value={`item-${index}`}>
-            <AccordionTrigger>{faq.question}</AccordionTrigger>
+          <AccordionItem key={index} value={`item-${index}`} className="">
+            <AccordionTrigger className="">{faq.question}</AccordionTrigger>
             <AccordionContent>
               <RichTextContent data={faq.answer} />
             </AccordionContent>

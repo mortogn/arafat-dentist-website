@@ -11,10 +11,13 @@ type GetCollectionParams = {
   limit?: number
   page?: number
   depth?: number
+  select?: {
+    [key: string]: true
+  }
 }
 
 export const getCollection = async (params: GetCollectionParams) => {
-  const { locale, collection, limit = 10, page = 1, depth } = params
+  const { locale, collection, limit = 10, page = 1, depth, select } = params
 
   const payload = await getPayload({ config })
 
@@ -22,6 +25,7 @@ export const getCollection = async (params: GetCollectionParams) => {
     collection,
     limit,
     locale,
+    select,
     page,
     depth,
   })
@@ -30,10 +34,10 @@ export const getCollection = async (params: GetCollectionParams) => {
 }
 
 export const getCachedCollection = (params: GetCollectionParams) => {
-  const { collection, locale, limit = 10, page = 1, depth } = params
+  const { collection, locale, limit = 10, page = 1, depth, select } = params
 
   return unstable_cache(
-    async () => getCollection({ collection, locale, limit, page, depth }),
+    async () => getCollection({ collection, select, locale, limit, page, depth }),
     [collection, locale, limit.toString(), page.toString()],
     {
       tags: [`collection_${collection}`],

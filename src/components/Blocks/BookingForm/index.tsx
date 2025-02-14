@@ -18,6 +18,10 @@ const BookingForm: FC<BookingFormProps> = async ({ data, locale }) => {
       locale,
       limit: 100,
       depth: 1,
+      select: {
+        title: true,
+        slug: true,
+      } as Partial<Record<keyof Treatment, true>>,
     })()
     treatments = (await result).docs as Treatment[]
   }

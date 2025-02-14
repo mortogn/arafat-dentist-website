@@ -31,7 +31,7 @@ export default async function TreatmentPage({ params }: PageProps) {
       {/* Add your treatment page content here */}
       {/* <h1>{pageData.title}</h1> */}
       {/* You can use the pageData and globalData to render your content */}
-      <article className="w-full mx-auto">
+      <article className="w-full mx-auto pb-8">
         {pageData.content && (
           <RichTextContent
             data={pageData.content}
