@@ -1,4 +1,4 @@
-import { revalidateTag } from 'next/cache'
+import { revalidateTagGlobal } from '@/utilities/revalidateTagGlobal'
 import { GlobalAfterChangeHook } from 'payload'
 
 export const revalidateContacts: GlobalAfterChangeHook = async ({
@@ -7,11 +7,11 @@ export const revalidateContacts: GlobalAfterChangeHook = async ({
   req: { payload },
 }) => {
   if (doc._status === 'published') {
-    revalidateTag('globals_contacts')
+    revalidateTagGlobal('globals_contacts')
   }
 
   if (previousDoc?._status === 'published' && doc._status !== 'published') {
-    revalidateTag('globals_contacts')
+    revalidateTagGlobal('globals_contacts')
   }
 
   payload.logger.info('Revalidating Contacts')

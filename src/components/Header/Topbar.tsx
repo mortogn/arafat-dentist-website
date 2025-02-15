@@ -4,20 +4,28 @@ import Buttons from '../Buttons'
 import Icon from '../Icons/Icon'
 import MaxWidthWrapper from '../MaxWidthWrapper'
 import Link from 'next/link'
+import { getCachedGlobal } from '@/utilities/getGlobals'
 
 type Props = {
-  data: Header['topbar'] & { socials?: Socials['socials'] }
+  data: Header['topbar']
 }
 
-const Topbar: FC<Props> = ({ data }) => {
+const Topbar: FC<Props> = async ({ data }) => {
+  let socials: Socials['socials'] | null = null
+
+  if (data.showSocials) {
+    const fetchedSocial = (await getCachedGlobal('socials', 1)()) as Socials
+    socials = fetchedSocial.socials
+  }
+
   return (
     <div className="bg-primary py-3 text-primary-foreground my-auto">
       <MaxWidthWrapper className="flex items-center justify-between">
         <div className="font-medium tracking-wide text-sm">{data.text}</div>
         {data.callToAction && data.buttons && <Buttons data={data.buttons} />}
-        {data.showSocials && data.socials && (
+        {data.showSocials && socials && (
           <div className="flex items-center gap-2">
-            {data.socials.map((social) => (
+            {socials.map((social) => (
               <Link
                 key={social.id}
                 href={social.url}

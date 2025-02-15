@@ -2,7 +2,6 @@ import { buttonsField } from '@/fields/buttons'
 import { validateURL } from '@/utilities/validateURL'
 import type { GlobalConfig } from 'payload'
 import { revalidateHeader } from './hooks/revalidateHeader'
-import { populateSocials } from './hooks/populate-socials'
 
 export const Header: GlobalConfig = {
   slug: 'header',
@@ -14,7 +13,6 @@ export const Header: GlobalConfig = {
   },
   hooks: {
     afterChange: [revalidateHeader],
-    afterRead: [populateSocials],
   },
   fields: [
     {

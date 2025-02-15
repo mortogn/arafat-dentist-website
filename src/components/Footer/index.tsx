@@ -15,7 +15,7 @@ const Footer: FC<Props> = async ({ locale }) => {
   const [footer, contacts, socials] = await Promise.all([
     getCachedGlobal('footer', 2, locale)() as Promise<FooterType>,
     getCachedGlobal('contacts', 1, locale)() as Promise<Contacts>,
-    getCachedGlobal('socials', 1, locale)() as Promise<Socials>,
+    getCachedGlobal('socials', 1)() as Promise<Socials>,
   ])
 
   if (!footer || !contacts || !socials) return null

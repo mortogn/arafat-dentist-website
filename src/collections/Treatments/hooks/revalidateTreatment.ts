@@ -1,5 +1,6 @@
 import { locales } from '@/const/locale'
-import { revalidatePath, revalidateTag } from 'next/cache'
+import { revalidateTagCollection } from '@/utilities/revalidateTagCollection'
+import { revalidatePath } from 'next/cache'
 import { CollectionAfterChangeHook } from 'payload'
 
 export const revalidateTreatment: CollectionAfterChangeHook = async ({
@@ -8,7 +9,7 @@ export const revalidateTreatment: CollectionAfterChangeHook = async ({
   previousDoc,
 }) => {
   // Always revalidate the collection tag for list pages
-  revalidateTag('collection_treatments')
+  revalidateTagCollection('collection_treatments')
 
   if (doc?._status === previousDoc?._status && doc._status !== 'published') {
     return doc

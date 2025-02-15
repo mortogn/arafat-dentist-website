@@ -1,4 +1,4 @@
-import { revalidateTag } from 'next/cache'
+import { revalidateTagGlobal } from '@/utilities/revalidateTagGlobal'
 import { GlobalAfterChangeHook } from 'payload'
 
 export const revalidateFooter: GlobalAfterChangeHook = async ({
@@ -7,11 +7,11 @@ export const revalidateFooter: GlobalAfterChangeHook = async ({
   req: { payload },
 }) => {
   if (doc._status === 'published') {
-    revalidateTag('globals_footer')
+    revalidateTagGlobal('globals_footer')
   }
 
   if (previousDoc?._status === 'published' && doc._status !== 'published') {
-    revalidateTag('globals_footer')
+    revalidateTagGlobal('globals_footer')
   }
 
   payload.logger.info('Revalidating Footer')
