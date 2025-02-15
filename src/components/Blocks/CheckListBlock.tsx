@@ -11,9 +11,9 @@ type Props = {
 const CheckListBlockComponent: FC<Props> = ({ data }) => {
   return (
     <div
-      className={cn('w-full max-w-[80%]', {
-        'ml-0': data.alignment === 'left',
-        'mx-auto': data.alignment === 'center',
+      className={cn('w-full ', {
+        'ml-0 max-w-[80%]': data.alignment === 'left',
+        'mx-auto w-max': data.alignment === 'center',
       })}
     >
       {data.checklist && (
