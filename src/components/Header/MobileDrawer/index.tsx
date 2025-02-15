@@ -38,7 +38,7 @@ const MobileDrawer: FC<MobileDrawerProps> = ({ data, locale, treatments }) => {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden [&_svg]:size-8">
+        <Button variant="ghost" size="icon" className=" [&_svg]:size-8">
           <Menu className="size-8" />
         </Button>
       </DrawerTrigger>
