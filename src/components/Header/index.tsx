@@ -33,8 +33,8 @@ const Header = async ({ locale }: HeaderProps) => {
   return (
     <>
       {headerData.topbar && <Topbar data={headerData.topbar} />}
-      <header className="">
-        <MaxWidthWrapper className="flex items-center justify-between h-[80px] py-4">
+      <header className="sticky top-0 bg-background z-10">
+        <MaxWidthWrapper className="flex items-center justify-between h-[80px] py-4 ">
           <div className="flex items-center gap-10">
             <div className="flex items-center gap-1">
               <div className="lg:hidden">

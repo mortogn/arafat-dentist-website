@@ -6,7 +6,7 @@ import YoutubeIcon from './YoutubeIcon'
 import TwitterIcon from './TwitterIcon'
 import { cn } from '@/lib/utils'
 import WhatsAppIcon from './WhatsAppIcon'
-import { BuildingIcon, MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react'
+import { BuildingIcon, MailIcon, PhoneIcon } from 'lucide-react'
 
 type Props = {
   icon:

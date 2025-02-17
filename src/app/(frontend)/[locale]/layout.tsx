@@ -9,6 +9,7 @@ import { notFound } from 'next/navigation'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import ScrollToTop from '@/components/ScrollToTop'
+import MobileBottomBar from '@/components/MobileBottomBar'
 
 const playfair_display = Playfair_Display({
   display: 'swap',
@@ -65,6 +66,9 @@ export default async function MainLayout({
           <Header locale={locale} />
           <main className="mt-10">{children}</main>
           <ScrollToTop />
+
+          <MobileBottomBar />
+
           <Footer locale={locale} />
         </body>
       </NextIntlClientProvider>
