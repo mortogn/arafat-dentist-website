@@ -20,5 +20,9 @@
   },
   "Footer": {
     "follow_socials": "Follow us on social media"
+  },
+  "Treatments": {
+    "title": "Our Treatments",
+    "description": "We offer a wide range of treatments to suit your needs."
   }
 }
