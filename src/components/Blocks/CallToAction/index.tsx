@@ -16,7 +16,9 @@ const CallToAction: FC<Props> = ({ data }) => {
         <Heading as="h3">{data.title}</Heading>
         <RichTextContent data={data.description} />
 
-        {data.buttons && data.buttons.length > 0 && <Buttons data={data.buttons} />}
+        {data.buttons && data.buttons.length > 0 && (
+          <Buttons containerClassName={'flex-col lg:flex-row'} data={data.buttons} />
+        )}
       </MaxWidthWrapper>
     </div>
   )

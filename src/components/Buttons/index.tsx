@@ -12,11 +12,12 @@ type Size = NonNullable<ButtonsField>[0]['size']
 type ButtonsProps = {
   data: ButtonsField
   className?: (params: { variant: Variant; size: Size }) => string
+  containerClassName?: string
 }
 
-const Buttons: FC<ButtonsProps> = ({ data, className }) => {
+const Buttons: FC<ButtonsProps> = ({ data, className, containerClassName }) => {
   return (
-    <div className="flex items-center gap-2">
+    <div className={cn('flex items-center gap-2', containerClassName)}>
       {data?.map((button) => (
         <Link
           href={button.href}
