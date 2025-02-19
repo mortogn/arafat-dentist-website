@@ -25,6 +25,7 @@ export const CallToActionBlock: Block = {
         description: 'The title of the Call To Action Section',
       },
       required: true,
+      localized: true,
     },
     {
       type: 'richText',
@@ -43,6 +44,7 @@ export const CallToActionBlock: Block = {
         ],
       }),
       required: true,
+      localized: true,
     },
     buttonsField({}),
   ],
