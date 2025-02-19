@@ -4,6 +4,7 @@ import { Link } from '@/i18n/routing'
 import { buttonVariants } from '../ui/button'
 import { sizeMapper } from './sizeMapper'
 import { cn } from '@/lib/utils'
+import Icon from '../Icons/Icon'
 
 type Variant = NonNullable<ButtonsField>[0]['variant']
 type Size = NonNullable<ButtonsField>[0]['size']
@@ -25,6 +26,7 @@ const Buttons: FC<ButtonsProps> = ({ data, className }) => {
             className?.({ variant: button.variant, size: button.size }),
           )}
         >
+          {button.icon && button.icon !== 'none' && <Icon className="" icon={button.icon} />}
           {button.label}
         </Link>
       ))}

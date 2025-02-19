@@ -1,9 +1,11 @@
+import CallToAction from '@/components/Blocks/CallToAction'
 import HeroSection from '@/components/Blocks/Hero'
 import StatsSection from '@/components/Blocks/Stats'
 import TreatmentsSection from '@/components/Blocks/Treatments'
 import VideoReviewSection from '@/components/Blocks/VideoReview'
 import {
   BookingFormBlock,
+  CallToActionBlock,
   HeroBlock,
   StatsBlock,
   TreatmentsBlock,
@@ -23,7 +25,13 @@ export default async function Home({ params }: { params: Promise<{ locale: 'en-U
   return homePage.layout?.map((block) => renderer(block))
 }
 
-type Blocks = HeroBlock | BookingFormBlock | TreatmentsBlock | VideoReviewBlock | StatsBlock
+type Blocks =
+  | HeroBlock
+  | BookingFormBlock
+  | TreatmentsBlock
+  | VideoReviewBlock
+  | StatsBlock
+  | CallToActionBlock
 
 function renderer(block: Blocks) {
   switch (block.blockType) {
@@ -38,6 +46,9 @@ function renderer(block: Blocks) {
 
     case 'stats':
       return <StatsSection data={block} key={block.id} />
+
+    case 'call-to-action':
+      return <CallToAction key={block.id} data={block} />
     default:
       return null
   }

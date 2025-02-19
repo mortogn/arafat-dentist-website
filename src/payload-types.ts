@@ -31,7 +31,7 @@ export type ButtonsField =
       /**
        * The icon to display on the button
        */
-      icon?: 'none' | null;
+      icon?: ('none' | 'phone' | 'whatsapp' | 'email' | 'facebook' | 'instagram' | 'twitter') | null;
       id?: string | null;
     }[]
   | null;
@@ -151,7 +151,9 @@ export interface Page {
    * The page's URL
    */
   slug: string;
-  layout?: (HeroBlock | BookingFormBlock | TreatmentsBlock | VideoReviewBlock | StatsBlock)[] | null;
+  layout?:
+    | (HeroBlock | BookingFormBlock | TreatmentsBlock | VideoReviewBlock | StatsBlock | CallToActionBlock)[]
+    | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -445,6 +447,38 @@ export interface StatsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlock".
+ */
+export interface CallToActionBlock {
+  /**
+   * The title of the Call To Action Section
+   */
+  title: string;
+  /**
+   * The description of the Call To Action Section
+   */
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  buttons?: ButtonsField;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'call-to-action';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -561,6 +595,7 @@ export interface PagesSelect<T extends boolean = true> {
         treatments?: T | TreatmentsBlockSelect<T>;
         'video-review'?: T | VideoReviewBlockSelect<T>;
         stats?: T | StatsBlockSelect<T>;
+        'call-to-action'?: T | CallToActionBlockSelect<T>;
       };
   meta?:
     | T
@@ -634,6 +669,29 @@ export interface StatsBlockSelect<T extends boolean = true> {
       };
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlock_select".
+ */
+export interface CallToActionBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  buttons?: T | ButtonsFieldSelect<T>;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ButtonsField_select".
+ */
+export interface ButtonsFieldSelect<T extends boolean = true> {
+  label?: T;
+  href?: T;
+  variant?: T;
+  size?: T;
+  icon?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -891,18 +949,6 @@ export interface HeaderSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ButtonsField_select".
- */
-export interface ButtonsFieldSelect<T extends boolean = true> {
-  label?: T;
-  href?: T;
-  variant?: T;
-  size?: T;
-  icon?: T;
-  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

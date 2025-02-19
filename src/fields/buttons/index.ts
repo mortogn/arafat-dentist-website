@@ -57,7 +57,7 @@ export const buttonsField = ({ overrides = {} }: ButtonsFieldParams) => {
       {
         type: 'radio',
         name: 'icon',
-        options: ['none'],
+        options: ['none', 'phone', 'whatsapp', 'email', 'facebook', 'instagram', 'twitter'],
         label: 'Icon',
         admin: {
           description: 'The icon to display on the button',

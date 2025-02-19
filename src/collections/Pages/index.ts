@@ -7,6 +7,7 @@ import { TreatmentsBlock } from '@/blocks/TreatmentsBlock'
 import { populateTreaments } from '@/blocks/TreatmentsBlock/hooks/populateTreatments'
 import { VideoReviewBlock } from '@/blocks/VideoReviewBlock'
 import { StatsBlock } from '@/blocks/StatsBlock'
+import { CallToActionBlock } from '@/blocks/CallToActionBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -18,7 +19,7 @@ export const Pages: CollectionConfig = {
     interface: 'Page',
   },
   admin: {
-    // useAsTitle: 'title',
+    useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'published'],
   },
   hooks: {
@@ -47,7 +48,14 @@ export const Pages: CollectionConfig = {
               type: 'blocks',
               name: 'layout',
 
-              blocks: [HeroBlock, BookingFormBlock, TreatmentsBlock, VideoReviewBlock, StatsBlock],
+              blocks: [
+                HeroBlock,
+                BookingFormBlock,
+                TreatmentsBlock,
+                VideoReviewBlock,
+                StatsBlock,
+                CallToActionBlock,
+              ],
             },
           ],
         },
