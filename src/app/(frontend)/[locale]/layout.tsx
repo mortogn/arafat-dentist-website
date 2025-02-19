@@ -38,6 +38,10 @@ const anek_bangla_body = Anek_Bangla({
   subsets: ['bengali'],
 })
 
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }))
+}
+
 export default async function MainLayout({
   children,
   params,
