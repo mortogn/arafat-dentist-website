@@ -5,6 +5,41 @@ import { getTreatment } from '@/utilities/getTreatment'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import RichTextContent from '@/components/RichTextContent'
 import { treatmentJsxConverter } from './treatmentJsxConverter'
+import { getCollection } from '@/utilities/getCollection'
+import { Locale } from '@/types'
+import { Treatment } from '@/payload-types'
+import { locales } from '@/const/locale'
+
+const getTreatmentSlugs = async (locale: Locale) => {
+  const treatments = await getCollection({
+    collection: 'treatments',
+    locale,
+    limit: 1000,
+    select: {
+      slug: true,
+    } as Partial<Record<keyof Treatment, true>>,
+  })
+
+  return treatments.docs as Pick<Treatment, 'slug' | 'id'>[]
+}
+
+export async function generateStaticParams() {
+  const params: { locale: Locale; slug: string }[] = []
+
+  for (const locale of locales) {
+    const treatments = await getTreatmentSlugs(locale)
+
+    // Map the treatments for current locale
+    const localeParams = treatments.map(({ slug }) => ({
+      locale,
+      slug,
+    }))
+
+    params.push(...localeParams)
+  }
+
+  return params
+}
 
 interface PageProps {
   params: Promise<{
