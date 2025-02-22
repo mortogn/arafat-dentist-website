@@ -10,7 +10,7 @@ type Props = {
 
 const SectionBlockComponent: React.FC<Props> = ({ data }) => {
   return (
-    <MaxWidthWrapper element="section" className="flex flex-col items-center my-20">
+    <MaxWidthWrapper element="section" className="flex flex-col items-center my-10 md:my-20">
       <SectionTitle title={data.title} description={data.description} />
 
       <RichTextContent className="mt-8" data={data.content} />

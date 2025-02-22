@@ -25,8 +25,8 @@ const LocationBlockComponent: FC<Props> = async ({ data, locale }) => {
   return (
     <MaxWidthWrapper id="location" element="section" className="my-20">
       <SectionTitle title={data.title} description={data.description} />
-      <div className="flex items-start gap-10 mt-8 ">
-        <div className="w-[65%]">
+      <div className="flex items-start gap-10 mt-8 flex-col md:flex-row">
+        <div className="w-full md:w-[65%]">
           <EmbeddedMap src={data.mapUrl} />
         </div>
         <div id="contact" className="text-xl">
@@ -38,7 +38,7 @@ const LocationBlockComponent: FC<Props> = async ({ data, locale }) => {
                 key={contact.id}
                 className="flex items-center text-lg en:text-base gap-2"
               >
-                <Icon className="size-6" icon={contact.icon} />
+                <Icon className="size-6 flex-shrink-0" icon={contact.icon} />
                 <span>{contact.label}</span>
               </Link>
             ))}
