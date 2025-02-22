@@ -64,6 +64,11 @@
   * {
     @apply border-border;
   }
+
+  html {
+    @apply scroll-smooth scroll-pt-24;
+  }
+
   body {
     @apply bg-background text-foreground font-body antialiased;
   }

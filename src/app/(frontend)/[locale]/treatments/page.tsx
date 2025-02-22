@@ -6,9 +6,15 @@ import { Treatment } from '@/payload-types'
 import { Locale } from '@/types'
 import { getCollection } from '@/utilities/getCollection'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import React from 'react'
+import { cache } from 'react'
+import { generateSEO } from '@/utilities/generateSeo'
+import { getPageBySlug } from '@/utilities/getPageBySlug'
 
-export const getTreatments = async ({ locale }: { locale: Locale }) => {
+const getTreatmentsPage = cache((locale: Locale) => {
+  return getPageBySlug('treatments', 2, locale)
+})
+
+const getTreatments = async (locale: Locale) => {
   const treatments = await getCollection({
     collection: 'treatments',
     locale,
@@ -25,13 +31,20 @@ export const getTreatments = async ({ locale }: { locale: Locale }) => {
   return treatments.docs as Treatment[]
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+  const { locale } = await params
+
+  const treatmentsPage = await getTreatmentsPage(locale)
+
+  return generateSEO(treatmentsPage.meta)
+}
+
 export default async function Treatments({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
   setRequestLocale(locale)
 
   const t = await getTranslations({ locale, namespace: 'Treatments' })
-
-  const treatments = await getTreatments({ locale })
+  const treatments = await getTreatments(locale)
 
   return (
     <MaxWidthWrapper>

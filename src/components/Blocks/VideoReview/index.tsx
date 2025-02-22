@@ -43,7 +43,7 @@ const VideoReviewSection: FC<Props> = ({ data }) => {
             typeof data.reviews[activeIndex] !== 'string' &&
             data.reviews[activeIndex].video && (
               <div key={data.reviews[activeIndex].id} className="space-y-2">
-                <h2 className="text-xl lg:text-2xl tracking-tight font-medium lg:text-left text-center">
+                <h2 className="text-xl en:lg:text-3xl lg:text-2xl tracking-tight font-medium lg:text-left text-center">
                   {data.reviews[activeIndex].video.title}
                 </h2>
                 <RichTextContent

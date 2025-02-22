@@ -152,7 +152,16 @@ export interface Page {
    */
   slug: string;
   layout?:
-    | (HeroBlock | BookingFormBlock | TreatmentsBlock | VideoReviewBlock | StatsBlock | CallToActionBlock)[]
+    | (
+        | HeroBlock
+        | BookingFormBlock
+        | TreatmentsBlock
+        | VideoReviewBlock
+        | StatsBlock
+        | CallToActionBlock
+        | LocationBlock
+        | SectionBlock
+      )[]
     | null;
   meta?: {
     title?: string | null;
@@ -479,6 +488,85 @@ export interface CallToActionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LocationBlock".
+ */
+export interface LocationBlock {
+  title: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * The URL to embed the map
+   */
+  mapUrl: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'location-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SectionBlock".
+ */
+export interface SectionBlock {
+  /**
+   * The title of the section
+   */
+  title: string;
+  /**
+   * The description of the section
+   */
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * The content of the section
+   */
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  image?: (string | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -596,6 +684,8 @@ export interface PagesSelect<T extends boolean = true> {
         'video-review'?: T | VideoReviewBlockSelect<T>;
         stats?: T | StatsBlockSelect<T>;
         'call-to-action'?: T | CallToActionBlockSelect<T>;
+        'location-block'?: T | LocationBlockSelect<T>;
+        section?: T | SectionBlockSelect<T>;
       };
   meta?:
     | T
@@ -692,6 +782,29 @@ export interface ButtonsFieldSelect<T extends boolean = true> {
   size?: T;
   icon?: T;
   id?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LocationBlock_select".
+ */
+export interface LocationBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  mapUrl?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SectionBlock_select".
+ */
+export interface SectionBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  content?: T;
+  image?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

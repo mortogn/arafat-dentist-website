@@ -59,7 +59,11 @@ const NavLinkWithChildren: FC<NavLinkWithChildrenProps> = async ({ data, locale 
 
   return (
     <NavigationMenuItem>
-      <NavigationMenuTrigger>{data.label}</NavigationMenuTrigger>
+      <NavigationMenuTrigger>
+        <Link href={data.href} className="bn:text-base">
+          {data.label}
+        </Link>
+      </NavigationMenuTrigger>
       <NavigationMenuContent className="">
         <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] grid-cols-2">
           {data.showTreatments && treatments && treatments.length > 0
@@ -92,7 +96,7 @@ const NavLinkWithoutChildren: FC<NavLinkWithoutChildrenProps> = ({ data }) => {
     <NavigationMenuItem>
       <Link href={data.href} passHref legacyBehavior>
         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-          <div>{data.label}</div>
+          <div className="bn:text-base">{data.label}</div>
         </NavigationMenuLink>
       </Link>
     </NavigationMenuItem>
@@ -112,7 +116,7 @@ const NavListItem: FC<NavListItemProps> = ({ data }) => {
             'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
           )}
         >
-          <div className="text-sm">{data.label}</div>
+          <div className="text-sm bn:text-base bn:font-medium">{data.label}</div>
           {data.description && (
             <p className="text-muted-foreground text-wrap line-clamp-2 text-sm tracking-wide">
               {data.description}

@@ -6,7 +6,7 @@ import YoutubeIcon from './YoutubeIcon'
 import TwitterIcon from './TwitterIcon'
 import { cn } from '@/lib/utils'
 import WhatsAppIcon from './WhatsAppIcon'
-import { BuildingIcon, MailIcon, PhoneIcon } from 'lucide-react'
+import { MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react'
 
 type Props = {
   icon:
@@ -38,7 +38,7 @@ function renderIcon(icon: Props['icon'], props: IconProps) {
     case 'whatsapp':
       return <WhatsAppIcon {...props} />
     case 'map':
-      return <BuildingIcon {...props} />
+      return <MapPinIcon {...props} />
     case 'phone':
       return <PhoneIcon {...props} />
     case 'email':

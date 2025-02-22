@@ -44,7 +44,7 @@ const Header = async ({ locale }: HeaderProps) => {
                   treatments={treatments.docs as Treatment[]}
                 />
               </div>
-              <Link href={'/'}>
+              <Link href={'/'} className="flex-shrink-0">
                 <Logo
                   src={(headerData.logo as Media).url!}
                   alt={(headerData.logo as Media).alt}
@@ -58,7 +58,12 @@ const Header = async ({ locale }: HeaderProps) => {
             </div>
           </div>
 
-          {headerData.buttons && <Buttons data={headerData.buttons} />}
+          {headerData.buttons && (
+            <Buttons
+              className={() => 'flex-wrap md:flex-nowrap max-w-[150px] md:max-w-none'}
+              data={headerData.buttons}
+            />
+          )}
         </MaxWidthWrapper>
       </header>
     </>

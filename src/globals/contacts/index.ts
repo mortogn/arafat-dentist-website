@@ -37,6 +37,7 @@ export const Contacts: GlobalConfig = {
               admin: {
                 description: 'The text to display for the link',
               },
+              localized: true,
             },
             {
               name: 'url',

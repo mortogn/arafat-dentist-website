@@ -12,7 +12,10 @@ const SectionTitle: FC<Props> = ({ title, description }) => {
       <h2 className="text-3xl md:text-4xl font-semibold">{title}</h2>
 
       {description && (
-        <RichTextContent data={description} className="[&_p]:text-sm md:[&_p]:text-base" />
+        <RichTextContent
+          data={description}
+          className="en:[&_p]:text-base bn:[&_p]:text-lg md:[&_p]:text-base"
+        />
       )}
     </div>
   )

@@ -18,7 +18,7 @@ const HeroSection: FC<Props> = ({ data }) => {
       <div className="lg:w-1/2">
         <RichTextContent
           data={data.text}
-          className="flex lg:block text-center lg:text-start items-center justify-center flex-col"
+          className="flex lg:block en:prose-headings:text-4xl lg:en:prose-headings:text-6xl text-center lg:text-start items-center justify-center flex-col"
         />
       </div>
 
