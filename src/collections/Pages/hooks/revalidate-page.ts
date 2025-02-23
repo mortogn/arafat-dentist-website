@@ -12,18 +12,17 @@ export const revalidatePage: CollectionAfterChangeHook = ({
   req: { payload },
 }) => {
   if (doc._status === 'published') {
-    payload.logger.info(`Revalidating page: ${doc.slug}`)
-
     locales.forEach((locale) => {
-      revalidatePath(`${locale}${getPathFromSlug(doc.slug)}`)
+      payload.logger.info(`Revalidating page: /${locale}${getPathFromSlug(doc.slug)}`)
+
+      revalidatePath(`/${locale}${getPathFromSlug(doc.slug)}`)
     })
   }
 
   if (previousDoc?._status === 'published' && doc._status !== 'published') {
-    payload.logger.info(`Revalidating page: ${doc.slug}`)
-
     locales.forEach((locale) => {
-      revalidatePath(`${locale}${getPathFromSlug(doc.slug)}`)
+      payload.logger.info(`Revalidating page: /${locale}${getPathFromSlug(doc.slug)}`)
+      revalidatePath(`/${locale}${getPathFromSlug(doc.slug)}`)
     })
   }
 }
