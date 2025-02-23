@@ -48,7 +48,7 @@ const AdminBar = () => {
         </p>
         <div className="[&_a]:font-medium [&_a]:underline text-sm gap-2 flex items-center">
           <Link href={'/admin'}>Admin Panel</Link>
-          <Link href={'/admin'}>Appointments</Link>
+          <Link href={'/admin/collections/appointments?limit=25&sort=date'}>Appointments</Link>
         </div>
       </MaxWidthWrapper>
     </div>

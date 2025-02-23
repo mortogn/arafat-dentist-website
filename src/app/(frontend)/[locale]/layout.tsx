@@ -11,6 +11,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import ScrollToTop from '@/components/ScrollToTop'
 import MobileBottomBar from '@/components/MobileBottomBar'
 import AdminBar from '@/components/AdminBar'
+import { Toaster } from '@/components/ui/sonner'
 
 const playfair_display = Playfair_Display({
   display: 'swap',
@@ -76,6 +77,8 @@ export default async function MainLayout({
           <MobileBottomBar />
 
           <Footer locale={locale} />
+
+          <Toaster position="bottom-center" richColors />
         </body>
       </NextIntlClientProvider>
     </html>

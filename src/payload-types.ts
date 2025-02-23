@@ -46,6 +46,7 @@ export interface Config {
     pages: Page;
     treatments: Treatment;
     reviews: Review;
+    appointments: Appointment;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -57,6 +58,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     treatments: TreatmentsSelect<false> | TreatmentsSelect<true>;
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
+    appointments: AppointmentsSelect<false> | AppointmentsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -567,6 +569,22 @@ export interface SectionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appointments".
+ */
+export interface Appointment {
+  id: string;
+  fullname: string;
+  email?: string | null;
+  phone: string;
+  date: string;
+  message?: string | null;
+  note?: string | null;
+  treatment: string | Treatment;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -591,6 +609,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'reviews';
         value: string | Review;
+      } | null)
+    | ({
+        relationTo: 'appointments';
+        value: string | Appointment;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -849,6 +871,21 @@ export interface ReviewsSelect<T extends boolean = true> {
     | {
         image?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appointments_select".
+ */
+export interface AppointmentsSelect<T extends boolean = true> {
+  fullname?: T;
+  email?: T;
+  phone?: T;
+  date?: T;
+  message?: T;
+  note?: T;
+  treatment?: T;
   updatedAt?: T;
   createdAt?: T;
 }

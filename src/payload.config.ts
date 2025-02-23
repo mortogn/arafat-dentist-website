@@ -17,6 +17,7 @@ import { Socials } from './globals/socials'
 import { Reviews } from './collections/Reviews'
 import { Contacts } from './globals/contacts'
 import { Footer } from './globals/footer'
+import { Appointment } from './collections/Appointment'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -28,7 +29,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pages, Treatments, Reviews],
+  collections: [Users, Media, Pages, Treatments, Reviews, Appointment],
   editor: lexicalEditor({
     features({ defaultFeatures, rootFeatures }) {
       return [...defaultFeatures, ...rootFeatures, FixedToolbarFeature()]

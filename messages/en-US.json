@@ -9,12 +9,21 @@
       "time": "Preferred Time",
       "notes": "Additional Notes",
       "submit": "Book Appointment",
+      "submitting": "Booking Appointment",
       "placeholders": {
         "fullname": "Enter your full name",
         "phone": "Enter your phone number",
         "email": "Enter your email address",
         "notes": "Any special requirements or concerns?",
         "treatment": "Choose your treatment"
+      },
+      "success": {
+        "title": "Appointment Booked",
+        "message": "Thank you for booking an appointment with us. We will get back to you shortly."
+      },
+      "failed": {
+        "title": "Failed to Book Appointment",
+        "message": "Sorry, we were unable to book your appointment. Please try again later."
       }
     }
   },
