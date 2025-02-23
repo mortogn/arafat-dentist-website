@@ -3,7 +3,7 @@ import { revalidatePath } from 'next/cache'
 import { CollectionAfterChangeHook } from 'payload'
 
 const getPathFromSlug = (slug: string) => {
-  return slug === 'home' ? '/' : `/${slug}`
+  return slug === 'home' ? '' : `/${slug}`
 }
 
 export const revalidatePage: CollectionAfterChangeHook = ({

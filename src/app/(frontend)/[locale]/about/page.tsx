@@ -1,16 +1,12 @@
-import EmbeddedMap from '@/components/EmbeddedMap'
-import Icon from '@/components/Icons/Icon'
-import MaxWidthWrapper from '@/components/MaxWidthWrapper'
-import { Contacts } from '@/payload-types'
 import { Locale } from '@/types'
 import { generateSEO } from '@/utilities/generateSeo'
-import { getCachedGlobal } from '@/utilities/getGlobals'
+
 import { getPageBySlug } from '@/utilities/getPageBySlug'
 import { Metadata } from 'next'
 
 import { setRequestLocale } from 'next-intl/server'
-import Link from 'next/link'
-import React, { cache } from 'react'
+
+import { cache } from 'react'
 import { renderer } from '../_renderer'
 
 const getAboutPage = cache(async (locale: Locale) => getPageBySlug('about', 1, locale))
