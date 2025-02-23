@@ -28,5 +28,9 @@
 
   "LocationBlock": {
     "contact-title": "Contact Information"
+  },
+
+  "CallToAction": {
+    "book-appointment": "Online Appointment"
   }
 }

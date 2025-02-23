@@ -109,6 +109,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: string;
+  role?: ('admin' | 'user')[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -481,7 +482,6 @@ export interface CallToActionBlock {
     };
     [k: string]: unknown;
   };
-  buttons?: ButtonsField;
   id?: string | null;
   blockName?: string | null;
   blockType: 'call-to-action';
@@ -639,6 +639,7 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -767,21 +768,8 @@ export interface StatsBlockSelect<T extends boolean = true> {
 export interface CallToActionBlockSelect<T extends boolean = true> {
   title?: T;
   description?: T;
-  buttons?: T | ButtonsFieldSelect<T>;
   id?: T;
   blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ButtonsField_select".
- */
-export interface ButtonsFieldSelect<T extends boolean = true> {
-  label?: T;
-  href?: T;
-  variant?: T;
-  size?: T;
-  icon?: T;
-  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1062,6 +1050,18 @@ export interface HeaderSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ButtonsField_select".
+ */
+export interface ButtonsFieldSelect<T extends boolean = true> {
+  label?: T;
+  href?: T;
+  variant?: T;
+  size?: T;
+  icon?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

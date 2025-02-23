@@ -9,6 +9,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { cache } from 'react'
 import { generateSEO } from '@/utilities/generateSeo'
 import { getPageBySlug } from '@/utilities/getPageBySlug'
+import { renderer } from '../_renderer'
 
 const getTreatmentsPage = cache((locale: Locale) => {
   return getPageBySlug('treatments', 2, locale)
@@ -43,17 +44,23 @@ export default async function Treatments({ params }: { params: Promise<{ locale:
   const { locale } = await params
   setRequestLocale(locale)
 
-  const t = await getTranslations({ locale, namespace: 'Treatments' })
-  const treatments = await getTreatments(locale)
+  const [t, treatments, treatmentsPage] = await Promise.all([
+    getTranslations({ locale, namespace: 'Treatments' }),
+    getTreatments(locale),
+    getTreatmentsPage(locale),
+  ])
 
   return (
-    <MaxWidthWrapper>
-      <div className="text-center">
-        <Heading as="h1">{t('title')}</Heading>
-        <Paragraph>{t('description')}</Paragraph>
-      </div>
+    <>
+      <MaxWidthWrapper>
+        <div className="text-center">
+          <Heading as="h1">{t('title')}</Heading>
+          <Paragraph>{t('description')}</Paragraph>
+        </div>
 
-      {treatments.length > 0 && <TreatmentWrapper className="my-10" treatments={treatments} />}
-    </MaxWidthWrapper>
+        {treatments.length > 0 && <TreatmentWrapper className="my-10" treatments={treatments} />}
+      </MaxWidthWrapper>
+      {treatmentsPage.layout?.map((block) => renderer(block, locale))}
+    </>
   )
 }

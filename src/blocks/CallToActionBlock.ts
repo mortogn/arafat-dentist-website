@@ -1,4 +1,4 @@
-import { buttonsField } from '@/fields/buttons'
+
 import {
   BoldFeature,
   FixedToolbarFeature,
@@ -46,6 +46,5 @@ export const CallToActionBlock: Block = {
       required: true,
       localized: true,
     },
-    buttonsField({}),
   ],
 }

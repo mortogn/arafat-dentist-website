@@ -10,6 +10,7 @@ import { getMessages, setRequestLocale } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import ScrollToTop from '@/components/ScrollToTop'
 import MobileBottomBar from '@/components/MobileBottomBar'
+import AdminBar from '@/components/AdminBar'
 
 const playfair_display = Playfair_Display({
   display: 'swap',
@@ -67,6 +68,7 @@ export default async function MainLayout({
             [`${anek_bangla_heading.variable} ${anek_bangla_body.variable}`]: locale === 'bn-BD',
           })}
         >
+          <AdminBar />
           <Header locale={locale} />
           <main className="mt-10">{children}</main>
           <ScrollToTop />

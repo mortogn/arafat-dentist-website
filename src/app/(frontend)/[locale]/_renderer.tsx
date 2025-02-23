@@ -42,7 +42,7 @@ export function renderer(block: Blocks, locale: Locale) {
       return <StatsSection data={block} key={block.id} />
 
     case 'call-to-action':
-      return <CallToAction key={block.id} data={block} />
+      return <CallToAction key={block.id} data={block} locale={locale} />
 
     case 'location-block':
       return <LocationBlockComponent key={block.id} data={block} locale={locale} />

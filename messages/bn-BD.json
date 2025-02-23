@@ -28,5 +28,9 @@
 
   "LocationBlock": {
     "contact-title": "যোগাযোগ তথ্য"
+  },
+
+  "CallToAction": {
+    "book-appointment": "সিরিয়াল বুকিং"
   }
 }
