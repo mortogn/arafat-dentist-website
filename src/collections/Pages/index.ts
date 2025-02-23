@@ -9,6 +9,7 @@ import { StatsBlock } from '@/blocks/StatsBlock'
 import { CallToActionBlock } from '@/blocks/CallToActionBlock'
 import { LocationBlock } from '@/blocks/LocationBlock'
 import { SectionBlock } from '@/blocks/SectionBlock'
+import { revalidatePage } from './hooks/revalidate-page'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -23,7 +24,9 @@ export const Pages: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'published'],
   },
-  hooks: {},
+  hooks: {
+    afterChange: [revalidatePage],
+  },
   versions: {
     drafts: true,
     maxPerDoc: 50,
