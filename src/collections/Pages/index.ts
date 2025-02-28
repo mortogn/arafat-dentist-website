@@ -10,6 +10,7 @@ import { CallToActionBlock } from '@/blocks/CallToActionBlock'
 import { LocationBlock } from '@/blocks/LocationBlock'
 import { SectionBlock } from '@/blocks/SectionBlock'
 import { revalidatePage } from './hooks/revalidate-page'
+import { PatientSafetyBlock } from '@/blocks/PatientSafetyBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -59,6 +60,7 @@ export const Pages: CollectionConfig = {
                 CallToActionBlock,
                 LocationBlock,
                 SectionBlock,
+                PatientSafetyBlock,
               ],
             },
           ],

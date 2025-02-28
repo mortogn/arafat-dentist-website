@@ -164,6 +164,7 @@ export interface Page {
         | CallToActionBlock
         | LocationBlock
         | SectionBlock
+        | PatientSafetyBlock
       )[]
     | null;
   meta?: {
@@ -569,6 +570,49 @@ export interface SectionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PatientSafetyBlock".
+ */
+export interface PatientSafetyBlock {
+  /**
+   * The title of the section
+   */
+  title: string;
+  /**
+   * The description of the section
+   */
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  intro: {
+    image: string | Media;
+    mobileImage: string | Media;
+    title: string;
+    description: string;
+  };
+  points: {
+    image: string | Media;
+    title: string;
+    description: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'patient-safety';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "appointments".
  */
 export interface Appointment {
@@ -709,6 +753,7 @@ export interface PagesSelect<T extends boolean = true> {
         'call-to-action'?: T | CallToActionBlockSelect<T>;
         'location-block'?: T | LocationBlockSelect<T>;
         section?: T | SectionBlockSelect<T>;
+        'patient-safety'?: T | PatientSafetyBlockSelect<T>;
       };
   meta?:
     | T
@@ -813,6 +858,32 @@ export interface SectionBlockSelect<T extends boolean = true> {
   description?: T;
   content?: T;
   image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PatientSafetyBlock_select".
+ */
+export interface PatientSafetyBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  intro?:
+    | T
+    | {
+        image?: T;
+        mobileImage?: T;
+        title?: T;
+        description?: T;
+      };
+  points?:
+    | T
+    | {
+        image?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

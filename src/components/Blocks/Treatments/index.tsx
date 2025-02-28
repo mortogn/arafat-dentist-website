@@ -34,7 +34,7 @@ const TreatmentsSection: FC<Props> = async ({ data, locale }) => {
   }
 
   return (
-    <MaxWidthWrapper id="treatments" element="section" className="my-20">
+    <MaxWidthWrapper id="treatments" element="section" className="my-10">
       <SectionTitle title={data.title} description={data.description} />
 
       {treatments && treatments.length > 0 && (

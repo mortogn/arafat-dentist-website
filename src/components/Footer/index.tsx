@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { type Contacts, type Socials, type Footer as FooterType } from '@/payload-types'
 import Media from '../Media'
 import MaxWidthWrapper from '../MaxWidthWrapper'
-import Link from 'next/link'
+import { Link } from '@/i18n/routing'
 import Icon from '../Icons/Icon'
 import { getTranslations } from 'next-intl/server'
 

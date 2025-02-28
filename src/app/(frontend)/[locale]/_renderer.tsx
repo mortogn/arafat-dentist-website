@@ -1,6 +1,7 @@
 import CallToAction from '@/components/Blocks/CallToAction'
 import HeroSection from '@/components/Blocks/Hero'
 import LocationBlockComponent from '@/components/Blocks/LocationBlock'
+import PatientSafetyBlockComponent from '@/components/Blocks/PatientSafety'
 import SectionBlockComponent from '@/components/Blocks/SectionBlock'
 import StatsSection from '@/components/Blocks/Stats'
 import TreatmentsSection from '@/components/Blocks/Treatments'
@@ -14,6 +15,7 @@ import {
   CallToActionBlock,
   SectionBlock,
   LocationBlock,
+  PatientSafetyBlock,
 } from '@/payload-types'
 import { Locale } from '@/types'
 
@@ -26,6 +28,7 @@ type Blocks =
   | CallToActionBlock
   | SectionBlock
   | LocationBlock
+  | PatientSafetyBlock
 
 export function renderer(block: Blocks, locale: Locale) {
   switch (block.blockType) {
@@ -49,6 +52,9 @@ export function renderer(block: Blocks, locale: Locale) {
 
     case 'section':
       return <SectionBlockComponent key={block.id} data={block} />
+
+    case 'patient-safety':
+      return <PatientSafetyBlockComponent key={block.id} data={block} />
     default:
       return null
   }

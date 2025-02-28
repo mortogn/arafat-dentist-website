@@ -45,5 +45,8 @@ For payload CMS collection examples,
 #File:../src/collections/Pages/index.ts
 #File:../src/collections/Media.ts
 
+For payload CMS Block Example,
+#File:../src/blocks/StatsBlock.ts
+
 For the env variable types,
 #File:../src/env.d.ts
