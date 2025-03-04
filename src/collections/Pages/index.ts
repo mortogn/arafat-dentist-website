@@ -11,6 +11,7 @@ import { LocationBlock } from '@/blocks/LocationBlock'
 import { SectionBlock } from '@/blocks/SectionBlock'
 import { revalidatePage } from './hooks/revalidate-page'
 import { PatientSafetyBlock } from '@/blocks/PatientSafetyBlock'
+import { TreatmentGridBlock } from '@/blocks/TreatmentGridBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -61,6 +62,7 @@ export const Pages: CollectionConfig = {
                 LocationBlock,
                 SectionBlock,
                 PatientSafetyBlock,
+                TreatmentGridBlock,
               ],
             },
           ],

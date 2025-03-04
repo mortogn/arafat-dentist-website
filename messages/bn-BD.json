@@ -41,5 +41,9 @@
 
   "CallToAction": {
     "book-appointment": "সিরিয়াল বুকিং"
+  },
+
+  "TreatmentGridBlock": {
+    "showMore": "আরো দেখুন"
   }
 }

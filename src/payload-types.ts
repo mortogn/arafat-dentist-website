@@ -165,6 +165,7 @@ export interface Page {
         | LocationBlock
         | SectionBlock
         | PatientSafetyBlock
+        | TreatmentGridBlock
       )[]
     | null;
   meta?: {
@@ -617,6 +618,42 @@ export interface PatientSafetyBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TreatmentGridBlock".
+ */
+export interface TreatmentGridBlock {
+  /**
+   * The title of the grid
+   */
+  title: string;
+  /**
+   * The description of the grid
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  treatments?: (string | Treatment)[] | null;
+  /**
+   * If checked, a 'Show More' button will be displayed at the bottom of the grid
+   */
+  showMoreButton?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'treatment-grid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "appointments".
  */
 export interface Appointment {
@@ -758,6 +795,7 @@ export interface PagesSelect<T extends boolean = true> {
         'location-block'?: T | LocationBlockSelect<T>;
         section?: T | SectionBlockSelect<T>;
         'patient-safety'?: T | PatientSafetyBlockSelect<T>;
+        'treatment-grid'?: T | TreatmentGridBlockSelect<T>;
       };
   meta?:
     | T
@@ -888,6 +926,18 @@ export interface PatientSafetyBlockSelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TreatmentGridBlock_select".
+ */
+export interface TreatmentGridBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  treatments?: T;
+  showMoreButton?: T;
   id?: T;
   blockName?: T;
 }
