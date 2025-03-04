@@ -48,19 +48,24 @@ const Footer: FC<Props> = async ({ locale }) => {
             </div>
           </div>
         ))}
-        <div className="flex flex-col items-center md:items-start">
+        <div className="flex flex-col items-center md:items-center">
           <h3 className="text-xl tracking-tight font-medium font-body">{t('follow_socials')}</h3>
-          <div className="flex items-start flex-col gap-2 mt-3">
+          <div className="flex items-start gap-3 mt-3">
             {socials.socials &&
               socials.socials.map((social) => (
                 <Link
                   key={social.id}
                   href={social.url}
                   target="_blank"
-                  className="group py-2 gap-2 rounded-md flex items-center"
+                  className="group py-2 gap-2 rounded-md"
                 >
-                  <Icon icon={social.icon} className="fill-primary-foreground size-5 " />
-                  <span className=" font-medium">{social.platform}</span>
+                  {social.image ? (
+                    <Media resource={social.image} height={50} width={50} className="size-10" />
+                  ) : (
+                    <Icon icon={social.icon} className="fill-primary-foreground size-10 " />
+                  )}
+
+                  <span className="sr-only font-medium">{social.platform}</span>
                 </Link>
               ))}
           </div>

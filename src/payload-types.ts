@@ -250,6 +250,10 @@ export interface Treatment {
    */
   description?: string | null;
   /**
+   * This icon will be used to represent the treatment on the website
+   */
+  icon: string | Media;
+  /**
    * The treatment's thumbnail image. The aspect ratio should be 5:3
    */
   thumbnail: string | Media;
@@ -896,6 +900,7 @@ export interface TreatmentsSelect<T extends boolean = true> {
   slugLock?: T;
   slug?: T;
   description?: T;
+  icon?: T;
   thumbnail?: T;
   content?: T;
   meta?:
@@ -1050,6 +1055,7 @@ export interface Socials {
   id: string;
   socials?:
     | {
+        image?: (string | null) | Media;
         icon: 'facebook' | 'instagram' | 'youtube' | 'twitter' | 'none';
         platform: string;
         url: string;
@@ -1179,6 +1185,7 @@ export interface SocialsSelect<T extends boolean = true> {
   socials?:
     | T
     | {
+        image?: T;
         icon?: T;
         platform?: T;
         url?: T;

@@ -57,6 +57,19 @@ export const Treatments: CollectionConfig = {
             },
             {
               type: 'upload',
+              name: 'icon',
+              relationTo: 'media',
+              required: true,
+              filterOptions: {
+                mimeType: { contains: 'image' },
+              },
+              label: 'Treatment Icon',
+              admin: {
+                description: 'This icon will be used to represent the treatment on the website',
+              },
+            },
+            {
+              type: 'upload',
               name: 'thumbnail',
               relationTo: 'media',
               required: true,

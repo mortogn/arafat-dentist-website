@@ -21,6 +21,16 @@ export const Socials: GlobalConfig = {
       },
       fields: [
         {
+          name: 'image',
+          label: 'Image',
+          type: 'upload',
+          relationTo: 'media',
+          required: false,
+          filterOptions: {
+            mimeType: { contains: 'image' },
+          },
+        },
+        {
           name: 'icon',
           type: 'radio',
           options: ['facebook', 'instagram', 'youtube', 'twitter', 'none'],

@@ -5,6 +5,7 @@ import Icon from '../Icons/Icon'
 import MaxWidthWrapper from '../MaxWidthWrapper'
 import Link from 'next/link'
 import { getCachedGlobal } from '@/utilities/getGlobals'
+import Media from '../Media'
 
 type Props = {
   data: Header['topbar']
@@ -32,6 +33,7 @@ const Topbar: FC<Props> = async ({ data }) => {
                 target="_blank"
                 className="hover:bg-primary-foreground group p-2 rounded-md"
               >
+                {/* <Media resource={social.image} height={50} width={50} className="size-5" /> */}
                 <Icon
                   icon={social.icon}
                   className="fill-primary-foreground size-5 group-hover:fill-primary"
