@@ -7,6 +7,7 @@ import { slugFields } from '@/fields/slug'
 import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload'
 import { revalidateTreatment } from './hooks/revalidateTreatment'
+import { GridPriceListBlock } from '@/blocks/richtext/GridPriceListBlock'
 
 export const Treatments: CollectionConfig = {
   slug: 'treatments',
@@ -101,7 +102,13 @@ export const Treatments: CollectionConfig = {
                     ...defaultFeatures,
                     ...rootFeatures,
                     BlocksFeature({
-                      blocks: [CheckListBlock, YoutubeEmbedBlock, ImageBlock, FaqBlock],
+                      blocks: [
+                        CheckListBlock,
+                        YoutubeEmbedBlock,
+                        ImageBlock,
+                        FaqBlock,
+                        GridPriceListBlock,
+                      ],
                     }),
                   ]
                 },

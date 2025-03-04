@@ -1,8 +1,15 @@
 import CheckListBlockComponent from '@/components/Blocks/CheckListBlock'
 import FAQSection from '@/components/Blocks/FAQBlock'
+import GridPriceListBlockComponent from '@/components/Blocks/GridPriceListBlock'
 import ImageBlockComponent from '@/components/Blocks/ImageBlock'
 import YoutubeEmbedBlockComponent from '@/components/Blocks/YoutubeEmbedBlock'
-import { CheckListBlock, FaqBlock, ImageBlock, YoutubeEmbedBlock } from '@/payload-types'
+import {
+  CheckListBlock,
+  FaqBlock,
+  GridPriceListBlock,
+  ImageBlock,
+  YoutubeEmbedBlock,
+} from '@/payload-types'
 import { JSXConvertersFunction } from '@payloadcms/richtext-lexical/react'
 
 export const treatmentJsxConverter: JSXConvertersFunction = ({ defaultConverters }) => {
@@ -19,6 +26,10 @@ export const treatmentJsxConverter: JSXConvertersFunction = ({ defaultConverters
         <YoutubeEmbedBlockComponent data={node.fields} />
       ),
       faq: ({ node }: { node: { fields: FaqBlock } }) => <FAQSection data={node.fields} />,
+
+      'grid-price-list': ({ node }: { node: { fields: GridPriceListBlock } }) => (
+        <GridPriceListBlockComponent data={node.fields} />
+      ),
     },
   }
 }
