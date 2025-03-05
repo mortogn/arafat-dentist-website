@@ -6,6 +6,7 @@ import Media from '../Media'
 import { MoreHorizontalIcon } from 'lucide-react'
 import { Locale } from '@/types'
 import { getTranslations } from 'next-intl/server'
+import { Link } from '@/i18n/routing'
 
 type Props = {
   data: TreatmentGridBlock
@@ -23,20 +24,24 @@ const TreatmentGridBlockComponent: React.FC<Props> = async ({ data, locale }) =>
           data.treatments.map(
             (treatment) =>
               typeof treatment !== 'string' && (
-                <div
+                <Link
                   key={treatment.id}
+                  href={`/treatments/${treatment.slug}`}
                   className="flex items-center flex-col space-y-4 p-6 bg-white rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-shadow duration-300"
                 >
                   <Media resource={treatment.icon} height={200} width={200} className="size-16" />
                   <h3 className="text-xl font-body text-center">{treatment.title}</h3>
-                </div>
+                </Link>
               ),
           )}
         {data.showMoreButton && (
-          <div className="flex items-center flex-col space-y-4 p-6 bg-white rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-shadow duration-300 cursor-pointer">
+          <Link
+            href={'/treatments'}
+            className="flex items-center flex-col space-y-4 p-6 bg-white rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+          >
             <MoreHorizontalIcon className="size-16" />
             <h3 className="text-xl font-body text-center">{t('showMore')}</h3>
-          </div>
+          </Link>
         )}
       </div>
     </MaxWidthWrapper>
