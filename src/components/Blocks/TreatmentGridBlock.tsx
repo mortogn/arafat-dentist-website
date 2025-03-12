@@ -19,7 +19,7 @@ const TreatmentGridBlockComponent: React.FC<Props> = async ({ data, locale }) =>
   return (
     <MaxWidthWrapper element="section" className="my-16">
       <SectionTitle title={data.title} description={data.description} />
-      <div className="mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      <div className="mt-8 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-6 gap-1">
         {data.treatments &&
           data.treatments.map(
             (treatment) =>
@@ -29,8 +29,13 @@ const TreatmentGridBlockComponent: React.FC<Props> = async ({ data, locale }) =>
                   href={`/treatments/${treatment.slug}`}
                   className="flex items-center flex-col space-y-4 p-6 bg-white rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-shadow duration-300"
                 >
-                  <Media resource={treatment.icon} height={200} width={200} className="size-16" />
-                  <h3 className="text-xl font-body text-center">{treatment.title}</h3>
+                  <Media
+                    resource={treatment.icon}
+                    height={200}
+                    width={200}
+                    className="size-12 lg:size-16"
+                  />
+                  <h3 className="text-base lg:text-xl font-body text-center">{treatment.title}</h3>
                 </Link>
               ),
           )}
@@ -39,8 +44,8 @@ const TreatmentGridBlockComponent: React.FC<Props> = async ({ data, locale }) =>
             href={'/treatments'}
             className="flex items-center flex-col space-y-4 p-6 bg-white rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
           >
-            <MoreHorizontalIcon className="size-16" />
-            <h3 className="text-xl font-body text-center">{t('showMore')}</h3>
+            <MoreHorizontalIcon className="size-12 lg:size-16" />
+            <h3 className="text-base lg:text-xl font-body text-center">{t('showMore')}</h3>
           </Link>
         )}
       </div>
