@@ -1,10 +1,12 @@
 import CheckListBlockComponent from '@/components/Blocks/CheckListBlock'
+import ColorTextInlineBlockComponent from '@/components/Blocks/ColorTextBlock'
 import FAQSection from '@/components/Blocks/FAQBlock'
 import GridPriceListBlockComponent from '@/components/Blocks/GridPriceListBlock'
 import ImageBlockComponent from '@/components/Blocks/ImageBlock'
 import YoutubeEmbedBlockComponent from '@/components/Blocks/YoutubeEmbedBlock'
 import {
   CheckListBlock,
+  ColorTextBlock,
   FaqBlock,
   GridPriceListBlock,
   ImageBlock,
@@ -29,6 +31,9 @@ export const treatmentJsxConverter: JSXConvertersFunction = ({ defaultConverters
 
       'grid-price-list': ({ node }: { node: { fields: GridPriceListBlock } }) => (
         <GridPriceListBlockComponent data={node.fields} />
+      ),
+      'color-text': ({ node }: { node: { fields: ColorTextBlock } }) => (
+        <ColorTextInlineBlockComponent data={node.fields} />
       ),
     },
   }
