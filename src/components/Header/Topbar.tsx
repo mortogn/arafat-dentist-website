@@ -21,11 +21,13 @@ const Topbar: FC<Props> = async ({ data }) => {
 
   return (
     <div className="bg-primary py-3 text-primary-foreground my-auto">
-      <MaxWidthWrapper className="flex items-center justify-between">
+      <MaxWidthWrapper className="flex items-center justify-center md:justify-between">
         <div className="font-medium tracking-wide text-sm bn:text-base">{data.text}</div>
-        {data.callToAction && data.buttons && <Buttons data={data.buttons} />}
+        {data.callToAction && data.buttons && (
+          <Buttons containerClassName="hidden md:flex" data={data.buttons} />
+        )}
         {data.showSocials && socials && (
-          <div className="flex items-center gap-2">
+          <div className=" hidden md:flex items-center gap-2 ">
             {socials.map((social) => (
               <Link
                 key={social.id}
