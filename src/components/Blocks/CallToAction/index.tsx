@@ -30,7 +30,10 @@ const CallToAction: FC<Props> = async ({ data, locale }) => {
         <Heading as="h3" className="en:text-3xl en:font-medium en:tracking-tight">
           {data.title}
         </Heading>
-        <RichTextContent data={data.description} className="en:prose-p:text-base" />
+        <RichTextContent
+          data={data.description}
+          className="en:prose-p:text-base text-primary-foreground"
+        />
 
         <div className="flex items-center gap-3 flex-col lg:flex-row">
           <Button asChild variant="secondary">
