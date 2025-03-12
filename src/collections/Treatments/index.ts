@@ -8,6 +8,7 @@ import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload'
 import { revalidateTreatment } from './hooks/revalidateTreatment'
 import { GridPriceListBlock } from '@/blocks/richtext/GridPriceListBlock'
+import { ColorTextBlock } from '@/blocks/richtext/ColorTextBlock'
 
 export const Treatments: CollectionConfig = {
   slug: 'treatments',
@@ -108,7 +109,9 @@ export const Treatments: CollectionConfig = {
                         ImageBlock,
                         FaqBlock,
                         GridPriceListBlock,
+                        ColorTextBlock,
                       ],
+                      inlineBlocks: [],
                     }),
                   ]
                 },

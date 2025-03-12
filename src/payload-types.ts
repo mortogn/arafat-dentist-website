@@ -1449,6 +1449,38 @@ export interface GridPriceListBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ColorTextBlock".
+ */
+export interface ColorTextBlock {
+  alignment?: ('left' | 'center' | 'right') | null;
+  /**
+   * The text to display
+   */
+  text?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Select a color for the text
+   */
+  color: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'color-text';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
