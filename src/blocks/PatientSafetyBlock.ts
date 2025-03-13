@@ -36,6 +36,9 @@ export const PatientSafetyBlock: Block = {
           filterOptions: {
             mimeType: { contains: 'image' },
           },
+          admin: {
+            description: 'The image that will be displayed on larger screens',
+          },
         },
         {
           type: 'upload',
@@ -45,6 +48,9 @@ export const PatientSafetyBlock: Block = {
           required: true,
           filterOptions: {
             mimeType: { contains: 'image' },
+          },
+          admin: {
+            description: 'The image that will be displayed on mobile screens',
           },
         },
         {
@@ -79,6 +85,9 @@ export const PatientSafetyBlock: Block = {
             mimeType: { contains: 'image' },
           },
           label: 'Image',
+          admin: {
+            description: 'Image will be rendered with a 6:3 aspect ratio',
+          },
         },
         {
           type: 'text',
