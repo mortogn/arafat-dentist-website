@@ -26,7 +26,7 @@ const Footer: FC<Props> = async ({ locale }) => {
     <footer className="bg-secondary/40 py-10 md:py-20 pb-[99px] lg:pb-20">
       <MaxWidthWrapper className="flex items-center md:items-start flex-col md:flex-row gap-10 justify-between">
         <div className="max-w-xs flex flex-col items-center md:items-start gap-4 md:gap-6">
-          <Media resource={footer.logo} height={100} width={100} className="h-[40px] w-auto" />
+          <Media resource={footer.logo} height={100} width={100} className="h-[80px] w-auto" />
           <div className="space-y-4 mt-8">
             {contacts.contacts?.map((contact) => (
               <Link href={contact.url} className="flex items-center gap-3" key={contact.id}>
