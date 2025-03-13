@@ -42,29 +42,31 @@ const MobileDrawer: FC<MobileDrawerProps> = ({ data, locale, treatments }) => {
           <Menu className="size-8" />
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader>
+      <DrawerContent className="max-h-[85vh] flex flex-col">
+        <DrawerHeader className="flex-shrink-0">
           <DrawerTitle>Menu</DrawerTitle>
         </DrawerHeader>
-        <motion.div
-          className="px-4 pb-8 flex flex-col divide-y"
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-        >
-          {data.links.map((link) =>
-            link.hasChildren || link.showTreatments ? (
-              <MobileNavLinkWithChildren
-                key={link.id}
-                data={link}
-                locale={locale}
-                treatments={treatments}
-              />
-            ) : (
-              <MobileNavLinkWithoutChildren key={link.id} data={link} />
-            ),
-          )}
-        </motion.div>
+        <div className="flex-1 overflow-y-auto">
+          <motion.div
+            className="px-4 pb-8 flex flex-col divide-y"
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+          >
+            {data.links.map((link) =>
+              link.hasChildren || link.showTreatments ? (
+                <MobileNavLinkWithChildren
+                  key={link.id}
+                  data={link}
+                  locale={locale}
+                  treatments={treatments}
+                />
+              ) : (
+                <MobileNavLinkWithoutChildren key={link.id} data={link} />
+              ),
+            )}
+          </motion.div>
+        </div>
       </DrawerContent>
     </Drawer>
   )
