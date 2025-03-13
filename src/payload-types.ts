@@ -601,12 +601,21 @@ export interface PatientSafetyBlock {
     [k: string]: unknown;
   };
   intro: {
+    /**
+     * The image that will be displayed on larger screens
+     */
     image: string | Media;
+    /**
+     * The image that will be displayed on mobile screens
+     */
     mobileImage: string | Media;
     title: string;
     description: string;
   };
   points: {
+    /**
+     * Image will be rendered with a 6:3 aspect ratio
+     */
     image: string | Media;
     title: string;
     description: string;

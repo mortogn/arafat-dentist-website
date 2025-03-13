@@ -42,12 +42,12 @@ const PatientSafetyBlockComponent: FC<Props> = ({ data }) => {
 
           {data.points.map((point) => (
             <div key={point.id} className="flex flex-col h-full">
-              <div className="h-60 relative">
+              <div className="max-h-60 relative aspect-[4/3]">
                 <Media
                   resource={point.image}
                   height={300}
                   width={600}
-                  className="w-full h-full object-cover absolute inset-0"
+                  className="w-full h-full object-cover absolute inset-0 aspect-[6/3]"
                 />
               </div>
               <div className="mt-4 flex flex-col text-center flex-1 flex-grow">
