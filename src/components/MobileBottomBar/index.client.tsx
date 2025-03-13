@@ -38,18 +38,18 @@ const MobileBottomBarClient: FC<Props> = ({ phone, whatsApp }) => {
   }, [])
 
   return (
-    <div className="fixed bottom-0 right-0 left-0 px-4 lg:hidden bg-background text-foreground flex items-center justify-between h-[65px] text-sm">
+    <div className="fixed bottom-0 right-0 left-0 px-4 lg:hidden bg-primary text-primary-foreground flex items-center justify-between h-[65px] text-sm">
       <Link className="flex items-center flex-col gap-0.5" href={phone || '#'}>
         <Icon className="size-6" icon="phone" />
         <span>Phone</span>
       </Link>
       <Link className="flex items-center flex-col gap-0.5" href={whatsApp || '#'}>
-        <Icon className="size-6" icon="whatsapp" />
+        <Icon className="size-6 fill-white" icon="whatsapp" />
         <span>WhatsApp</span>
       </Link>
       <div></div>
       <Link href={'/'} className="absolute left-1/2  -translate-x-1/2">
-        <div className="bg-primary p-3 rounded-full border-transparent border-4 -mt-[65px]">
+        <div className="bg-primary p-3 rounded-full border-background border-4 -mt-[65px]">
           <ToothIcon
             className="fill-primary-foreground size-8"
             style={{
@@ -60,7 +60,7 @@ const MobileBottomBarClient: FC<Props> = ({ phone, whatsApp }) => {
         </div>
       </Link>
       <Link className="flex items-center flex-col gap-0.5" href={'/treatments'}>
-        <Image height={20} width={20} src={'/clinic.png'} alt="clinic" className="size-7" />
+        <Image height={20} width={20} src={'/clinic.png'} alt="clinic" className="size-7 invert" />
         Treatments
       </Link>
       <Link className="flex items-center flex-col gap-0.5" href={`/about#location`}>
