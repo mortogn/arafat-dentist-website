@@ -48,7 +48,7 @@ const Header = async ({ locale }: HeaderProps) => {
                 <Logo
                   src={(headerData.logo as Media).url!}
                   alt={(headerData.logo as Media).alt}
-                  className="h-[40px]"
+                  className="h-[65px]"
                 />
               </Link>
             </div>
