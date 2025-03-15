@@ -20,7 +20,7 @@ export async function getTreatment({
         equals: slug,
       },
     },
-    depth: 1,
+    depth: 2,
     locale: locale,
     draft: draft,
     limit: 1,

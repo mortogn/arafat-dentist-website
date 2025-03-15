@@ -3,6 +3,7 @@ import ColorTextInlineBlockComponent from '@/components/Blocks/ColorTextBlock'
 import FAQSection from '@/components/Blocks/FAQBlock'
 import GridPriceListBlockComponent from '@/components/Blocks/GridPriceListBlock'
 import ImageBlockComponent from '@/components/Blocks/ImageBlock'
+import TreatmentsRelationBlockComponent from '@/components/Blocks/TreatmentsRelation'
 import YoutubeEmbedBlockComponent from '@/components/Blocks/YoutubeEmbedBlock'
 import {
   CheckListBlock,
@@ -10,6 +11,7 @@ import {
   FaqBlock,
   GridPriceListBlock,
   ImageBlock,
+  TreatmentsRelationBlock,
   YoutubeEmbedBlock,
 } from '@/payload-types'
 import { JSXConvertersFunction } from '@payloadcms/richtext-lexical/react'
@@ -34,6 +36,9 @@ export const treatmentJsxConverter: JSXConvertersFunction = ({ defaultConverters
       ),
       'color-text': ({ node }: { node: { fields: ColorTextBlock } }) => (
         <ColorTextInlineBlockComponent data={node.fields} />
+      ),
+      'treatments-relation': ({ node }: { node: { fields: TreatmentsRelationBlock } }) => (
+        <TreatmentsRelationBlockComponent data={node.fields} />
       ),
     },
   }

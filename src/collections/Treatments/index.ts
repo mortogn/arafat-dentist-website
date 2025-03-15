@@ -9,6 +9,7 @@ import { CollectionConfig } from 'payload'
 import { revalidateTreatment } from './hooks/revalidateTreatment'
 import { GridPriceListBlock } from '@/blocks/richtext/GridPriceListBlock'
 import { ColorTextBlock } from '@/blocks/richtext/ColorTextBlock'
+import { TreatmentsRelationBlock } from '@/blocks/richtext/TreatmentsRelationBlock'
 
 export const Treatments: CollectionConfig = {
   slug: 'treatments',
@@ -25,6 +26,13 @@ export const Treatments: CollectionConfig = {
   },
   hooks: {
     afterChange: [revalidateTreatment],
+  },
+  defaultPopulate: {
+    title: true,
+    icon: true,
+    thumbnail: true,
+    description: true,
+    slug: true,
   },
   fields: [
     {
@@ -110,6 +118,7 @@ export const Treatments: CollectionConfig = {
                         FaqBlock,
                         GridPriceListBlock,
                         ColorTextBlock,
+                        TreatmentsRelationBlock,
                       ],
                       inlineBlocks: [],
                     }),

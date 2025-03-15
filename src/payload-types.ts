@@ -1490,6 +1490,16 @@ export interface ColorTextBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TreatmentsRelationBlock".
+ */
+export interface TreatmentsRelationBlock {
+  treatments?: (string | Treatment)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'treatments-relation';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {

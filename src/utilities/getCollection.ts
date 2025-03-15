@@ -28,6 +28,7 @@ export const getCollection = async (params: GetCollectionParams) => {
     select,
     page,
     depth,
+    draft: false,
   })
 
   return result
