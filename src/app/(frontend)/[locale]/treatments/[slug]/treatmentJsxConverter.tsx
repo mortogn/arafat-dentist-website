@@ -1,3 +1,4 @@
+import CallToActionButtonsBlockComponent from '@/components/Blocks/CallToActionButtonsBlock'
 import CheckListBlockComponent from '@/components/Blocks/CheckListBlock'
 import ColorTextInlineBlockComponent from '@/components/Blocks/ColorTextBlock'
 import FAQSection from '@/components/Blocks/FAQBlock'
@@ -6,6 +7,7 @@ import ImageBlockComponent from '@/components/Blocks/ImageBlock'
 import TreatmentsRelationBlockComponent from '@/components/Blocks/TreatmentsRelation'
 import YoutubeEmbedBlockComponent from '@/components/Blocks/YoutubeEmbedBlock'
 import {
+  CallToActionButtonsBlock,
   CheckListBlock,
   ColorTextBlock,
   FaqBlock,
@@ -39,6 +41,9 @@ export const treatmentJsxConverter: JSXConvertersFunction = ({ defaultConverters
       ),
       'treatments-relation': ({ node }: { node: { fields: TreatmentsRelationBlock } }) => (
         <TreatmentsRelationBlockComponent data={node.fields} />
+      ),
+      'call-to-action-buttons': ({ node }: { node: { fields: CallToActionButtonsBlock } }) => (
+        <CallToActionButtonsBlockComponent data={node.fields} />
       ),
     },
   }
