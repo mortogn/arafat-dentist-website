@@ -11,7 +11,7 @@ type Props = {
 const CheckListBlockComponent: FC<Props> = ({ data }) => {
   return (
     <div
-      className={cn('w-full ', {
+      className={cn('w-full not-prose max-w-[80%] ', {
         'ml-0 max-w-[80%]': data.alignment === 'left',
         'mx-auto w-max': data.alignment === 'center',
       })}
@@ -25,15 +25,23 @@ const CheckListBlockComponent: FC<Props> = ({ data }) => {
           })}
         >
           {data.checklist.map((item, index) => (
-            <li key={index} className={cn('flex items-center gap-2')}>
+            <li key={index} className={cn('flex items-start gap-2 overflow-visible')}>
               <CheckIcon
-                className={cn('flex-shrink-0 text-green-600', {
+                className={cn('flex-shrink-0 text-green-600 mt-1', {
                   'size-4 md:size-5': data.size === 'small',
                   'size-5 md:size-6': data.size === 'medium',
                   'size-6 md:size-7': data.size === 'large',
                 })}
               />
-              {item.label && <RichTextContent data={item.label} />}
+
+              <div className="min-w-0 flex-1 overflow-visible">
+                {item.label && (
+                  <RichTextContent
+                    className="break-words hyphens-auto max-w-full whitespace-normal overflow-visible"
+                    data={item.label}
+                  />
+                )}
+              </div>
             </li>
           ))}
         </ul>

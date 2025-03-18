@@ -10,6 +10,7 @@ import { revalidateTreatment } from './hooks/revalidateTreatment'
 import { GridPriceListBlock } from '@/blocks/richtext/GridPriceListBlock'
 import { ColorTextBlock } from '@/blocks/richtext/ColorTextBlock'
 import { TreatmentsRelationBlock } from '@/blocks/richtext/TreatmentsRelationBlock'
+import { CallToActionButtonsBlock } from '@/blocks/richtext/CallToActionButtonsBlock'
 
 export const Treatments: CollectionConfig = {
   slug: 'treatments',
@@ -119,6 +120,7 @@ export const Treatments: CollectionConfig = {
                         GridPriceListBlock,
                         ColorTextBlock,
                         TreatmentsRelationBlock,
+                        CallToActionButtonsBlock,
                       ],
                       inlineBlocks: [],
                     }),

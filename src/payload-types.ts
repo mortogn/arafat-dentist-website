@@ -1500,6 +1500,27 @@ export interface TreatmentsRelationBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionButtonsBlock".
+ */
+export interface CallToActionButtonsBlock {
+  buttons?:
+    | {
+        icon?: (string | null) | Media;
+        label: string;
+        url: string;
+        color: {
+          bgColor: string;
+          textColor: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'call-to-action-buttons';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
