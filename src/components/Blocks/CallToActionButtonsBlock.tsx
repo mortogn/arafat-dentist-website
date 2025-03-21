@@ -16,11 +16,12 @@ const CallToActionButtonsBlockComponent: FC<Props> = ({ data }) => {
           asChild
           key={button.id}
           style={{ backgroundColor: button.color.bgColor, color: button.color.textColor }}
-          className="flex-1 text-lg h-16"
-          size="lg"
+          className="flex-1 text-base md:text-lg h-16 shrink-0 space-x-2 w-full"
         >
-          <Link href={button.url} className="space-x-2">
-            {button.icon && <Media resource={button.icon} height={30} width={30} />}
+          <Link href={button.url}>
+            {button.icon && (
+              <Media resource={button.icon} height={30} width={30} className="size-5 md:size-7" />
+            )}
             {button.label}
           </Link>
         </Button>
