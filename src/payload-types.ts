@@ -47,6 +47,7 @@ export interface Config {
     treatments: Treatment;
     reviews: Review;
     appointments: Appointment;
+    doctors: Doctor;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -59,6 +60,7 @@ export interface Config {
     treatments: TreatmentsSelect<false> | TreatmentsSelect<true>;
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     appointments: AppointmentsSelect<false> | AppointmentsSelect<true>;
+    doctors: DoctorsSelect<false> | DoctorsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -166,6 +168,7 @@ export interface Page {
         | SectionBlock
         | PatientSafetyBlock
         | TreatmentGridBlock
+        | TreatmentInfoViewBlock
       )[]
     | null;
   meta?: {
@@ -258,10 +261,29 @@ export interface Treatment {
    * The treatment's thumbnail image. The aspect ratio should be 5:3
    */
   thumbnail: string | Media;
+  doctors: (string | Doctor)[];
   /**
    * All the details about the treatment including price, duration and benefits
    */
   content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Content to display in the treatment info view block
+   */
+  infoViewContent?: {
     root: {
       type: string;
       children: {
@@ -287,6 +309,33 @@ export interface Treatment {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "doctors".
+ */
+export interface Doctor {
+  id: string;
+  photo: string | Media;
+  name: string;
+  specialization: string;
+  about?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -663,6 +712,17 @@ export interface TreatmentGridBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TreatmentInfoViewBlock".
+ */
+export interface TreatmentInfoViewBlock {
+  title: string;
+  bgImage: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'treatment-info-view-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "appointments".
  */
 export interface Appointment {
@@ -707,6 +767,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'appointments';
         value: string | Appointment;
+      } | null)
+    | ({
+        relationTo: 'doctors';
+        value: string | Doctor;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -805,6 +869,7 @@ export interface PagesSelect<T extends boolean = true> {
         section?: T | SectionBlockSelect<T>;
         'patient-safety'?: T | PatientSafetyBlockSelect<T>;
         'treatment-grid'?: T | TreatmentGridBlockSelect<T>;
+        'treatment-info-view-block'?: T | TreatmentInfoViewBlockSelect<T>;
       };
   meta?:
     | T
@@ -952,6 +1017,16 @@ export interface TreatmentGridBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TreatmentInfoViewBlock_select".
+ */
+export interface TreatmentInfoViewBlockSelect<T extends boolean = true> {
+  title?: T;
+  bgImage?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "treatments_select".
  */
 export interface TreatmentsSelect<T extends boolean = true> {
@@ -961,7 +1036,9 @@ export interface TreatmentsSelect<T extends boolean = true> {
   description?: T;
   icon?: T;
   thumbnail?: T;
+  doctors?: T;
   content?: T;
+  infoViewContent?: T;
   meta?:
     | T
     | {
@@ -1021,6 +1098,18 @@ export interface AppointmentsSelect<T extends boolean = true> {
   message?: T;
   note?: T;
   treatment?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "doctors_select".
+ */
+export interface DoctorsSelect<T extends boolean = true> {
+  photo?: T;
+  name?: T;
+  specialization?: T;
+  about?: T;
   updatedAt?: T;
   createdAt?: T;
 }

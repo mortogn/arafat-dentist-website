@@ -49,5 +49,10 @@
 
   "TreatmentCard": {
     "viewDetails": "বিস্তারিত"
+  },
+
+  "TreatmentInfoViewBlock": {
+    "viewDetails": "বিস্তারিত দেখুন",
+    "selectTreatment": "চিকিৎসা নির্বাচন করুন"
   }
 }

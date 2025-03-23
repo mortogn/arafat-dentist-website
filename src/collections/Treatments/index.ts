@@ -92,6 +92,16 @@ export const Treatments: CollectionConfig = {
               },
               displayPreview: true,
             },
+            {
+              type: 'relationship',
+              name: 'doctors',
+              relationTo: 'doctors',
+              hasMany: true,
+              admin: {
+                isSortable: true,
+              },
+              required: true,
+            },
           ],
         },
         {
@@ -119,6 +129,34 @@ export const Treatments: CollectionConfig = {
                         FaqBlock,
                         GridPriceListBlock,
                         ColorTextBlock,
+                        TreatmentsRelationBlock,
+                        CallToActionButtonsBlock,
+                      ],
+                      inlineBlocks: [],
+                    }),
+                  ]
+                },
+              }),
+            },
+            {
+              type: 'richText',
+              name: 'infoViewContent',
+              label: 'Info View Content',
+              admin: {
+                description: 'Content to display in the treatment info view block',
+              },
+              localized: true,
+              editor: lexicalEditor({
+                features({ defaultFeatures, rootFeatures }) {
+                  return [
+                    ...defaultFeatures,
+                    ...rootFeatures,
+                    BlocksFeature({
+                      blocks: [
+                        CheckListBlock,
+                        YoutubeEmbedBlock,
+                        ImageBlock,
+                        GridPriceListBlock,
                         TreatmentsRelationBlock,
                         CallToActionButtonsBlock,
                       ],

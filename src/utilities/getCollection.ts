@@ -35,11 +35,11 @@ export const getCollection = async (params: GetCollectionParams) => {
 }
 
 export const getCachedCollection = (params: GetCollectionParams) => {
-  const { collection, locale, limit = 10, page = 1, depth, select } = params
+  const { collection, locale, limit = 10, page = 1, depth = 1, select } = params
 
   return unstable_cache(
     async () => getCollection({ collection, select, locale, limit, page, depth }),
-    [collection, locale, limit.toString(), page.toString(), JSON.stringify(select)],
+    [collection, locale, String(depth), limit.toString(), page.toString(), JSON.stringify(select)],
     {
       tags: [`collection_${collection}`],
     },

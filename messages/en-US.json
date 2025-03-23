@@ -49,5 +49,10 @@
 
   "TreatmentCard": {
     "viewDetails": "View Details"
+  },
+
+  "TreatmentInfoViewBlock": {
+    "viewDetails": "View Details",
+    "selectTreatment": "Select Treatment"
   }
 }
