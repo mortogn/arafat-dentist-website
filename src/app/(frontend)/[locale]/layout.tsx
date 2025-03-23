@@ -71,7 +71,7 @@ export default async function MainLayout({
         >
           <AdminBar />
           <Header locale={locale} />
-          <main className="mt-10">{children}</main>
+          <main>{children}</main>
           <ScrollToTop />
 
           <MobileBottomBar />

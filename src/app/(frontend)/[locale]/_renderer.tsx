@@ -5,6 +5,7 @@ import PatientSafetyBlockComponent from '@/components/Blocks/PatientSafety'
 import SectionBlockComponent from '@/components/Blocks/SectionBlock'
 import StatsSection from '@/components/Blocks/Stats'
 import TreatmentGridBlockComponent from '@/components/Blocks/TreatmentGridBlock'
+import TreatmentInfoViewBlockComponent from '@/components/Blocks/TreatmentInfoViewBlock'
 import TreatmentsSection from '@/components/Blocks/Treatments'
 import VideoReviewSection from '@/components/Blocks/VideoReview'
 import {
@@ -18,6 +19,7 @@ import {
   LocationBlock,
   PatientSafetyBlock,
   TreatmentGridBlock,
+  TreatmentInfoViewBlock,
 } from '@/payload-types'
 import { Locale } from '@/types'
 
@@ -32,6 +34,7 @@ type Blocks =
   | LocationBlock
   | PatientSafetyBlock
   | TreatmentGridBlock
+  | TreatmentInfoViewBlock
 
 export function renderer(block: Blocks, locale: Locale) {
   switch (block.blockType) {
@@ -61,6 +64,10 @@ export function renderer(block: Blocks, locale: Locale) {
 
     case 'treatment-grid':
       return <TreatmentGridBlockComponent key={block.id} data={block} locale={locale} />
+
+    case 'treatment-info-view-block':
+      return <TreatmentInfoViewBlockComponent key={block.id} data={block} locale={locale} />
+
     default:
       return null
   }
