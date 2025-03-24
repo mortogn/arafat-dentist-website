@@ -53,6 +53,9 @@
 
   "TreatmentInfoViewBlock": {
     "viewDetails": "View Details",
-    "selectTreatment": "Select Treatment"
+    "selectTreatment": "Select Treatment",
+    "searchTreatments": "Search treatments...",
+    "noTreatmentsFound": "No treatments found",
+    "reset": "Reset"
   }
 }
