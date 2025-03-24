@@ -40,7 +40,7 @@ const AdminBar = () => {
   if (!user?.role?.includes('admin')) return null
 
   return (
-    <div className="bg-black text-white p-2">
+    <div id="adminbar" className="bg-black text-white p-2">
       <MaxWidthWrapper className="flex items-center justify-between">
         <p className="text-sm">
           You are currently logged in as <span className="font-bold">{user?.email}</span> and have

@@ -10,7 +10,7 @@ import Buttons from '../Buttons'
 import MaxWidthWrapper from '../MaxWidthWrapper'
 import Link from 'next/link'
 import Topbar from './Topbar'
-import MobileDrawer from './MobileDrawer'
+import MobileMenu from './MobileMenu'
 
 type HeaderProps = {
   locale: 'en-US' | 'bn-BD'
@@ -38,7 +38,7 @@ const Header = async ({ locale }: HeaderProps) => {
           <div className="flex items-center gap-10">
             <div className="flex items-center gap-1">
               <div className="lg:hidden">
-                <MobileDrawer
+                <MobileMenu
                   data={headerData}
                   locale={locale}
                   treatments={treatments.docs as Treatment[]}
