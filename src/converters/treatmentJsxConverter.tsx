@@ -1,4 +1,7 @@
 import CallToActionButtonsBlockComponent from '@/components/Blocks/CallToActionButtonsBlock'
+import ImageReviewCarousel from '@/components/Blocks/CarouselReview/ImageReviewCarousel'
+import TextReviewCarousel from '@/components/Blocks/CarouselReview/TextReviewCarousel'
+import VideoReviewCarousel from '@/components/Blocks/CarouselReview/VideoReviewCarousel'
 import CheckListBlockComponent from '@/components/Blocks/CheckListBlock'
 import ColorTextInlineBlockComponent from '@/components/Blocks/ColorTextBlock'
 import FAQSection from '@/components/Blocks/FAQBlock'
@@ -13,7 +16,10 @@ import {
   FaqBlock,
   GridPriceListBlock,
   ImageBlock,
+  ImageReviewCarouselBlock,
+  TextReviewCarouselBlock,
   TreatmentsRelationBlock,
+  VideoReviewCarouselBlock,
   YoutubeEmbedBlock,
 } from '@/payload-types'
 import { JSXConvertersFunction } from '@payloadcms/richtext-lexical/react'
@@ -44,6 +50,15 @@ export const treatmentJsxConverter: JSXConvertersFunction = ({ defaultConverters
       ),
       'call-to-action-buttons': ({ node }: { node: { fields: CallToActionButtonsBlock } }) => (
         <CallToActionButtonsBlockComponent data={node.fields} />
+      ),
+      'video-review-carousel': ({ node }: { node: { fields: VideoReviewCarouselBlock } }) => (
+        <VideoReviewCarousel data={node.fields} />
+      ),
+      'text-review-carousel': ({ node }: { node: { fields: TextReviewCarouselBlock } }) => (
+        <TextReviewCarousel data={node.fields} />
+      ),
+      'image-review-carousel': ({ node }: { node: { fields: ImageReviewCarouselBlock } }) => (
+        <ImageReviewCarousel data={node.fields} />
       ),
     },
   }

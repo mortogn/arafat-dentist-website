@@ -11,6 +11,9 @@ import { GridPriceListBlock } from '@/blocks/richtext/GridPriceListBlock'
 import { ColorTextBlock } from '@/blocks/richtext/ColorTextBlock'
 import { TreatmentsRelationBlock } from '@/blocks/richtext/TreatmentsRelationBlock'
 import { CallToActionButtonsBlock } from '@/blocks/richtext/CallToActionButtonsBlock'
+import { VideoReviewCarouselBlock } from '@/blocks/VideoReviewCarouselBlock'
+import { ImageReviewCarouselBlock } from '@/blocks/ImageReviewCarouselBlock'
+import { TextReviewCarouselBlock } from '@/blocks/TextReviewCarouselBlock'
 
 export const Treatments: CollectionConfig = {
   slug: 'treatments',
@@ -131,6 +134,9 @@ export const Treatments: CollectionConfig = {
                         ColorTextBlock,
                         TreatmentsRelationBlock,
                         CallToActionButtonsBlock,
+                        VideoReviewCarouselBlock,
+                        ImageReviewCarouselBlock,
+                        TextReviewCarouselBlock,
                       ],
                       inlineBlocks: [],
                     }),
