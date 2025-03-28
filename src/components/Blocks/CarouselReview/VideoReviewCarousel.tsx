@@ -22,7 +22,7 @@ const VideoReviewCarousel: FC<Props> = ({ data }) => {
 
       <ReviewCarousel className="mt-8">
         {filteredReviews?.map((review) => (
-          <CarouselItem className="lg:basis-1/3" key={review.id}>
+          <CarouselItem className="lg:basis-1/2" key={review.id}>
             <div className="py-1">
               <YoutubeEmbed
                 isActive
