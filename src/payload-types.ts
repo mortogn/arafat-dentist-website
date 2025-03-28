@@ -1610,6 +1610,102 @@ export interface CallToActionButtonsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoReviewCarouselBlock".
+ */
+export interface VideoReviewCarouselBlock {
+  /**
+   * The title of the section
+   */
+  title?: string | null;
+  /**
+   * The description of the section
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  videoReviews?: (string | Review)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'video-review-carousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageReviewCarouselBlock".
+ */
+export interface ImageReviewCarouselBlock {
+  /**
+   * The title of the section
+   */
+  title?: string | null;
+  /**
+   * The description of the section
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  imageReviews?: (string | Review)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'image-review-carousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextReviewCarouselBlock".
+ */
+export interface TextReviewCarouselBlock {
+  /**
+   * The title of the section
+   */
+  title?: string | null;
+  /**
+   * The description of the section
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  textReviews?: (string | Review)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'text-review-carousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {

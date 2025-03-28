@@ -62,7 +62,7 @@ export default async function TreatmentPage({ params }: PageProps) {
   }
 
   return (
-    <MaxWidthWrapper>
+    <MaxWidthWrapper className="mt-10">
       {/* Add your treatment page content here */}
       {/* <h1>{pageData.title}</h1> */}
       {/* You can use the pageData and globalData to render your content */}

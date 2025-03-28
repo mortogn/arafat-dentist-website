@@ -9,7 +9,7 @@ type Props = {
 const SectionTitle: FC<Props> = ({ title, description }) => {
   return (
     <div className="text-center space-y-2 flex flex-col items-center">
-      <h2 className="text-3xl md:text-4xl font-semibold">{title}</h2>
+      <h2 className="text-3xl md:text-4xl text-foreground font-semibold">{title}</h2>
 
       {description && (
         <RichTextContent
