@@ -1,6 +1,6 @@
 import { NavigationMenu, NavigationMenuList } from '@/components/ui/navigation-menu'
 
-import { FC } from 'react'
+import { FC, Suspense } from 'react'
 import NavLinkWithChildren from './NavLinkWithChildren'
 import NavLinkWithoutChildren from './NavLinkWithoutChildren'
 import { Header } from '@/payload-types'
@@ -19,7 +19,9 @@ const Navbar: FC<NavbarProps> = ({ data, locale }) => {
           link.hasChildren || link.showTreatments ? (
             <NavLinkWithChildren key={link.id} data={link} locale={locale} />
           ) : (
-            <NavLinkWithoutChildren key={link.id} data={link} />
+            <Suspense key={link.id}>
+              <NavLinkWithoutChildren data={link} />
+            </Suspense>
           ),
         )}
       </NavigationMenuList>

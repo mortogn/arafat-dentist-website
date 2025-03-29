@@ -53,7 +53,7 @@ export default async function Treatments({ params }: { params: Promise<{ locale:
   return (
     <>
       <MaxWidthWrapper>
-        <div className="text-center">
+        <div className="text-center mt-8">
           <Heading as="h1">{t('title')}</Heading>
           <Paragraph>{t('description')}</Paragraph>
         </div>
