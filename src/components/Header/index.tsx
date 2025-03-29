@@ -4,7 +4,7 @@ import React from 'react'
 
 import type { Header, Header as HeaderData, Media, Treatment } from '@/payload-types'
 import Logo from '../Logo'
-import Navbar from './navbar'
+import Navbar from './Navbar/index'
 
 import Buttons from '../Buttons'
 import MaxWidthWrapper from '../MaxWidthWrapper'
