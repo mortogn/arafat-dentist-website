@@ -119,7 +119,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ data, locale, treatments }) => {
               variants={menuVariants}
             >
               <div className="h-full max-h-[inherit] overflow-y-auto">
-                <div className="px-6 py-8 flex flex-col divide-y">
+                <div className=" py-8 flex flex-col divide-y">
                   {data.links.map((link) =>
                     link.hasChildren || link.showTreatments ? (
                       <MobileNavLinkWithChildren
