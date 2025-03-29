@@ -2,7 +2,7 @@
 
 import { navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'
 import { NavigationMenuItem, NavigationMenuLink } from '@/components/ui/navigation-menu'
-import { Link, usePathname, useRouter } from '@/i18n/routing'
+import { Link, usePathname } from '@/i18n/routing'
 import { FC, useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { isActivePath } from '@/utilities/isActivePath'
@@ -36,7 +36,7 @@ const NavLinkWithoutChildren: FC<NavLinkWithoutChildrenProps> = ({ data }) => {
     // Set up MutationObserver to detect URL changes including hash changes
     // This is more reliable than hashchange for detecting fragment changes in Next.js
     if (typeof window !== 'undefined' && window.MutationObserver) {
-      const observer = new MutationObserver((mutations) => {
+      const observer = new MutationObserver(() => {
         // Check if URL has changed
         if (window.location.pathname === pathname) {
           updateFullPath()
@@ -63,8 +63,9 @@ const NavLinkWithoutChildren: FC<NavLinkWithoutChildrenProps> = ({ data }) => {
     <NavigationMenuItem>
       <Link href={data.href} passHref legacyBehavior>
         <NavigationMenuLink
-          className={cn(navigationMenuTriggerStyle(), {
-            'bg-primary text-primary-foreground': isActivePath(fullPath, data.href, true),
+          className={cn(navigationMenuTriggerStyle(), 'active:bg-transparent', {
+            'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground':
+              isActivePath(fullPath, data.href, true),
           })}
         >
           <div className="bn:text-base">{data.label}</div>

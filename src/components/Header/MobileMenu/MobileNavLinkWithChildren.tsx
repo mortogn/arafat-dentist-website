@@ -77,7 +77,7 @@ export const MobileNavLinkWithChildren: FC<MobileNavLinkWithChildrenProps> = ({
     <motion.div variants={itemVariants} style={{ willChange: 'transform, opacity' }}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-4 flex items-center justify-between text-sm font-medium"
+        className="w-full py-4 px-6 flex items-center justify-between text-sm font-medium"
       >
         {data.label}
         <motion.span
