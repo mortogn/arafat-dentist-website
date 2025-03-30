@@ -21,6 +21,7 @@ const getTreatments = async (locale: Locale) => {
     locale,
     depth: 1,
     limit: 100,
+    sort: `-sort`,
     select: {
       title: true,
       description: true,

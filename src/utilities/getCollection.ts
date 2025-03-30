@@ -1,5 +1,5 @@
 import { Config } from '@/payload-types'
-import { getPayload } from 'payload'
+import { getPayload, Sort } from 'payload'
 import config from '@payload-config'
 import { unstable_cache } from 'next/cache'
 
@@ -14,10 +14,11 @@ type GetCollectionParams = {
   select?: {
     [key: string]: true
   }
+  sort?: Sort
 }
 
 export const getCollection = async (params: GetCollectionParams) => {
-  const { locale, collection, limit = 10, page = 1, depth, select } = params
+  const { locale, collection, limit = 10, page = 1, depth, select, sort } = params
 
   const payload = await getPayload({ config })
 
@@ -28,6 +29,7 @@ export const getCollection = async (params: GetCollectionParams) => {
     select,
     page,
     depth,
+    sort,
     draft: false,
   })
 
@@ -35,11 +37,19 @@ export const getCollection = async (params: GetCollectionParams) => {
 }
 
 export const getCachedCollection = (params: GetCollectionParams) => {
-  const { collection, locale, limit = 10, page = 1, depth = 1, select } = params
+  const { collection, locale, limit = 10, page = 1, depth = 1, select, sort } = params
 
   return unstable_cache(
-    async () => getCollection({ collection, select, locale, limit, page, depth }),
-    [collection, locale, String(depth), limit.toString(), page.toString(), JSON.stringify(select)],
+    async () => getCollection({ collection, select, locale, limit, page, depth, sort }),
+    [
+      collection,
+      String(sort),
+      locale,
+      String(depth),
+      limit.toString(),
+      page.toString(),
+      JSON.stringify(select),
+    ],
     {
       tags: [`collection_${collection}`],
     },

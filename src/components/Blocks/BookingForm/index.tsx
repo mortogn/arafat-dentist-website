@@ -18,6 +18,7 @@ const BookingForm: FC<BookingFormProps> = async ({ data, locale }) => {
       locale,
       limit: 100,
       depth: 1,
+      sort: '-sort',
       select: {
         title: true,
         slug: true,
