@@ -54,6 +54,16 @@ export const Treatments: CollectionConfig = {
       overrides: { slugOverrides: { localized: true }, checkboxOverrides: { localized: true } },
     }),
     {
+      type: 'number',
+      name: 'sort',
+      label: 'Sort',
+      admin: {
+        description: 'Sort order for the treatment. The lower the number, the higher the priority.',
+        position: 'sidebar',
+      },
+      defaultValue: 1,
+    },
+    {
       type: 'tabs',
       tabs: [
         {

@@ -250,6 +250,10 @@ export interface Treatment {
    */
   slug: string;
   /**
+   * Sort order for the treatment. The lower the number, the higher the priority.
+   */
+  sort?: number | null;
+  /**
    * A short description of the treatment
    */
   description?: string | null;
@@ -1033,6 +1037,7 @@ export interface TreatmentsSelect<T extends boolean = true> {
   title?: T;
   slugLock?: T;
   slug?: T;
+  sort?: T;
   description?: T;
   icon?: T;
   thumbnail?: T;

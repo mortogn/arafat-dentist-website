@@ -16,6 +16,7 @@ const TreatmentInfoViewBlockComponent: React.FC<Props> = async ({ data, locale }
     locale,
     limit: 100,
     depth: 2,
+    sort: '-sort',
     select: {
       title: true,
       slug: true,
