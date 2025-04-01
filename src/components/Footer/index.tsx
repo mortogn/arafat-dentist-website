@@ -33,8 +33,9 @@ const Footer: FC<Props> = async ({ locale }) => {
                 href={contact.url}
                 className="flex items-center gap-3"
                 key={contact.id}
-                data-umami-event={contact.label}
+                data-umami-event={contact.name}
                 data-umami-event-context="footer"
+                data-umami-event-label={contact.label}
                 data-umami-event-url={contact.url}
               >
                 <Media

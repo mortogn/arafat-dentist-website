@@ -17,7 +17,7 @@ const TreatmentGridBlockComponent: React.FC<Props> = async ({ data, locale }) =>
   const t = await getTranslations({ locale, namespace: 'TreatmentGridBlock' })
 
   return (
-    <MaxWidthWrapper element="section" className="my-16">
+    <MaxWidthWrapper element="section" id="treatments" className="my-16">
       <SectionTitle title={data.title} description={data.description} />
       <div className="mt-8 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-6 gap-1">
         {data.treatments &&
