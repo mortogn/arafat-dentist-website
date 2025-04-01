@@ -3,10 +3,8 @@
 import React, { FC, useEffect, useState } from 'react'
 import ToothIcon from '../Icons/ToothIcon'
 import { Link } from '@/i18n/routing'
-import Icon from '../Icons/Icon'
 import Image from 'next/image'
-import { MapIcon } from 'lucide-react'
-import { Contacts, type Media as MediaType } from '@/payload-types'
+import { type Media as MediaType } from '@/payload-types'
 import Media from '../Media'
 
 type ContactItem = {
@@ -48,11 +46,21 @@ const MobileBottomBarClient: FC<Props> = ({ phone, whatsApp, address }) => {
 
   return (
     <div className="fixed bottom-0 right-0 left-0 px-4 lg:hidden bg-primary text-primary-foreground flex items-center justify-between h-[65px] text-sm">
-      <Link className="flex items-center flex-col gap-0.5" href={phone?.url || '#'}>
+      <Link
+        className="flex items-center flex-col gap-0.5"
+        href={phone?.url || '#'}
+        data-umami-event="Call us button"
+        data-umami-event-context="Mobile bottom bar"
+      >
         <Media resource={phone?.image} height={25} width={25} className="size-6" />
         <span>Phone</span>
       </Link>
-      <Link className="flex items-center flex-col gap-0.5" href={whatsApp?.url || '#'}>
+      <Link
+        className="flex items-center flex-col gap-0.5"
+        href={whatsApp?.url || '#'}
+        data-umami-event="WhatsApp button"
+        data-umami-event-context="Mobile bottom bar"
+      >
         <Media resource={whatsApp?.image} height={25} width={25} />
         <span>WhatsApp</span>
       </Link>
@@ -68,11 +76,21 @@ const MobileBottomBarClient: FC<Props> = ({ phone, whatsApp, address }) => {
           />
         </div>
       </Link>
-      <Link className="flex items-center flex-col gap-0.5" href={'/treatments'}>
+      <Link
+        className="flex items-center flex-col gap-0.5"
+        href={'/treatments'}
+        data-umami-event="Treatments button"
+        data-umami-event-context="Mobile bottom bar"
+      >
         <Image height={20} width={20} src={'/clinic.png'} alt="clinic" className="size-7 invert" />
         Treatments
       </Link>
-      <Link className="flex items-center flex-col gap-0.5" href={`/about#location`}>
+      <Link
+        className="flex items-center flex-col gap-0.5"
+        href={`/about#location`}
+        data-umami-event="Location button"
+        data-umami-event-context="Mobile bottom bar"
+      >
         <Media resource={address?.image} height={25} width={25} className="size-6" />
         <span>Address</span>
       </Link>

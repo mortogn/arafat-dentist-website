@@ -24,7 +24,7 @@ const Topbar: FC<Props> = async ({ data }) => {
       <MaxWidthWrapper className="flex items-center justify-center md:justify-between">
         <div className="font-medium tracking-wide text-sm bn:text-base">{data.text}</div>
         {data.callToAction && data.buttons && (
-          <Buttons containerClassName="hidden md:flex" data={data.buttons} />
+          <Buttons containerClassName="hidden md:flex" data={data.buttons} context="Topbar" />
         )}
         {data.showSocials && socials && (
           <div className=" hidden md:flex items-center gap-2 ">

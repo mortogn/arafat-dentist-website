@@ -11,6 +11,7 @@ import Icon from '../Icons/Icon'
 import SectionTitle from '../SectionTitle'
 import { getTranslations } from 'next-intl/server'
 import Heading from '../Typography/Heading'
+import Media from '../Media'
 
 type Props = {
   locale: Locale
@@ -38,7 +39,13 @@ const LocationBlockComponent: FC<Props> = async ({ data, locale }) => {
                 key={contact.id}
                 className="flex items-center text-lg en:text-base gap-2"
               >
-                <Icon className="size-6 flex-shrink-0" icon={contact.icon} />
+                <Media
+                  resource={contact.image}
+                  height={25}
+                  width={25}
+                  className="size-6 flex-shrink-0"
+                />
+
                 <span>{contact.label}</span>
               </Link>
             ))}

@@ -63,6 +63,7 @@ const Header = async ({ locale }: HeaderProps) => {
             <Buttons
               className={() => 'flex-wrap md:flex-nowrap max-w-[150px] md:max-w-none'}
               data={headerData.buttons}
+              context="Header"
             />
           )}
         </MaxWidthWrapper>
