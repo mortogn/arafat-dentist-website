@@ -24,6 +24,7 @@ const NavLinkWithChildren: FC<NavLinkWithChildrenProps> = async ({ data, locale 
     const result = await getCachedCollection({
       collection: 'treatments',
       locale,
+      limit: 100,
       select: {
         title: true,
         description: true,

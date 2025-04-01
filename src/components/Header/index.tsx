@@ -22,6 +22,7 @@ const Header = async ({ locale }: HeaderProps) => {
     getCachedCollection({
       collection: 'treatments',
       locale,
+      limit: 100,
       select: {
         title: true,
         description: true,
