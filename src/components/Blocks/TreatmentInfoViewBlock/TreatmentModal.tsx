@@ -67,8 +67,26 @@ const TreatmentModal: React.FC<TreatmentModalProps> = ({
                 }`}
                 onClick={() => handleSelectTreatment(treatment.id)}
               >
-                <Media resource={treatment.icon} height={40} width={40} className="shrink-0" />
-                <span className="font-medium">{treatment.title}</span>
+                <div className="flex items-center justify-between gap-3 flex-1">
+                  <div className="flex items-center gap-3">
+                    <Media resource={treatment.icon} height={40} width={40} className="shrink-0" />
+                    <span className="font-medium">{treatment.title}</span>
+                  </div>
+
+                  <div className="relative flex items-center">
+                    <div
+                      className={`h-4 w-4 rounded-full border ${
+                        selectedTreatmentId === treatment.id
+                          ? 'border-primary'
+                          : 'border-muted-foreground'
+                      }`}
+                    >
+                      {selectedTreatmentId === treatment.id && (
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-primary" />
+                      )}
+                    </div>
+                  </div>
+                </div>
               </button>
             ))
           ) : (
