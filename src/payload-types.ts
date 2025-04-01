@@ -1239,10 +1239,7 @@ export interface Contacts {
          * The URL to link to
          */
         url: string;
-        /**
-         * The icon to display next to the contact
-         */
-        icon: 'none' | 'phone' | 'email' | 'map' | 'whatsapp';
+        image: string | Media;
         id?: string | null;
       }[]
     | null;
@@ -1360,7 +1357,7 @@ export interface ContactsSelect<T extends boolean = true> {
         name?: T;
         label?: T;
         url?: T;
-        icon?: T;
+        image?: T;
         id?: T;
       };
   _status?: T;

@@ -51,14 +51,25 @@ export const Contacts: GlobalConfig = {
           ],
         },
         {
-          name: 'icon',
-          type: 'radio',
-          options: ['none', 'phone', 'email', 'map', 'whatsapp'],
-          admin: {
-            description: 'The icon to display next to the contact',
-          },
+          name: 'image',
+          label: 'Image',
+          type: 'upload',
+          relationTo: 'media',
           required: true,
+          filterOptions: {
+            mimeType: { contains: 'image' },
+          },
         },
+        // {
+        //   name: 'icon',
+        //   type: 'radio',
+        //   options: ['none', 'phone', 'email', 'map', 'whatsapp'],
+        //   admin: {
+        //     description: 'The icon to display next to the contact',
+        //   },
+        //   required: true,
+
+        // },
       ],
     },
   ],

@@ -6,9 +6,9 @@ import { Contacts } from '@/payload-types'
 const MobileBottomBar = async () => {
   const { contacts } = (await getCachedGlobal('contacts', 1, 'en-US')()) as Contacts
 
-  const phone = contacts?.find((contact) => contact.name === 'Phone')?.url
-  const whatsApp = contacts?.find((contact) => contact.name === 'WhatsApp')?.url
-  const address = contacts?.find((contact) => contact.name === 'Address')?.url
+  const phone = contacts?.find((contact) => contact.name === 'Phone')
+  const whatsApp = contacts?.find((contact) => contact.name === 'WhatsApp')
+  const address = contacts?.find((contact) => contact.name === 'Address')
 
   return contacts && contacts ? (
     <MobileBottomBarClient phone={phone} whatsApp={whatsApp} address={address} />

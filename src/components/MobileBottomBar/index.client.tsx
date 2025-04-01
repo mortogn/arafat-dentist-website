@@ -6,14 +6,23 @@ import { Link } from '@/i18n/routing'
 import Icon from '../Icons/Icon'
 import Image from 'next/image'
 import { MapIcon } from 'lucide-react'
+import { Contacts, type Media as MediaType } from '@/payload-types'
+import Media from '../Media'
 
-type Props = {
-  phone?: string
-  whatsApp?: string
-  address?: string
+type ContactItem = {
+  name: string
+  label: string
+  url: string
+  image: string | MediaType
 }
 
-const MobileBottomBarClient: FC<Props> = ({ phone, whatsApp }) => {
+type Props = {
+  phone?: ContactItem
+  whatsApp?: ContactItem
+  address?: ContactItem
+}
+
+const MobileBottomBarClient: FC<Props> = ({ phone, whatsApp, address }) => {
   const [rotation, setRotation] = useState(0)
 
   useEffect(() => {
@@ -39,12 +48,12 @@ const MobileBottomBarClient: FC<Props> = ({ phone, whatsApp }) => {
 
   return (
     <div className="fixed bottom-0 right-0 left-0 px-4 lg:hidden bg-primary text-primary-foreground flex items-center justify-between h-[65px] text-sm">
-      <Link className="flex items-center flex-col gap-0.5" href={phone || '#'}>
-        <Icon className="size-6" icon="phone" />
+      <Link className="flex items-center flex-col gap-0.5" href={phone?.url || '#'}>
+        <Media resource={phone?.image} height={25} width={25} className="size-6" />
         <span>Phone</span>
       </Link>
-      <Link className="flex items-center flex-col gap-0.5" href={whatsApp || '#'}>
-        <Icon className="size-6 fill-white" icon="whatsapp" />
+      <Link className="flex items-center flex-col gap-0.5" href={whatsApp?.url || '#'}>
+        <Media resource={whatsApp?.image} height={25} width={25} />
         <span>WhatsApp</span>
       </Link>
       <div></div>
@@ -64,7 +73,7 @@ const MobileBottomBarClient: FC<Props> = ({ phone, whatsApp }) => {
         Treatments
       </Link>
       <Link className="flex items-center flex-col gap-0.5" href={`/about#location`}>
-        <MapIcon className="size-6 " />
+        <Media resource={address?.image} height={25} width={25} className="size-6" />
         <span>Address</span>
       </Link>
     </div>
