@@ -12,6 +12,14 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/track/:path*',
+        destination: 'http://umami-vsc0sgwwoc4wsocsk4kcss8c.157.180.72.227.sslip.io/:path*',
+      },
+    ]
+  },
 }
 
 export default withPayload(withNextIntl(nextConfig))

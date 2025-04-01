@@ -9,6 +9,7 @@ interface YoutubeEmbedProps {
   videoId: string
   isPlaying?: boolean
   isActive?: boolean
+  context?: string
 }
 
 const YoutubeEmbed = ({
@@ -16,6 +17,7 @@ const YoutubeEmbed = ({
   videoId,
   isPlaying: isPlayingFromProps,
   isActive,
+  context,
 }: YoutubeEmbedProps) => {
   const [isPlaying, setIsPlaying] = useState(isPlayingFromProps || false)
 
@@ -36,6 +38,10 @@ const YoutubeEmbed = ({
           onClick={handleClick}
           className="block w-full h-full transition-opacity focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 hover:opacity-90"
           aria-label="Play video"
+          data-umami-event="Play Youtube Video"
+          data-umami-event-url={`https://www.youtube.com/watch?v=${videoId}`}
+          data-umami-event-video-id={videoId}
+          data-umami-event-context={context}
         >
           <div className="relative w-full h-full">
             <Media

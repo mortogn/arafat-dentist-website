@@ -13,14 +13,20 @@ type ButtonsProps = {
   data: ButtonsField
   className?: (params: { variant: Variant; size: Size }) => string
   containerClassName?: string
+  context?: string
 }
 
-const Buttons: FC<ButtonsProps> = ({ data, className, containerClassName }) => {
+const Buttons: FC<ButtonsProps> = ({ data, className, containerClassName, context }) => {
   return (
     <div className={cn('flex items-center gap-2', containerClassName)}>
       {data?.map((button) => (
         <Link
           href={button.href}
+          data-umami-event={`${button.label} button`}
+          data-umami-event-id={button.id}
+          data-umami-event-type="button"
+          data-umami-event-url={button.href}
+          data-umami-event-context={context}
           key={button.id}
           className={cn(
             buttonVariants({ variant: button.variant, size: sizeMapper(button.size) }),

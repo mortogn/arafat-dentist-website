@@ -36,12 +36,23 @@ const CallToAction: FC<Props> = async ({ data, locale }) => {
         />
 
         <div className="flex items-center gap-3 flex-col lg:flex-row">
-          <Button asChild variant="secondary">
+          <Button
+            data-umami-event="Book appointment button"
+            data-umami-event-context="Call to action block"
+            data-umami-event-url={'/book-appointment'}
+            asChild
+            variant="secondary"
+          >
             <Link href={'/book-appointment'}>{t('book-appointment')}</Link>
           </Button>
 
           {phone?.url && (
-            <Button asChild variant="secondary">
+            <Button
+              asChild
+              variant="secondary"
+              data-umami-event="Call us button"
+              data-umami-event-context="Call to action block"
+            >
               <Link href={phone?.url}>
                 <Icon icon="phone" />
                 <span>{phone.label}</span>
@@ -50,7 +61,12 @@ const CallToAction: FC<Props> = async ({ data, locale }) => {
           )}
 
           {whatsApp?.url && (
-            <Button asChild variant="secondary">
+            <Button
+              asChild
+              variant="secondary"
+              data-umami-event="WhatsApp us button"
+              data-umami-event-context="Call to action block"
+            >
               <Link href={whatsApp?.url}>
                 <Icon icon="whatsapp" />
                 <span>{whatsApp.label}</span>

@@ -12,6 +12,7 @@ import ScrollToTop from '@/components/ScrollToTop'
 import MobileBottomBar from '@/components/MobileBottomBar'
 import AdminBar from '@/components/AdminBar'
 import { Toaster } from '@/components/ui/sonner'
+import UmamiAnalytics from '@/components/UmamiAnalytics'
 
 const playfair_display = Playfair_Display({
   display: 'swap',
@@ -79,6 +80,8 @@ export default async function MainLayout({
           <Footer locale={locale} />
 
           <Toaster position="bottom-center" richColors />
+
+          <UmamiAnalytics />
         </body>
       </NextIntlClientProvider>
     </html>

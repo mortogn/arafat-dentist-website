@@ -75,7 +75,13 @@ const TreatmentInfoViewBlockClient: FC<Props> = ({ treatments }) => {
             className="prose md:prose lg:prose xl:prose 2xl:prose [&_p]:text-base [&_h4]:text-lg"
           />
           <div className="flex items-center justify-center my-4">
-            <Button asChild>
+            <Button
+              asChild
+              data-umami-event="View details button"
+              data-umami-event-url={`/treatments/${selectedTreatment.slug}`}
+              data-umami-event-context="Treatment info view block"
+              data-umami-event-treatment={selectedTreatment.title}
+            >
               <Link href={`/treatments/${selectedTreatment.slug}`}>{t('viewDetails')}</Link>
             </Button>
           </div>

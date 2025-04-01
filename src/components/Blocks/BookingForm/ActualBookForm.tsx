@@ -188,7 +188,16 @@ const ActualBookForm: FC<Props> = ({ treatments }) => {
           )}
         />
 
-        <Button className="w-full" disabled={isSubmitting}>
+        <Button
+          data-umami-event="Book appointment button"
+          data-umami-event-email={form.getValues('email')}
+          data-umami-event-name={form.getValues('fullName')}
+          data-umami-event-treatment={
+            treatments.find((t) => t.id === form.getValues('treatmentId'))?.title
+          }
+          className="w-full"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? (
             <>
               <Loader2 className="animate-spin" />

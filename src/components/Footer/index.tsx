@@ -29,8 +29,21 @@ const Footer: FC<Props> = async ({ locale }) => {
           <Media resource={footer.logo} height={100} width={100} className="h-[80px] w-auto" />
           <div className="space-y-4 mt-8">
             {contacts.contacts?.map((contact) => (
-              <Link href={contact.url} className="flex items-center gap-3" key={contact.id}>
-                <Icon className="size-6 flex-shrink-0" icon={contact.icon} />
+              <Link
+                href={contact.url}
+                className="flex items-center gap-3"
+                key={contact.id}
+                data-umami-event={contact.label}
+                data-umami-event-context="footer"
+                data-umami-event-url={contact.url}
+              >
+                <Media
+                  resource={contact.image}
+                  height={25}
+                  width={25}
+                  className="size-6 flex-shrink-0"
+                />
+
                 <span>{contact.label}</span>
               </Link>
             ))}
@@ -58,6 +71,12 @@ const Footer: FC<Props> = async ({ locale }) => {
                   href={social.url}
                   target="_blank"
                   className="group py-2 gap-2 rounded-md"
+                  data-umami-event={`${social.platform} button`}
+                  data-umami-event-id={social.id}
+                  data-umami-event-type="social"
+                  data-umami-event-url={social.url}
+                  data-umami-event-context="footer"
+                  data-umami-event-label={social.platform}
                 >
                   {social.image ? (
                     <Media resource={social.image} height={50} width={50} className="size-10" />
