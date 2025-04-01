@@ -82,7 +82,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ data, locale, treatments }) => {
   return (
     <div className="relative z-10" ref={containerRef}>
       <Button
-        variant="ghost"
+        variant="default"
         size="icon"
         className="[&_svg]:size-8"
         onClick={() => setIsOpen(!isOpen)}

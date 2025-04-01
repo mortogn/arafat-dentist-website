@@ -27,7 +27,7 @@ const TreatmentGridBlockComponent: React.FC<Props> = async ({ data, locale }) =>
                 <Link
                   key={treatment.id}
                   href={`/treatments/${treatment.slug}`}
-                  className="flex items-center flex-col space-y-4 p-6 bg-white rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-shadow duration-300"
+                  className="flex items-center border-2 border-primary/40 flex-col space-y-4 p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
                 >
                   <Media
                     resource={treatment.icon}
