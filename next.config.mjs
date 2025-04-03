@@ -12,6 +12,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  images: {
+    formats: ['image/webp', 'image/avif'],
+  },
   async rewrites() {
     return [
       {

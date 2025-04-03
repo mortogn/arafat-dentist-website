@@ -28,7 +28,14 @@ const TreatmentInfoViewBlockComponent: React.FC<Props> = async ({ data, locale }
 
   return (
     <div className="min-h-[550px] mb-10 flex items-center justify-center relative py-8 px-2 lg:p-10">
-      <Media resource={data.bgImage} fill className="absolute inset-0" />
+      <Media
+        resource={data.bgImage}
+        fill
+        className="absolute inset-0"
+        priority
+        quality={50}
+        sizes="100vw"
+      />
       <div className="absolute inset-0 bg-black/40" />
       <div className="bg-green-100/50 backdrop-blur-md text-secondary-foreground w-full max-w-[600px] py-8 px-3  lg:p-10 rounded-md">
         <h2 className="text-center text-2xl font-medium mb-4 text-primary">{data.title}</h2>

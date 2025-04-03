@@ -22,8 +22,15 @@ const HeroSection: FC<Props> = ({ data }) => {
         />
       </div>
 
-      <div className="lg:w-1/2 aspect-[4/5] max-h-[650px] rounded-md overflow-hidden">
-        <Media resource={data.image} height={960} width={680} className="h-full w-full" />
+      <div className="lg:w-1/2 w-full aspect-[4/5] max-h-[650px] rounded-md overflow-hidden relative">
+        <Media
+          resource={data.image}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          priority
+          className="h-full w-full"
+          quality={65}
+        />
       </div>
     </MaxWidthWrapper>
   )
