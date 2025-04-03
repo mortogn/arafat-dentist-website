@@ -1,6 +1,6 @@
 import { locales } from '@/const/locale'
 import { revalidateTagCollection } from '@/utilities/revalidateTagCollection'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import { CollectionAfterChangeHook } from 'payload'
 
 export const revalidateTreatment: CollectionAfterChangeHook = async ({
@@ -45,6 +45,9 @@ export const revalidateTreatment: CollectionAfterChangeHook = async ({
     locales.forEach((locale) => {
       revalidatePath(`/${locale}/treatments`, 'page')
     })
+
+    // Revalidate the treatment sitemap
+    revalidateTag('treatments-sitemap')
   } catch (err) {
     payload.logger.error('Error in revalidateTreatment hook', err)
   }
