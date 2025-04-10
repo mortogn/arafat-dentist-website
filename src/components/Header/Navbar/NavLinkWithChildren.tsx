@@ -25,6 +25,7 @@ const NavLinkWithChildren: FC<NavLinkWithChildrenProps> = async ({ data, locale 
       collection: 'treatments',
       locale,
       limit: 100,
+      sort: '-sort',
       select: {
         title: true,
         description: true,
@@ -43,7 +44,7 @@ const NavLinkWithChildren: FC<NavLinkWithChildrenProps> = async ({ data, locale 
         </Link>
       </NavigationMenuTrigger>
       <NavigationMenuContent className="">
-        <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] grid-cols-2">
+        <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[650px] md:grid-cols-2 lg:grid-cols-3">
           {data.showTreatments && treatments && treatments.length > 0
             ? treatments.map((treatment) => (
                 <NavListItem
