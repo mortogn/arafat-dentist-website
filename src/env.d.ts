@@ -5,5 +5,8 @@ declare namespace NodeJS {
     R2_SECRET_TOKEN: string
     R2_ENDPOINT: string
     R2_BUCKET: string
+
+    NEXT_PUBLIC_UMAMI_TRACK_CODE: string
+    NEXT_PUBLIC_UMAMI_URL: string
   }
 }

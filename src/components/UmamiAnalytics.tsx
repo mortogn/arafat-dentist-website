@@ -6,7 +6,7 @@ const UmamiAnalytics = () => {
     <Script
       defer
       src="/track/script.js"
-      data-website-id="e9d2473f-a563-40a5-bf78-7b4c4e033095"
+      data-website-id={process.env.NEXT_PUBLIC_UMAMI_TRACK_CODE}
       strategy="afterInteractive"
     />
   )
