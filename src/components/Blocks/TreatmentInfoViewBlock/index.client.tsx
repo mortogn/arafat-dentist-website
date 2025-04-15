@@ -96,8 +96,9 @@ const TreatmentInfoViewBlockClient: FC<Props> = ({ treatments }) => {
                 <div key={doctor.id} className="flex items-center gap-4">
                   <Media
                     resource={doctor.photo}
-                    height={50}
-                    width={50}
+                    height={300}
+                    width={300}
+                    quality={100}
                     className="object-cover rounded-full size-[90px] lg:size-[150px] shrink-0"
                   />
                   <div>
