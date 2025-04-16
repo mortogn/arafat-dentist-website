@@ -1552,11 +1552,7 @@ export interface GridPriceListBlock {
  * via the `definition` "ColorTextBlock".
  */
 export interface ColorTextBlock {
-  alignment?: ('left' | 'center' | 'right') | null;
-  /**
-   * The text to display
-   */
-  text?: {
+  content?: {
     root: {
       type: string;
       children: {

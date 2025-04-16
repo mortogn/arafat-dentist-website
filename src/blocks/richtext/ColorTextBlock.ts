@@ -20,32 +20,19 @@ export const ColorTextBlock: Block = {
   interfaceName: 'ColorTextBlock',
   fields: [
     {
-      type: 'select',
-      name: 'alignment',
-      label: 'Alignment',
-      options: [
-        { label: 'Left', value: 'left' },
-        { label: 'Center', value: 'center' },
-        { label: 'Right', value: 'right' },
-      ],
-      defaultValue: 'left',
-    },
-    {
       type: 'richText',
-      name: 'text',
-      label: 'Text',
-      admin: {
-        description: 'The text to display',
-      },
+      name: 'content',
+      label: 'Content',
+      localized: true,
       editor: lexicalEditor({
         features: [
+          AlignFeature(),
+          HeadingFeature(),
+          ParagraphFeature(),
           BoldFeature(),
           ItalicFeature(),
-          HeadingFeature(),
           StrikethroughFeature(),
           FixedToolbarFeature(),
-          AlignFeature(),
-          ParagraphFeature(),
         ],
       }),
     },
