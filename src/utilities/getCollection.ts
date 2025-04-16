@@ -43,7 +43,7 @@ export const getCachedCollection = (params: GetCollectionParams) => {
     async () => getCollection({ collection, select, locale, limit, page, depth, sort }),
     [
       collection,
-      String(sort),
+      sort ? JSON.stringify(sort) : '',
       locale,
       String(depth),
       limit.toString(),

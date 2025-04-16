@@ -250,7 +250,7 @@ export interface Treatment {
    */
   slug: string;
   /**
-   * Sort order for the treatment. The lower the number, the higher the priority.
+   * Sort order for the treatment. The higher the number, the higher the priority.
    */
   sort?: number | null;
   /**

@@ -26,8 +26,9 @@ export const Treatments: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['thumbnail', 'title', 'slug', 'status'],
+    defaultColumns: ['thumbnail', 'title', 'slug', '_status', 'sort'],
   },
+  defaultSort: '-sort',
   hooks: {
     afterChange: [revalidateTreatment],
   },
@@ -58,7 +59,8 @@ export const Treatments: CollectionConfig = {
       name: 'sort',
       label: 'Sort',
       admin: {
-        description: 'Sort order for the treatment. The lower the number, the higher the priority.',
+        description:
+          'Sort order for the treatment. The higher the number, the higher the priority.',
         position: 'sidebar',
       },
       defaultValue: 1,
