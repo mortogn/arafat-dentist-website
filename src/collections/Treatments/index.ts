@@ -14,6 +14,7 @@ import { CallToActionButtonsBlock } from '@/blocks/richtext/CallToActionButtonsB
 import { VideoReviewCarouselBlock } from '@/blocks/VideoReviewCarouselBlock'
 import { ImageReviewCarouselBlock } from '@/blocks/ImageReviewCarouselBlock'
 import { TextReviewCarouselBlock } from '@/blocks/TextReviewCarouselBlock'
+import { InlineColorTextBlock } from '@/blocks/richtext/InlineColorTextBlock'
 
 export const Treatments: CollectionConfig = {
   slug: 'treatments',
@@ -150,7 +151,7 @@ export const Treatments: CollectionConfig = {
                         ImageReviewCarouselBlock,
                         TextReviewCarouselBlock,
                       ],
-                      inlineBlocks: [],
+                      inlineBlocks: [InlineColorTextBlock],
                     }),
                   ]
                 },

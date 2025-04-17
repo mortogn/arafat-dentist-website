@@ -7,6 +7,7 @@ import ColorTextInlineBlockComponent from '@/components/Blocks/ColorTextBlock'
 import FAQSection from '@/components/Blocks/FAQBlock'
 import GridPriceListBlockComponent from '@/components/Blocks/GridPriceListBlock'
 import ImageBlockComponent from '@/components/Blocks/ImageBlock'
+import InlineColorBlockComponent from '@/components/Blocks/InlineColorBlock'
 import TreatmentsRelationBlockComponent from '@/components/Blocks/TreatmentsRelation'
 import YoutubeEmbedBlockComponent from '@/components/Blocks/YoutubeEmbedBlock'
 import {
@@ -17,6 +18,7 @@ import {
   GridPriceListBlock,
   ImageBlock,
   ImageReviewCarouselBlock,
+  InlineColorTextBlock,
   TextReviewCarouselBlock,
   TreatmentsRelationBlock,
   VideoReviewCarouselBlock,
@@ -59,6 +61,11 @@ export const treatmentJsxConverter: JSXConvertersFunction = ({ defaultConverters
       ),
       'image-review-carousel': ({ node }: { node: { fields: ImageReviewCarouselBlock } }) => (
         <ImageReviewCarousel data={node.fields} />
+      ),
+    },
+    inlineBlocks: {
+      'inline-color-text': ({ node }: { node: { fields: InlineColorTextBlock } }) => (
+        <InlineColorBlockComponent data={node.fields} />
       ),
     },
   }

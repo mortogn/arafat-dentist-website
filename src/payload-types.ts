@@ -1704,6 +1704,17 @@ export interface TextReviewCarouselBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InlineColorTextBlock".
+ */
+export interface InlineColorTextBlock {
+  text: string;
+  color: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'inline-color-text';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {

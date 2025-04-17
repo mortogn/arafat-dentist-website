@@ -8,6 +8,7 @@ import {
   lexicalEditor,
   ParagraphFeature,
   StrikethroughFeature,
+  UnderlineFeature,
 } from '@payloadcms/richtext-lexical'
 import { Block } from 'payload'
 
@@ -32,6 +33,7 @@ export const ColorTextBlock: Block = {
           BoldFeature(),
           ItalicFeature(),
           StrikethroughFeature(),
+          UnderlineFeature(),
           FixedToolbarFeature(),
         ],
       }),
