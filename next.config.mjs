@@ -18,6 +18,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/en-US',
+        destination: '/bn-BD',
+        permanent: false,
+      },
+      {
         source: '/en-US/:path*',
         destination: '/bn-BD/:path*',
         permanent: false,
