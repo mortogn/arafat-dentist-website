@@ -15,6 +15,15 @@ const nextConfig = {
   images: {
     formats: ['image/webp', 'image/avif'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/en-US/:path*',
+        destination: '/bn-BD/:path*',
+        permanent: false,
+      },
+    ]
+  },
   async rewrites() {
     return [
       {
