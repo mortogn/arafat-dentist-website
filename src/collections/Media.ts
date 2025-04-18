@@ -22,5 +22,15 @@ export const Media: CollectionConfig = {
       required: true,
     },
   ],
-  upload: true,
+  upload: {
+    adminThumbnail: 'small',
+    imageSizes: [
+      {
+        name: 'small',
+        width: 300,
+        height: 300,
+        fit: 'cover',
+      },
+    ],
+  },
 }
