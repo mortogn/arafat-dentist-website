@@ -10,9 +10,11 @@ import { getMessages, setRequestLocale } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import ScrollToTop from '@/components/ScrollToTop'
 import MobileBottomBar from '@/components/MobileBottomBar'
-import AdminBar from '@/components/AdminBar'
+import { AdminBar } from '@/components/AdminBar'
 import { Toaster } from '@/components/ui/sonner'
 import UmamiAnalytics from '@/components/UmamiAnalytics'
+import { draftMode } from 'next/headers'
+import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 
 const playfair_display = Playfair_Display({
   display: 'swap',
@@ -61,8 +63,11 @@ export default async function MainLayout({
 
   const messages = await getMessages()
 
+  const { isEnabled } = await draftMode()
+
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
+      <RefreshRouteOnSave />
       <NextIntlClientProvider messages={messages}>
         <body
           className={cn({
@@ -70,7 +75,8 @@ export default async function MainLayout({
             [`${anek_bangla_heading.variable} ${anek_bangla_body.variable}`]: locale === 'bn-BD',
           })}
         >
-          <AdminBar />
+          <AdminBar adminBarProps={{ preview: isEnabled }} />
+
           <Header locale={locale} />
           <main>{children}</main>
           <ScrollToTop />

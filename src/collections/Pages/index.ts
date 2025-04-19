@@ -13,6 +13,7 @@ import { revalidatePage } from './hooks/revalidate-page'
 import { PatientSafetyBlock } from '@/blocks/PatientSafetyBlock'
 import { TreatmentGridBlock } from '@/blocks/TreatmentGridBlock'
 import { TreatmentInfoViewBlock } from '@/blocks/TreatmentInfoViewBlock'
+import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -26,12 +27,28 @@ export const Pages: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'published'],
+    livePreview: {
+      url: ({ data, locale, req }) => {
+        const path = generatePreviewPath({
+          locale: locale.code,
+          collection: 'pages',
+          slug: data?.slug,
+          req,
+        })
+
+        return path
+      },
+    },
   },
   hooks: {
     afterChange: [revalidatePage],
   },
   versions: {
-    drafts: true,
+    drafts: {
+      autosave: {
+        interval: 375,
+      },
+    },
     maxPerDoc: 50,
   },
   fields: [

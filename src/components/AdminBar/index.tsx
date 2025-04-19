@@ -1,58 +1,93 @@
 'use client'
 
-import { User } from '@/payload-types'
-import Link from 'next/link'
-import React, { useEffect } from 'react'
+import type { PayloadAdminBarProps } from 'payload-admin-bar'
+
+import { cn } from '@/lib/utils'
+import { useSelectedLayoutSegments } from 'next/navigation'
+import { PayloadAdminBar } from 'payload-admin-bar'
+import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import MaxWidthWrapper from '../MaxWidthWrapper'
 
-const AdminBar = () => {
-  const [user, setUser] = React.useState<User | null>(null)
+const baseClass = 'admin-bar'
 
-  useEffect(() => {
-    const controller = new AbortController()
+type CollectionLabels = {
+  [key: string]: {
+    plural: string
+    singular: string
+  }
+}
 
-    const fetchAndSetUser = async (c: AbortController) => {
-      const user = await fetch('/api/users/me', {
-        credentials: 'include',
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        signal: c.signal,
-      })
+const collectionLabels: CollectionLabels = {
+  pages: {
+    plural: 'Pages',
+    singular: 'Page',
+  },
+  posts: {
+    plural: 'Posts',
+    singular: 'Post',
+  },
+  projects: {
+    plural: 'Projects',
+    singular: 'Project',
+  },
+}
 
-      const data = await user.json()
+const Title: React.FC = () => <span>Dashboard</span>
 
-      setUser(data && 'user' in data ? data?.user : null)
-    }
+export const AdminBar: React.FC<{
+  adminBarProps?: PayloadAdminBarProps
+}> = (props) => {
+  const { adminBarProps } = props || {}
+  const segments = useSelectedLayoutSegments()
+  const [show, setShow] = useState(false)
+  const collection = collectionLabels?.[segments?.[1]] ? segments?.[1] : 'pages'
+  const router = useRouter()
 
-    fetchAndSetUser(controller)
-
-    return () => {
-      controller.abort()
+  const onAuthChange = React.useCallback((user: unknown) => {
+    if (user && typeof user === 'object' && 'role' in user && Array.isArray(user.role)) {
+      setShow(user.role.includes('admin'))
     }
   }, [])
 
-  useEffect(() => {
-    console.log('User state has changed:', user)
-  }, [user])
-
-  if (!user?.role?.includes('admin')) return null
-
   return (
-    <div id="adminbar" className="bg-black text-white p-2">
-      <MaxWidthWrapper className="flex items-center justify-between">
-        <p className="text-sm">
-          You are currently logged in as <span className="font-bold">{user?.email}</span> and have
-          the role of <span className="font-bold">admin</span>
-        </p>
-        <div className="[&_a]:font-medium [&_a]:underline text-sm gap-2 flex items-center">
-          <Link href={'/admin'}>Admin Panel</Link>
-          <Link href={'/admin/collections/appointments?limit=25&sort=date'}>Appointments</Link>
-        </div>
+    <div
+      className={cn(baseClass, 'py-2 bg-black text-white', {
+        block: show,
+        hidden: !show,
+      })}
+    >
+      <MaxWidthWrapper>
+        <PayloadAdminBar
+          {...adminBarProps}
+          className="py-2 text-white"
+          classNames={{
+            controls: 'font-medium text-white',
+            logo: 'text-white',
+            user: 'text-white',
+          }}
+          cmsURL={process.env.NEXT_PUBLIC_BASE_URL}
+          collection={collection}
+          collectionLabels={{
+            plural: collectionLabels[collection]?.plural || 'Pages',
+            singular: collectionLabels[collection]?.singular || 'Page',
+          }}
+          logo={<Title />}
+          onAuthChange={onAuthChange}
+          onPreviewExit={() => {
+            fetch('/next/exit-preview').then(() => {
+              router.push('/')
+              router.refresh()
+            })
+          }}
+          style={{
+            backgroundColor: 'transparent',
+            padding: 0,
+            position: 'relative',
+            zIndex: 'unset',
+          }}
+        />
       </MaxWidthWrapper>
     </div>
   )
 }
-
-export default AdminBar

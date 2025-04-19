@@ -6,6 +6,8 @@ declare namespace NodeJS {
     R2_ENDPOINT: string
     R2_BUCKET: string
 
+    NEXT_PUBLIC_BASE_URL: string
+
     NEXT_PUBLIC_UMAMI_TRACK_CODE: string
     NEXT_PUBLIC_UMAMI_URL: string
   }

@@ -15,6 +15,7 @@ import { VideoReviewCarouselBlock } from '@/blocks/VideoReviewCarouselBlock'
 import { ImageReviewCarouselBlock } from '@/blocks/ImageReviewCarouselBlock'
 import { TextReviewCarouselBlock } from '@/blocks/TextReviewCarouselBlock'
 import { InlineColorTextBlock } from '@/blocks/richtext/InlineColorTextBlock'
+import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 
 export const Treatments: CollectionConfig = {
   slug: 'treatments',
@@ -28,6 +29,26 @@ export const Treatments: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['thumbnail', 'title', 'slug', '_status', 'sort'],
+    livePreview: {
+      url: ({ data, locale, req }) => {
+        const path = generatePreviewPath({
+          collection: 'treatments',
+          slug: data?.slug,
+          locale: locale.code,
+          req,
+        })
+        return path
+      },
+    },
+    preview: (data, { req, locale }) => {
+      const path = generatePreviewPath({
+        collection: 'treatments',
+        slug: data?.slug as string,
+        locale,
+        req,
+      })
+      return path
+    },
   },
   defaultSort: '-sort',
   hooks: {
@@ -196,7 +217,11 @@ export const Treatments: CollectionConfig = {
     },
   ],
   versions: {
-    drafts: true,
+    drafts: {
+      autosave: {
+        interval: 375,
+      },
+    },
     maxPerDoc: 50,
   },
 }

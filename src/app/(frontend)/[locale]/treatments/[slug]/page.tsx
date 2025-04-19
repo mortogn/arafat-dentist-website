@@ -9,6 +9,7 @@ import { getCollection } from '@/utilities/getCollection'
 import { Locale } from '@/types'
 import { Treatment } from '@/payload-types'
 import { locales } from '@/const/locale'
+import { draftMode } from 'next/headers'
 
 const getTreatmentSlugs = async (locale: Locale) => {
   const treatments = await getCollection({
@@ -54,7 +55,9 @@ export default async function TreatmentPage({ params }: PageProps) {
   // Enable static rendering
   setRequestLocale(locale)
 
-  const pageData = await getTreatment({ slug, locale })
+  const { isEnabled: draft } = await draftMode()
+
+  const pageData = await getTreatment({ slug, locale, draft })
 
   // If page not found, return 404
   if (!pageData) {
