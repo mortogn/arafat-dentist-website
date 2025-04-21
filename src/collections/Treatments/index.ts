@@ -40,15 +40,6 @@ export const Treatments: CollectionConfig = {
         return path
       },
     },
-    preview: (data, { req, locale }) => {
-      const path = generatePreviewPath({
-        collection: 'treatments',
-        slug: data?.slug as string,
-        locale,
-        req,
-      })
-      return path
-    },
   },
   defaultSort: '-sort',
   hooks: {
@@ -217,11 +208,7 @@ export const Treatments: CollectionConfig = {
     },
   ],
   versions: {
-    drafts: {
-      autosave: {
-        interval: 375,
-      },
-    },
+    drafts: true,
     maxPerDoc: 50,
   },
 }

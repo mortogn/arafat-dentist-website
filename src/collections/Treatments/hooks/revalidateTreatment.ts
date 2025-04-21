@@ -10,6 +10,7 @@ export const revalidateTreatment: CollectionAfterChangeHook = async ({
 }) => {
   // Always revalidate the collection tag for list pages
   revalidateTagCollection('collection_treatments')
+  payload.logger.info('Revalidating collection_treatments tag')
 
   if (doc?._status === previousDoc?._status && doc._status !== 'published') {
     return doc
