@@ -54,6 +54,7 @@
   "TreatmentInfoViewBlock": {
     "viewDetails": "বিস্তারিত দেখুন",
     "selectTreatment": "চিকিৎসা নির্বাচন করুন",
+    "selectTreatmentDescription": "আপনার প্রয়োজনীয়তা অনুযায়ী চিকিৎসা নির্বাচন করুন।",
     "searchTreatments": "চিকিৎসা অনুসন্ধান করুন...",
     "noTreatmentsFound": "কোন চিকিৎসা পাওয়া যায়নি",
     "reset": "রিসেট"

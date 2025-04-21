@@ -3,6 +3,7 @@ import Media from '@/components/Media'
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -29,8 +30,9 @@ const TreatmentModal: React.FC<TreatmentModalProps> = ({
   const [searchQuery, setSearchQuery] = useState('')
   const [open, setOpen] = useState(false)
 
-  const filteredTreatments = treatments.filter((treatment) =>
-    treatment.title.toLowerCase().includes(searchQuery.toLowerCase()),
+  const filteredTreatments = treatments.filter(
+    (treatment) =>
+      treatment.title && treatment.title.toLowerCase().includes(searchQuery.toLowerCase()),
   )
 
   const handleSelectTreatment = (treatmentId: string) => {
@@ -44,6 +46,7 @@ const TreatmentModal: React.FC<TreatmentModalProps> = ({
       <DialogContent className="sm:max-w-md max-h-[80vh] overflow-auto">
         <DialogHeader>
           <DialogTitle>{t('selectTreatment')}</DialogTitle>
+          <DialogDescription>{t('selectTreatmentDescription')}</DialogDescription>
         </DialogHeader>
 
         <div className="relative mt-2 mb-4">
