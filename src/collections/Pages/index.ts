@@ -39,6 +39,16 @@ export const Pages: CollectionConfig = {
         return path
       },
     },
+    preview: (data, { locale, req }) => {
+      const path = generatePreviewPath({
+        locale: locale,
+        collection: 'pages',
+        slug: data?.slug as string,
+        req,
+      })
+
+      return path
+    },
   },
   hooks: {
     afterChange: [revalidatePage],

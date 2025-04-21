@@ -40,6 +40,15 @@ export const Treatments: CollectionConfig = {
         return path
       },
     },
+    preview: (data, { locale, req }) => {
+      const path = generatePreviewPath({
+        collection: 'treatments',
+        slug: data?.slug as string,
+        locale,
+        req,
+      })
+      return path
+    },
   },
   defaultSort: '-sort',
   hooks: {
