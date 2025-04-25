@@ -28,10 +28,7 @@ export const generatePreviewPath = ({ collection, locale, slug, req }: Props) =>
     encodedParams.append(key, value)
   })
 
-  const isProduction = process.env.NODE_ENV === 'production'
-  const protocol = isProduction ? 'https:' : req.protocol
-
-  const url = `${protocol}//${req.host}/next/preview?${encodedParams.toString()}`
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/next/preview?${encodedParams.toString()}`
 
   return url
 }
