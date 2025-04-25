@@ -29,6 +29,28 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    livePreview: {
+      breakpoints: [
+        {
+          name: 'mobile',
+          label: 'Mobile',
+          width: 375,
+          height: 667, // iPhone 8/SE dimensions
+        },
+        {
+          name: 'tablet',
+          label: 'Tablet',
+          width: 768,
+          height: 1024, // iPad dimensions
+        },
+        {
+          name: 'desktop',
+          label: 'Desktop',
+          width: 1440,
+          height: 900, // Common desktop resolution
+        },
+      ],
+    },
   },
   collections: [Users, Media, Pages, Treatments, Reviews, Appointment, Doctors],
   editor: lexicalEditor({
