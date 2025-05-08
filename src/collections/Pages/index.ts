@@ -14,6 +14,8 @@ import { PatientSafetyBlock } from '@/blocks/PatientSafetyBlock'
 import { TreatmentGridBlock } from '@/blocks/TreatmentGridBlock'
 import { TreatmentInfoViewBlock } from '@/blocks/TreatmentInfoViewBlock'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
+import { VideoSectionBlock } from '@/blocks/VideoSectionBlock'
+import { GalleryBlock } from '@/blocks/GalleryBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -92,6 +94,8 @@ export const Pages: CollectionConfig = {
                 PatientSafetyBlock,
                 TreatmentGridBlock,
                 TreatmentInfoViewBlock,
+                VideoSectionBlock,
+                GalleryBlock,
               ],
             },
           ],

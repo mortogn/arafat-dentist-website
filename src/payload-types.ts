@@ -179,6 +179,8 @@ export interface Page {
         | PatientSafetyBlock
         | TreatmentGridBlock
         | TreatmentInfoViewBlock
+        | VideoSectionBlock
+        | GalleryBlock
       )[]
     | null;
   meta?: {
@@ -737,6 +739,80 @@ export interface TreatmentInfoViewBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoSectionBlock".
+ */
+export interface VideoSectionBlock {
+  /**
+   * The title of the video section.
+   */
+  title: string;
+  /**
+   * A brief description of the video section.
+   */
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * The thumbnail image for the video section.
+   */
+  thumbnail: string | Media;
+  /**
+   * The ID of the video to be embedded. Paste the full URL or just the ID.
+   */
+  videoId: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'video-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock".
+ */
+export interface GalleryBlock {
+  /**
+   * The title of the gallery.
+   */
+  title: string;
+  /**
+   * A brief description of the gallery.
+   */
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  images: {
+    image: string | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gallery';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "appointments".
  */
 export interface Appointment {
@@ -898,6 +974,8 @@ export interface PagesSelect<T extends boolean = true> {
         'patient-safety'?: T | PatientSafetyBlockSelect<T>;
         'treatment-grid'?: T | TreatmentGridBlockSelect<T>;
         'treatment-info-view-block'?: T | TreatmentInfoViewBlockSelect<T>;
+        'video-section'?: T | VideoSectionBlockSelect<T>;
+        gallery?: T | GalleryBlockSelect<T>;
       };
   meta?:
     | T
@@ -1050,6 +1128,34 @@ export interface TreatmentGridBlockSelect<T extends boolean = true> {
 export interface TreatmentInfoViewBlockSelect<T extends boolean = true> {
   title?: T;
   bgImage?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoSectionBlock_select".
+ */
+export interface VideoSectionBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  thumbnail?: T;
+  videoId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock_select".
+ */
+export interface GalleryBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

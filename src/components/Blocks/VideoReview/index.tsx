@@ -36,7 +36,7 @@ const VideoReviewSection: FC<Props> = ({ data }) => {
       <MaxWidthWrapper element="section" className="my-20 ">
         <SectionTitle title={data.title} description={data.description} />
         <div className="flex items-center flex-col lg:flex-row gap-10 lg:gap-20 mt-10">
-          <div className="lg:max-w-[55%] w-full">
+          <div className="lg:max-w-[55%] w-full flex-shrink-0">
             <VideoSlider data={data} />
           </div>
           {data.reviews[activeIndex] &&

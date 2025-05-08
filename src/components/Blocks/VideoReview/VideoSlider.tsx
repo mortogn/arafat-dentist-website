@@ -59,7 +59,12 @@ const VideoSlider: FC<Props> = ({ data }) => {
   }
 
   return (
-    <Carousel setApi={setApi}>
+    <Carousel
+      setApi={setApi}
+      opts={{
+        loop: true,
+      }}
+    >
       <CarouselContent>
         {data.reviews.map(
           (review, index) =>
