@@ -8,6 +8,7 @@ interface YoutubeEmbedProps {
   image?: MediaType | undefined | string | null
   videoId: string
   isPlaying?: boolean
+  onIsPlayingChange?: (isPlaying: boolean) => void
   isActive?: boolean
   context?: string
 }
@@ -16,6 +17,7 @@ const YoutubeEmbed = ({
   image,
   videoId,
   isPlaying: isPlayingFromProps,
+  onIsPlayingChange,
   isActive,
   context,
 }: YoutubeEmbedProps) => {
@@ -28,6 +30,7 @@ const YoutubeEmbed = ({
   }, [isActive, isPlaying])
 
   const handleClick = () => {
+    onIsPlayingChange?.(true)
     setIsPlaying(true)
   }
 

@@ -20,12 +20,14 @@ const VideoSlider: FC<Props> = ({ data }) => {
 
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
-
+  const [isPlaying, setIsPlaying] = useState(false)
   // Update activeIndex
   useEffect(() => {
     if (!api) return
 
     const onSelect = () => {
+      // Force isPlaying to false when changing slides
+      setIsPlaying(false)
       setActiveIndex(api.selectedScrollSnap())
     }
 
@@ -34,7 +36,47 @@ const VideoSlider: FC<Props> = ({ data }) => {
     return () => {
       api.off('select', onSelect)
     }
-  }, [api, setActiveIndex])
+  }, [api, setActiveIndex]) // Store a reference to the autoplay plugin
+  interface AutoplayPlugin {
+    play: () => void
+    stop: () => void
+  }
+
+  const [autoplayPlugin, setAutoplayPlugin] = useState<AutoplayPlugin | null>(null)
+
+  // Initialize and store the autoplay plugin instance
+  useEffect(() => {
+    if (api?.plugins()?.autoplay) {
+      const autoplay = api.plugins().autoplay as AutoplayPlugin
+      setAutoplayPlugin(autoplay)
+
+      // Initial state setup
+      if (isPlaying) {
+        console.log('Initial state: Video is playing, stopping autoplay')
+        autoplay.stop()
+      }
+    }
+  }, [api, isPlaying])
+
+  // Handle video playing state changes
+  useEffect(() => {
+    if (!autoplayPlugin) return
+
+    if (isPlaying) {
+      console.log('Video is playing, stopping autoplay')
+      autoplayPlugin.stop()
+
+      // Force autoplay to remain stopped
+      const interval = setInterval(() => {
+        autoplayPlugin.stop()
+      }, 500)
+
+      return () => clearInterval(interval)
+    } else {
+      console.log('Video is not playing, resuming autoplay')
+      autoplayPlugin.play()
+    }
+  }, [isPlaying, autoplayPlugin])
 
   // Update canScrollPrev and canScrollNext
   useEffect(() => {
@@ -69,9 +111,10 @@ const VideoSlider: FC<Props> = ({ data }) => {
       plugins={[
         Autoplay({
           delay: 3000,
-          stopOnMouseEnter: true,
-          stopOnFocusIn: true,
-          stopOnInteraction: false,
+          stopOnMouseEnter: true, // Stop on hover
+          stopOnFocusIn: true, // Stop when carousel gets focus
+          stopOnInteraction: true, // Stop on user interaction
+          playOnInit: !isPlaying, // Don't play if video is already playing
         }),
       ]}
     >
@@ -87,6 +130,8 @@ const VideoSlider: FC<Props> = ({ data }) => {
                   isActive={activeIndex === index}
                   videoId={review.video?.videoId}
                   image={review?.video.thumbnail}
+                  isPlaying={isPlaying}
+                  onIsPlayingChange={setIsPlaying}
                 />
               </CarouselItem>
             ),

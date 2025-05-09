@@ -11,13 +11,32 @@ type Props = React.ComponentProps<'div'> & {
   children: ReactNode
   itemCount?: number // Optional total count for pagination display
   onIndexChange?: (index: number) => void // Optional callback for index changes
+  hasVideos?: boolean // Flag to indicate if carousel contains videos
+  onIsPlayingChange?: (isPlaying: boolean) => void // Callback for video play state
 }
 
-const ReviewCarousel: FC<Props> = ({ children, onIndexChange, className, ...props }) => {
+const ReviewCarousel: FC<Props> = ({
+  children,
+  onIndexChange,
+  className,
+  hasVideos = false,
+  onIsPlayingChange,
+  ...props
+}) => {
   const [api, setApi] = useState<CarouselApi>()
-
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  // Interface for Autoplay plugin
+  interface AutoplayPlugin {
+    play: () => void
+    stop: () => void
+  }
+
+  // Only initialize autoplay plugin state if we have videos
+  const [autoplayPlugin, setAutoplayPlugin] = useState<AutoplayPlugin | null>(null)
+  // Handle video playing state changes from children - will be passed to video components in parent
 
   // Update activeIndex
   useEffect(() => {
@@ -25,6 +44,10 @@ const ReviewCarousel: FC<Props> = ({ children, onIndexChange, className, ...prop
 
     const onSelect = () => {
       const currentIndex = api.selectedScrollSnap()
+      // Reset video playing state when slides change
+      if (hasVideos) {
+        setIsPlaying(false)
+      }
       if (onIndexChange) {
         onIndexChange(currentIndex)
       }
@@ -35,7 +58,35 @@ const ReviewCarousel: FC<Props> = ({ children, onIndexChange, className, ...prop
     return () => {
       api.off('select', onSelect)
     }
-  }, [api, onIndexChange])
+  }, [api, onIndexChange, hasVideos])
+
+  // Initialize and store autoplay plugin
+  useEffect(() => {
+    if (hasVideos && api?.plugins()?.autoplay) {
+      const autoplay = api.plugins().autoplay as AutoplayPlugin
+      setAutoplayPlugin(autoplay)
+    }
+  }, [hasVideos, api])
+
+  // Control autoplay based on video playing state
+  useEffect(() => {
+    if (!hasVideos || !autoplayPlugin) return
+
+    if (isPlaying) {
+      console.log('Video is playing, stopping autoplay')
+      autoplayPlugin.stop()
+
+      // Force autoplay to remain stopped while video is playing
+      const interval = setInterval(() => {
+        autoplayPlugin.stop()
+      }, 500)
+
+      return () => clearInterval(interval)
+    } else {
+      console.log('Video is not playing, resuming autoplay')
+      autoplayPlugin.play()
+    }
+  }, [hasVideos, isPlaying, autoplayPlugin])
 
   // Update canScrollPrev and canScrollNext
   useEffect(() => {
@@ -63,6 +114,7 @@ const ReviewCarousel: FC<Props> = ({ children, onIndexChange, className, ...prop
 
   return (
     <div className={cn('relative', className)} {...props}>
+      {' '}
       <Carousel
         setApi={setApi}
         plugins={[
@@ -70,7 +122,10 @@ const ReviewCarousel: FC<Props> = ({ children, onIndexChange, className, ...prop
             delay: 3000,
             stopOnMouseEnter: true,
             stopOnFocusIn: true,
-            stopOnInteraction: false,
+            // For video carousels, we want manual control of interaction behavior
+            stopOnInteraction: !hasVideos,
+            // Don't play if a video is already playing
+            playOnInit: hasVideos ? !isPlaying : true,
           }),
         ]}
       >
