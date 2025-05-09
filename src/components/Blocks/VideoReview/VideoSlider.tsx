@@ -7,6 +7,7 @@ import { VideoReviewBlock } from '@/payload-types'
 import { MoveLeftIcon, MoveRightIcon } from 'lucide-react'
 import React, { FC, useEffect, useState } from 'react'
 import { useVideoReviewSectionContext } from '.'
+import Autoplay from 'embla-carousel-autoplay'
 
 type Props = {
   data: VideoReviewBlock
@@ -14,6 +15,7 @@ type Props = {
 
 const VideoSlider: FC<Props> = ({ data }) => {
   const [api, setApi] = useState<CarouselApi>()
+
   const { activeIndex, setActiveIndex } = useVideoReviewSectionContext()
 
   const [canScrollPrev, setCanScrollPrev] = useState(false)
@@ -64,6 +66,14 @@ const VideoSlider: FC<Props> = ({ data }) => {
       opts={{
         loop: true,
       }}
+      plugins={[
+        Autoplay({
+          delay: 3000,
+          stopOnMouseEnter: true,
+          stopOnFocusIn: true,
+          stopOnInteraction: false,
+        }),
+      ]}
     >
       <CarouselContent>
         {data.reviews.map(
@@ -82,6 +92,7 @@ const VideoSlider: FC<Props> = ({ data }) => {
             ),
         )}
       </CarouselContent>
+
       <div className="absolute -bottom-10 -translate-x-1/2 left-1/2 flex items-center gap-2">
         <Button
           size="icon"

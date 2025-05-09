@@ -44,7 +44,7 @@ const NavLinkWithChildren: FC<NavLinkWithChildrenProps> = async ({ data, locale 
         </Link>
       </NavigationMenuTrigger>
       <NavigationMenuContent className="">
-        <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[650px] md:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[700px] xl:w-[750px] md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
           {data.showTreatments && treatments && treatments.length > 0
             ? treatments.map((treatment) => (
                 <NavListItem

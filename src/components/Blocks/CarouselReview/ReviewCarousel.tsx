@@ -5,6 +5,7 @@ import { Carousel, CarouselApi, CarouselContent } from '@/components/ui/carousel
 import { Button } from '@/components/ui/button'
 import { MoveLeftIcon, MoveRightIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import Autoplay from 'embla-carousel-autoplay'
 
 type Props = React.ComponentProps<'div'> & {
   children: ReactNode
@@ -62,7 +63,17 @@ const ReviewCarousel: FC<Props> = ({ children, onIndexChange, className, ...prop
 
   return (
     <div className={cn('relative', className)} {...props}>
-      <Carousel setApi={setApi}>
+      <Carousel
+        setApi={setApi}
+        plugins={[
+          Autoplay({
+            delay: 3000,
+            stopOnMouseEnter: true,
+            stopOnFocusIn: true,
+            stopOnInteraction: false,
+          }),
+        ]}
+      >
         <CarouselContent>{children}</CarouselContent>
       </Carousel>
       <div className="absolute -bottom-10 -translate-x-1/2 left-1/2 flex items-center gap-2">
