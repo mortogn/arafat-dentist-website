@@ -72,11 +72,26 @@ export const Appointment: CollectionConfig = {
         position: 'sidebar',
       },
     },
+    // Deprecated
     {
       type: 'relationship',
       name: 'treatment',
       label: 'Treatment',
       relationTo: 'treatments',
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+        description: "This field is deprecated. Use 'treatments' instead.",
+        disabled: true,
+      },
+      required: false,
+    },
+    {
+      type: 'relationship',
+      name: 'treatments',
+      label: 'Treatments',
+      relationTo: 'treatments',
+      hasMany: true,
       admin: {
         readOnly: true,
         position: 'sidebar',

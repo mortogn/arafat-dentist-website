@@ -17,7 +17,7 @@ export async function createAppointment(values: BookFormValues) {
         email: values.email,
         phone: values.phone,
         message: values.message,
-        treatment: values.treatmentId,
+        treatments: values.treatmentIds,
       },
     })
 

@@ -5,6 +5,11 @@
       "phone": "Phone Number",
       "email": "Email Address",
       "treatment": "Select Treatment",
+      "treatments": "Select one or more treatments",
+      "selectTreatments": "Select Treatments",
+      "selectMultipleTreatments": "Select treatments according to your needs.",
+      "searchTreatments": "Search treatments...",
+      "noTreatmentsFound": "No treatments found",
       "date": "Preferred Date",
       "time": "Preferred Time",
       "notes": "Additional Notes",
@@ -15,7 +20,8 @@
         "phone": "Enter your phone number",
         "email": "Enter your email address",
         "notes": "Any special requirements or concerns?",
-        "treatment": "Choose your treatment"
+        "treatment": "Choose your treatment",
+        "treatments": "Select one or more treatments"
       },
       "success": {
         "title": "Appointment Booked",

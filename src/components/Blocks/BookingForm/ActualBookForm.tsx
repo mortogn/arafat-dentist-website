@@ -14,13 +14,6 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import { Treatment } from '@/payload-types'
 import DatePicker from '@/components/DatePicker'
 import { format } from 'date-fns'
@@ -29,6 +22,7 @@ import { Button } from '@/components/ui/button'
 import { createAppointment } from './bookingFormAction'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
+import TreatmentMultiSelect from './TreatmentMultiSelect'
 
 type Props = {
   treatments: Treatment[]
@@ -44,7 +38,7 @@ const ActualBookForm: FC<Props> = ({ treatments }) => {
       fullName: '',
       email: '',
       phone: '',
-      treatmentId: '',
+      treatmentIds: [], // This will now store comma-separated IDs
       date: new Date(),
       message: '',
     },
@@ -120,25 +114,18 @@ const ActualBookForm: FC<Props> = ({ treatments }) => {
 
         <FormField
           control={form.control}
-          name="treatmentId"
+          name="treatmentIds"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t('treatment')}</FormLabel>
-              <Select defaultValue={field.value} onValueChange={field.onChange}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder={t('placeholders.treatment')} />
-                  </SelectTrigger>
-                </FormControl>
-
-                <SelectContent>
-                  {treatments?.map((treatment) => (
-                    <SelectItem value={treatment.id} key={treatment.id}>
-                      {treatment.title}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <FormLabel>{t('treatments')}</FormLabel>
+              <FormControl>
+                <TreatmentMultiSelect
+                  treatments={treatments}
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder={t('placeholders.treatments')}
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
@@ -187,9 +174,7 @@ const ActualBookForm: FC<Props> = ({ treatments }) => {
           data-umami-event="Book appointment button"
           data-umami-event-email={form.getValues('email')}
           data-umami-event-name={form.getValues('fullName')}
-          data-umami-event-treatment={
-            treatments.find((t) => t.id === form.getValues('treatmentId'))?.title
-          }
+          data-umami-event-treatments={form.getValues('treatmentIds')}
           className="w-full"
           disabled={isSubmitting}
         >

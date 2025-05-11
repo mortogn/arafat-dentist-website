@@ -823,7 +823,11 @@ export interface Appointment {
   date: string;
   message?: string | null;
   note?: string | null;
-  treatment: string | Treatment;
+  /**
+   * This field is deprecated. Use 'treatments' instead.
+   */
+  treatment?: (string | null) | Treatment;
+  treatments: (string | Treatment)[];
   updatedAt: string;
   createdAt: string;
 }
@@ -1233,6 +1237,7 @@ export interface AppointmentsSelect<T extends boolean = true> {
   message?: T;
   note?: T;
   treatment?: T;
+  treatments?: T;
   updatedAt?: T;
   createdAt?: T;
 }

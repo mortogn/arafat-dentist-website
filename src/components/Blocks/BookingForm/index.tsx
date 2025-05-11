@@ -1,8 +1,8 @@
-import { BookingFormBlock, Media, Treatment } from '@/payload-types'
-import Image from 'next/image'
+import { BookingFormBlock, Treatment } from '@/payload-types'
 import React, { FC } from 'react'
 import ActualBookForm from './ActualBookForm'
 import { getCachedCollection } from '@/utilities/getCollection'
+import Media from '@/components/Media'
 
 type BookingFormProps = {
   data: BookingFormBlock
@@ -28,22 +28,22 @@ const BookingForm: FC<BookingFormProps> = async ({ data, locale }) => {
   }
 
   return (
-    <div className="flex items-center my-10 justify-between py-10 md:py-0 md:h-[58rem] rounded-md border border-border overflow-hidden shadow-md">
-      <div className="w-full md:w-1/2 px-10 flex items-center flex-col justify-center gap-5">
-        <div className="space-y-2  text-center max-w-[450px]">
+    <div className="flex items-stretch my-10 rounded-md border border-border overflow-hidden shadow-md min-h-[58rem]">
+      <div className="w-full md:w-1/2 px-10 flex flex-col items-center justify-center gap-5 py-10">
+        <div className="space-y-2 text-center max-w-[450px]">
           <h1 className="text-3xl font-medium tracking-tighter">{data.title}</h1>
           <p className="text-muted-foreground tracking-wide">{data.subtitle}</p>
         </div>
         <ActualBookForm treatments={treatments} />
       </div>
 
-      <div className="relative h-full w-1/2 hidden md:block">
-        <Image
-          src={(data.image as Media).url!}
-          alt={(data.image as Media).alt}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px): 50vw"
+      <div className="relative w-1/2 hidden md:flex">
+        <Media
+          resource={data.image}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
           className="object-cover"
+          fill
+          priority
         />
       </div>
     </div>
