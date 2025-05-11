@@ -52,7 +52,6 @@ const VideoSlider: FC<Props> = ({ data }) => {
 
       // Initial state setup
       if (isPlaying) {
-        console.log('Initial state: Video is playing, stopping autoplay')
         autoplay.stop()
       }
     }
@@ -62,21 +61,25 @@ const VideoSlider: FC<Props> = ({ data }) => {
   useEffect(() => {
     if (!autoplayPlugin) return
 
-    if (isPlaying) {
-      console.log('Video is playing, stopping autoplay')
-      autoplayPlugin.stop()
-
-      // Force autoplay to remain stopped
-      const interval = setInterval(() => {
+    try {
+      if (isPlaying) {
         autoplayPlugin.stop()
-      }, 500)
 
-      return () => clearInterval(interval)
-    } else {
-      console.log('Video is not playing, resuming autoplay')
-      autoplayPlugin.play()
+        // Force autoplay to remain stopped
+        const interval = setInterval(() => {
+          autoplayPlugin.stop()
+        }, 500)
+
+        return () => clearInterval(interval)
+      } else {
+        if (canScrollNext) {
+          autoplayPlugin.play()
+        }
+      }
+    } catch (err) {
+      console.error('Error controlling autoplay:', err)
     }
-  }, [isPlaying, autoplayPlugin])
+  }, [isPlaying, autoplayPlugin, canScrollNext])
 
   // Update canScrollPrev and canScrollNext
   useEffect(() => {

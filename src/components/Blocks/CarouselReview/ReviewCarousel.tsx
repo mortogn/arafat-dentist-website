@@ -20,7 +20,6 @@ const ReviewCarousel: FC<Props> = ({
   onIndexChange,
   className,
   hasVideos = false,
-  onIsPlayingChange,
   ...props
 }) => {
   const [api, setApi] = useState<CarouselApi>()
@@ -72,21 +71,25 @@ const ReviewCarousel: FC<Props> = ({
   useEffect(() => {
     if (!hasVideos || !autoplayPlugin) return
 
-    if (isPlaying) {
-      console.log('Video is playing, stopping autoplay')
-      autoplayPlugin.stop()
-
-      // Force autoplay to remain stopped while video is playing
-      const interval = setInterval(() => {
+    try {
+      if (isPlaying) {
         autoplayPlugin.stop()
-      }, 500)
 
-      return () => clearInterval(interval)
-    } else {
-      console.log('Video is not playing, resuming autoplay')
-      autoplayPlugin.play()
+        // Force autoplay to remain stopped while video is playing
+        const interval = setInterval(() => {
+          autoplayPlugin.stop()
+        }, 500)
+
+        return () => clearInterval(interval)
+      } else {
+        if (canScrollNext) {
+          autoplayPlugin.play()
+        }
+      }
+    } catch (err) {
+      console.error('Error controlling autoplay:', err)
     }
-  }, [hasVideos, isPlaying, autoplayPlugin])
+  }, [hasVideos, isPlaying, autoplayPlugin, canScrollNext])
 
   // Update canScrollPrev and canScrollNext
   useEffect(() => {

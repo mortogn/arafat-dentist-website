@@ -56,11 +56,6 @@ const ActualBookForm: FC<Props> = ({ treatments }) => {
       setIsSubmitting(true)
       const success = await createAppointment(values)
 
-      console.log({
-        title: t('success.title'),
-        message: t('success.message'),
-      })
-
       if (success) {
         form.reset()
         toast.success(t('success.title'), {
