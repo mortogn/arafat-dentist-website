@@ -10,10 +10,10 @@ type Props = {
 
 const GalleryBlockComponent: React.FC<Props> = ({ data }) => {
   return (
-    <MaxWidthWrapper element="section">
+    <MaxWidthWrapper element="section" className="my-10">
       <SectionTitle title={data.title} description={data.description} />
 
-      <div>
+      <div className="columns-4 gap-2 space-y-2 mt-8">
         {data.images.map((image) => (
           <Media resource={image.image} key={image.id} height={600} width={700} />
         ))}

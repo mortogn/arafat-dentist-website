@@ -12,7 +12,6 @@ type Props = React.ComponentProps<'div'> & {
   itemCount?: number // Optional total count for pagination display
   onIndexChange?: (index: number) => void // Optional callback for index changes
   hasVideos?: boolean // Flag to indicate if carousel contains videos
-  onIsPlayingChange?: (isPlaying: boolean) => void // Callback for video play state
 }
 
 const ReviewCarousel: FC<Props> = ({
@@ -20,6 +19,7 @@ const ReviewCarousel: FC<Props> = ({
   onIndexChange,
   className,
   hasVideos = false,
+
   ...props
 }) => {
   const [api, setApi] = useState<CarouselApi>()

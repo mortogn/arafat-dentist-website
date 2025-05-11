@@ -29,12 +29,7 @@ const VideoReviewCarousel: FC<Props> = ({ data }) => {
     <MaxWidthWrapper element="section" className="not-prose my-10 p-0">
       {data.title ? <SectionTitle title={data.title} description={data.description} /> : null}
 
-      <ReviewCarousel
-        className="mt-8"
-        hasVideos={true}
-        onIsPlayingChange={setIsPlaying}
-        onIndexChange={setActiveIndex}
-      >
+      <ReviewCarousel className="mt-8" hasVideos={true} onIndexChange={setActiveIndex}>
         {filteredReviews?.map((review, index) => (
           <CarouselItem className="lg:basis-1/2" key={review.id}>
             <div className="py-1">
