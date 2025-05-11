@@ -70,7 +70,7 @@ export default async function TreatmentPage({ params }: PageProps) {
       {/* <h1>{pageData.title}</h1> */}
       {/* You can use the pageData and globalData to render your content */}
       <article className="w-full mx-auto pb-8">
-        {pageData.content && Array.isArray(pageData.content) && pageData.content.length > 0 ? (
+        {pageData.content ? (
           <RichTextContent
             data={pageData.content}
             converters={treatmentJsxConverter}
