@@ -16,6 +16,10 @@ const ImageReviewCarousel: FC<Props> = ({ data }) => {
     (review): review is Review => review !== null && typeof review !== 'string',
   )
 
+  if (!filteredReviews?.length) {
+    return null
+  }
+
   return (
     <MaxWidthWrapper element="section" className="my-10 not-prose p-0">
       {data.title && <SectionTitle title={data.title} description={data.description} />}

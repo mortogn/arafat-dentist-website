@@ -26,7 +26,7 @@ export async function getTreatment({
     limit: 1,
   })
 
-  if (!treatments.docs?.[0]) {
+  if (!treatments.docs || treatments.docs.length === 0) {
     return null
   }
 

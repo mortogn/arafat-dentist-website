@@ -70,12 +70,16 @@ export default async function TreatmentPage({ params }: PageProps) {
       {/* <h1>{pageData.title}</h1> */}
       {/* You can use the pageData and globalData to render your content */}
       <article className="w-full mx-auto pb-8">
-        {pageData.content && (
+        {pageData.content && Array.isArray(pageData.content) && pageData.content.length > 0 ? (
           <RichTextContent
             data={pageData.content}
             converters={treatmentJsxConverter}
             className="lg:prose-lg xl:prose-xl w-full max-w-screen-lg mx-auto"
           />
+        ) : (
+          <div className="text-center py-10">
+            <p>No content available for this treatment.</p>
+          </div>
         )}
       </article>
     </MaxWidthWrapper>

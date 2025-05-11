@@ -21,6 +21,10 @@ const VideoReviewCarousel: FC<Props> = ({ data }) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
 
+  if (!filteredReviews?.length) {
+    return null
+  }
+
   return (
     <MaxWidthWrapper element="section" className="not-prose my-10 p-0">
       {data.title ? <SectionTitle title={data.title} description={data.description} /> : null}

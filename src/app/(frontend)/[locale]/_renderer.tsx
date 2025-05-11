@@ -1,4 +1,5 @@
 import CallToAction from '@/components/Blocks/CallToAction'
+import GalleryBlockComponent from '@/components/Blocks/GallerySectionBlock'
 import HeroSection from '@/components/Blocks/Hero'
 import LocationBlockComponent from '@/components/Blocks/LocationBlock'
 import PatientSafetyBlockComponent from '@/components/Blocks/PatientSafety'
@@ -8,6 +9,7 @@ import TreatmentGridBlockComponent from '@/components/Blocks/TreatmentGridBlock'
 import TreatmentInfoViewBlockComponent from '@/components/Blocks/TreatmentInfoViewBlock'
 import TreatmentsSection from '@/components/Blocks/Treatments'
 import VideoReviewSection from '@/components/Blocks/VideoReview'
+import VideoSectionBlockComponent from '@/components/Blocks/VideoSectionBlock'
 import {
   HeroBlock,
   BookingFormBlock,
@@ -20,6 +22,8 @@ import {
   PatientSafetyBlock,
   TreatmentGridBlock,
   TreatmentInfoViewBlock,
+  VideoSectionBlock,
+  GalleryBlock,
 } from '@/payload-types'
 import { Locale } from '@/types'
 
@@ -35,8 +39,14 @@ type Blocks =
   | PatientSafetyBlock
   | TreatmentGridBlock
   | TreatmentInfoViewBlock
+  | VideoSectionBlock
+  | GalleryBlock
 
 export function renderer(block: Blocks, locale: Locale) {
+  if (!block || !block.blockType) {
+    return null
+  }
+
   switch (block.blockType) {
     case 'hero':
       return <HeroSection key={block.id} data={block} />
@@ -67,6 +77,12 @@ export function renderer(block: Blocks, locale: Locale) {
 
     case 'treatment-info-view-block':
       return <TreatmentInfoViewBlockComponent key={block.id} data={block} locale={locale} />
+
+    case 'video-section':
+      return <VideoSectionBlockComponent key={block.id} data={block} />
+
+    case 'gallery':
+      return <GalleryBlockComponent key={block.id} data={block} />
 
     default:
       return null
