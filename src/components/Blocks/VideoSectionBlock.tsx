@@ -10,7 +10,7 @@ type Props = {
 
 const VideoSectionBlockComponent: FC<Props> = ({ data }) => {
   return (
-    <MaxWidthWrapper element="section" className="my-10">
+    <MaxWidthWrapper element="section" className="my-10 lg:my-20">
       <SectionTitle title={data.title} description={data.description} />
       <div className=" max-w-[950px] mx-auto mt-8">
         <YoutubeEmbed videoId={data.videoId} isActive image={data.thumbnail} />
