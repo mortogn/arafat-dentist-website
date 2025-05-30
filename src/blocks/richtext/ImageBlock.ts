@@ -61,14 +61,5 @@ export const ImageBlock: Block = {
         description: 'Optional caption for the image.',
       },
     },
-    {
-      type: 'text',
-      name: 'altText',
-      label: 'Alt Text',
-      required: false,
-      admin: {
-        description: 'Alternative text for the image, improving accessibility.',
-      },
-    },
   ],
 }

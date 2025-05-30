@@ -8,12 +8,14 @@ type Props = {
 
 const TreatmentsRelationBlockComponent: FC<Props> = ({ data }) => {
   return (
-    data.treatments && (
-      <TreatmentWrapper
-        className="not-prose xl:grid-cols-3"
-        treatments={data.treatments as Treatment[]}
-      />
-    )
+    <>
+      {data.treatments && (
+        <TreatmentWrapper
+          className="not-prose xl:grid-cols-3"
+          treatments={data.treatments as Treatment[]}
+        />
+      )}
+    </>
   )
 }
 

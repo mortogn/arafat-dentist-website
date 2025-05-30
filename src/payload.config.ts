@@ -19,6 +19,7 @@ import { Contacts } from './globals/contacts'
 import { Footer } from './globals/footer'
 import { Appointment } from './collections/Appointment'
 import { Doctors } from './collections/Doctors'
+import { Popup } from './collections/Popup'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -52,7 +53,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Pages, Treatments, Reviews, Appointment, Doctors],
+  collections: [Users, Media, Pages, Treatments, Reviews, Appointment, Doctors, Popup],
   editor: lexicalEditor({
     features({ defaultFeatures, rootFeatures }) {
       return [...defaultFeatures, ...rootFeatures, FixedToolbarFeature()]

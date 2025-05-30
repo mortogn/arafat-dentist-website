@@ -15,6 +15,7 @@ import { Toaster } from '@/components/ui/sonner'
 import UmamiAnalytics from '@/components/UmamiAnalytics'
 import { draftMode } from 'next/headers'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+import Popup from '@/components/Popup'
 
 const playfair_display = Playfair_Display({
   display: 'swap',
@@ -86,6 +87,8 @@ export default async function MainLayout({
           <Footer locale={locale} />
 
           <Toaster position="bottom-center" richColors />
+
+          <Popup locale={locale} />
 
           <UmamiAnalytics />
         </body>

@@ -48,6 +48,7 @@ export interface Config {
     reviews: Review;
     appointments: Appointment;
     doctors: Doctor;
+    popup: Popup;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -61,6 +62,7 @@ export interface Config {
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     appointments: AppointmentsSelect<false> | AppointmentsSelect<true>;
     doctors: DoctorsSelect<false> | DoctorsSelect<true>;
+    popup: PopupSelect<false> | PopupSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -833,6 +835,28 @@ export interface Appointment {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "popup".
+ */
+export interface Popup {
+  id: string;
+  /**
+   * The title of the popup
+   */
+  title: string;
+  /**
+   * The image to display in the popup. Aspect ratio is 1:1. Ex. 650x650px
+   */
+  image: string | Media;
+  /**
+   * The URL to redirect to when the popup is clicked
+   */
+  url: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -865,6 +889,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'doctors';
         value: string | Doctor;
+      } | null)
+    | ({
+        relationTo: 'popup';
+        value: string | Popup;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1255,6 +1283,18 @@ export interface DoctorsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "popup_select".
+ */
+export interface PopupSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  url?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -1601,10 +1641,6 @@ export interface ImageBlock {
    * Optional caption for the image.
    */
   caption?: string | null;
-  /**
-   * Alternative text for the image, improving accessibility.
-   */
-  altText?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'image';
