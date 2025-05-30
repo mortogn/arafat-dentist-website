@@ -71,7 +71,15 @@ const TreatmentMultiSelect: React.FC<TreatmentMultiSelectProps> = ({
             key={treatment.id}
             className="bg-accent flex items-center gap-2 rounded-md px-2 py-1"
           >
-            <span className="text-sm">{treatment.title}</span>
+            <div className="flex items-center gap-2">
+              <Media
+                resource={treatment.icon}
+                height={24}
+                width={24}
+                className="shrink-0 rounded-md"
+              />
+              <div className="text-sm">{treatment.title}</div>
+            </div>
             <div
               role="button"
               aria-label="Remove treatment"
