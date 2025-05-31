@@ -88,6 +88,16 @@ export const Treatments: CollectionConfig = {
       defaultValue: 1,
     },
     {
+      type: 'checkbox',
+      name: 'isNotListed',
+      label: 'Do not list this treatment',
+      admin: {
+        description: 'Check this if you do not want this treatment to be listed on the website',
+        position: 'sidebar',
+      },
+      defaultValue: false,
+    },
+    {
       type: 'tabs',
       tabs: [
         {

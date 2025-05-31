@@ -24,11 +24,25 @@ const Header = async ({ locale }: HeaderProps) => {
       locale,
       limit: 100,
       sort: '-sort',
+      where: {
+        or: [
+          {
+            isNotListed: {
+              equals: false,
+            },
+          },
+          {
+            isNotListed: {
+              equals: undefined,
+            },
+          },
+        ],
+      },
       select: {
         title: true,
         description: true,
         slug: true,
-      },
+      } as Record<keyof Partial<Treatment>, true>,
     })() as Promise<{ docs: Treatment[] }>,
   ])
 

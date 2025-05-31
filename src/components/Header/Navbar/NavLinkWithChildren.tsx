@@ -26,6 +26,20 @@ const NavLinkWithChildren: FC<NavLinkWithChildrenProps> = async ({ data, locale 
       locale,
       limit: 100,
       sort: '-sort',
+      where: {
+        or: [
+          {
+            isNotListed: {
+              equals: false,
+            },
+          },
+          {
+            isNotListed: {
+              equals: undefined,
+            },
+          },
+        ],
+      },
       select: {
         title: true,
         description: true,

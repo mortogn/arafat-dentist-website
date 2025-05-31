@@ -19,6 +19,20 @@ const BookingForm: FC<BookingFormProps> = async ({ data, locale }) => {
       limit: 100,
       depth: 1,
       sort: '-sort',
+      where: {
+        or: [
+          {
+            isNotListed: {
+              equals: false,
+            },
+          },
+          {
+            isNotListed: {
+              equals: undefined,
+            },
+          },
+        ],
+      },
       select: {
         title: true,
         slug: true,

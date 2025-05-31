@@ -268,6 +268,10 @@ export interface Treatment {
    */
   sort?: number | null;
   /**
+   * Check this if you do not want this treatment to be listed on the website
+   */
+  isNotListed?: boolean | null;
+  /**
    * A short description of the treatment
    */
   description?: string | null;
@@ -1200,6 +1204,7 @@ export interface TreatmentsSelect<T extends boolean = true> {
   slugLock?: T;
   slug?: T;
   sort?: T;
+  isNotListed?: T;
   description?: T;
   icon?: T;
   thumbnail?: T;
