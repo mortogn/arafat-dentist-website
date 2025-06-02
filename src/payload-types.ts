@@ -834,6 +834,15 @@ export interface Appointment {
    */
   treatment?: (string | null) | Treatment;
   treatments: (string | Treatment)[];
+  isConfirmed?: boolean | null;
+  /**
+   * This field is used to identify the appointment in the admin panel.
+   */
+  nickname?: string | null;
+  /**
+   * This field is used to store the time of the appointment.
+   */
+  time?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1271,6 +1280,9 @@ export interface AppointmentsSelect<T extends boolean = true> {
   note?: T;
   treatment?: T;
   treatments?: T;
+  isConfirmed?: T;
+  nickname?: T;
+  time?: T;
   updatedAt?: T;
   createdAt?: T;
 }

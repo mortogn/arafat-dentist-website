@@ -50,8 +50,7 @@ export const Appointment: CollectionConfig = {
       label: 'Date',
       required: true,
       admin: {
-        readOnly: true,
-        position: 'sidebar',
+        readOnly: false,
       },
     },
     {
@@ -60,7 +59,6 @@ export const Appointment: CollectionConfig = {
       label: 'Message',
       admin: {
         readOnly: true,
-        position: 'sidebar',
       },
     },
     {
@@ -93,10 +91,36 @@ export const Appointment: CollectionConfig = {
       relationTo: 'treatments',
       hasMany: true,
       admin: {
-        readOnly: true,
         position: 'sidebar',
       },
       required: true,
+    },
+    {
+      type: 'checkbox',
+      name: 'isConfirmed',
+      label: 'Is Confirmed',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'nickname',
+      type: 'text',
+      label: 'Nickname',
+      admin: {
+        description: 'This field is used to identify the appointment in the admin panel.',
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'time',
+      type: 'text',
+      label: 'Time',
+      admin: {
+        description: 'This field is used to store the time of the appointment.',
+        position: 'sidebar',
+      },
     },
   ],
 }

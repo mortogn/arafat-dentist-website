@@ -64,5 +64,16 @@
     "searchTreatments": "Search treatments...",
     "noTreatmentsFound": "No treatments found",
     "reset": "Reset"
+  },
+
+  "AppointmentsPage": {
+    "title": "Appointments",
+    "description": "Manage your appointments here",
+    "upcoming": "Upcoming Appointments",
+    "past": "Past Appointments",
+    "noUpcoming": "No upcoming appointments",
+    "noPast": "No past appointments",
+    "loadMore": "Load More",
+    "loading": "Loading..."
   }
 }

@@ -11,14 +11,15 @@ import { Popup } from '@/payload-types'
 import Media from '../Media'
 import { Link } from '@/i18n/routing'
 import { Button } from '@/components/ui/button'
-import { MoveLeftIcon, MoveRightIcon } from 'lucide-react'
+import { MoveLeftIcon, MoveRightIcon, XCircleIcon } from 'lucide-react'
 
 type Props = {
   popups: Popup[]
   setDialogOpen: React.Dispatch<React.SetStateAction<boolean>>
+  onHidePopup: (popupId: string) => void
 }
 
-const Slider: FC<Props> = ({ popups, setDialogOpen }) => {
+const Slider: FC<Props> = ({ popups, setDialogOpen, onHidePopup }) => {
   const [api, setApi] = useState<CarouselApi>()
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
@@ -58,6 +59,14 @@ const Slider: FC<Props> = ({ popups, setDialogOpen }) => {
     api?.scrollPrev()
   }
 
+  const handleHidePopup = () => {
+    const currentPopup = popups[currentIndex]
+    if (currentPopup) {
+      onHidePopup(currentPopup.id)
+    }
+    setDialogOpen(false)
+  }
+
   return (
     <Carousel setApi={setApi} opts={{ loop: true }}>
       <CarouselContent>
@@ -70,7 +79,7 @@ const Slider: FC<Props> = ({ popups, setDialogOpen }) => {
         ))}
       </CarouselContent>
 
-      <div className="justify-center flex items-center gap-2">
+      <div className="justify-center flex items-center gap-2 mb-2">
         <Button
           size="icon"
           className="[&_svg]:size-6"
@@ -94,9 +103,17 @@ const Slider: FC<Props> = ({ popups, setDialogOpen }) => {
         </Button>
       </div>
 
-      {/* These can be removed if you want to rely only on the custom controls above */}
-      <CarouselPrevious className="hidden" />
-      <CarouselNext className="hidden" />
+      <div className="flex justify-center mt-2">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-xs flex items-center gap-1"
+          onClick={handleHidePopup}
+        >
+          <XCircleIcon className="size-4" />
+          Don&apos;t show this again
+        </Button>
+      </div>
     </Carousel>
   )
 }
