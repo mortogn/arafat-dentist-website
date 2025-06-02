@@ -96,10 +96,17 @@ export const Appointment: CollectionConfig = {
       required: true,
     },
     {
-      type: 'checkbox',
-      name: 'isConfirmed',
-      label: 'Is Confirmed',
-      defaultValue: false,
+      type: 'select',
+      name: 'status',
+      label: 'Status',
+      defaultValue: 'pending',
+      options: [
+        { label: 'Pending', value: 'pending' },
+        { label: 'Confirmed', value: 'confirmed' },
+        { label: 'Cancelled', value: 'cancelled' },
+        { label: 'Completed', value: 'completed' },
+        { label: 'No Show', value: 'no-show' },
+      ],
       admin: {
         position: 'sidebar',
       },

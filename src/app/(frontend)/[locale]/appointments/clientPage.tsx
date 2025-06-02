@@ -4,7 +4,6 @@ import { Appointment } from '@/payload-types'
 import React, { useEffect, useState } from 'react'
 import { stringify } from 'qs-esm'
 import { Locale } from '@/types'
-import { Poppins } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
 import { Badge } from '@/components/ui/badge'
@@ -14,6 +13,9 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { format, startOfToday } from 'date-fns'
 import { bn, enUS } from 'date-fns/locale'
 import { Where } from 'payload'
+import { Link } from '@/i18n/routing'
+import NextLink from 'next/link'
+import { ExternalLinkIcon } from 'lucide-react'
 
 const PAGE_SIZE = 10
 
@@ -154,28 +156,57 @@ function AppointmentCard({ appointment, locale }: { appointment: Appointment; lo
     <Card className="p-4">
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
-          <h3 className="font-semibold text-lg">{appointment.fullname}</h3>
-          <time className="text-sm text-muted-foreground">
-            {format(new Date(appointment.date), 'dd/MM/yyyy', { locale: dateLocale })}
-          </time>
+          <h3 className="font-semibold text-lg">{appointment?.nickname || appointment.fullname}</h3>
+          <div className="space-x-2">
+            <Badge
+              variant="secondary"
+              className={cn({
+                'bg-green-300 hover:bg-green-300': appointment.status === 'completed',
+                'bg-yellow-300 hover:bg-yellow-300': appointment.status === 'pending',
+                'bg-red-300 hover:bg-red-300': appointment.status === 'cancelled',
+                'bg-gray-300 hover:bg-gray-300': appointment.status === 'no-show',
+                'bg-blue-300 hover:bg-blue-300': appointment.status === 'confirmed',
+              })}
+            >
+              {appointment.status || 'pending'}
+            </Badge>
+            <time className="text-sm text-muted-foreground">
+              {format(new Date(appointment.date), 'dd/MM/yyyy', { locale: dateLocale })}{' '}
+              {appointment.time && <span>- {appointment.time}</span>}
+            </time>
+            <Button size="sm" variant="ghost" asChild>
+              <NextLink target="_blank" href={`/admin/collections/appointments/${appointment.id}`}>
+                <span>View Details</span>
+                <ExternalLinkIcon className="ml-2" />
+              </NextLink>
+            </Button>
+          </div>
         </div>
 
         {appointment.treatments && (
           <div className="flex flex-wrap gap-2">
-            {Array.isArray(appointment.treatments) ? (
-              appointment.treatments.map((treatment) => (
-                <Badge key={treatment.id} variant="secondary">
-                  {treatment.title}
-                </Badge>
-              ))
-            ) : (
-              <Badge variant="secondary">{appointment.treatments.title}</Badge>
-            )}
+            {Array.isArray(appointment.treatments)
+              ? appointment.treatments.map((treatment) =>
+                  typeof treatment === 'object' && treatment !== null ? (
+                    <Link key={treatment.id} href={`/treatments/${treatment.slug}`}>
+                      <Badge variant="secondary">{treatment.title}</Badge>
+                    </Link>
+                  ) : (
+                    <Badge key={treatment} variant="secondary">
+                      {treatment}
+                    </Badge>
+                  ),
+                )
+              : null}
           </div>
         )}
 
         {appointment.message && (
           <p className="text-sm text-muted-foreground mt-2">{appointment.message}</p>
+        )}
+
+        {appointment.note && (
+          <p className="text-base text-muted-foreground mt-2">Note: {appointment.note}</p>
         )}
       </div>
     </Card>

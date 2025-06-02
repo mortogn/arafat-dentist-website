@@ -29,7 +29,7 @@ export default async function AppointmentsPage({ params }: { params: Params }) {
   const t = await getTranslations({ locale, namespace: 'AppointmentsPage' })
 
   return (
-    <MaxWidthWrapper className="max-w-screen-lg">
+    <MaxWidthWrapper className="max-w-screen-lg my-10">
       <h1 className="text-4xl font-bold tracking-tight">{t('title')}</h1>
       <p className="text-muted-foreground mt-2">{t('description')}</p>
 

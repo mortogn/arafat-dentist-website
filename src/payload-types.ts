@@ -834,7 +834,7 @@ export interface Appointment {
    */
   treatment?: (string | null) | Treatment;
   treatments: (string | Treatment)[];
-  isConfirmed?: boolean | null;
+  status?: ('pending' | 'confirmed' | 'cancelled' | 'completed' | 'no-show') | null;
   /**
    * This field is used to identify the appointment in the admin panel.
    */
@@ -1280,7 +1280,7 @@ export interface AppointmentsSelect<T extends boolean = true> {
   note?: T;
   treatment?: T;
   treatments?: T;
-  isConfirmed?: T;
+  status?: T;
   nickname?: T;
   time?: T;
   updatedAt?: T;
