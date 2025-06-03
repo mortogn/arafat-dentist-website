@@ -8,6 +8,12 @@ import AppointmentsClientPage from './clientPage'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getMeUser } from '@/utilities/getMeUser'
 import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Appointments',
+  description: 'Manage and view appointments',
+}
 
 type Params = Promise<{
   locale: Locale
