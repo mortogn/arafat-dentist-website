@@ -1,12 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '../ui/carousel'
+import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '../ui/carousel'
 import { Popup } from '@/payload-types'
 import Media from '../Media'
 import { Link } from '@/i18n/routing'

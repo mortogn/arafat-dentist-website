@@ -5,16 +5,19 @@ import React, { useEffect, useState } from 'react'
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog'
 import Slider from './Slider'
+import { usePathname } from '@/i18n/routing'
 
 type Props = {
   popups: Popup[]
 }
 
 const HIDDEN_POPUPS_KEY = 'hidden-popups'
+const HIDDEN_POPUP_PATHS = ['/appointments']
 
 const PopupClient = ({ popups }: Props) => {
   const [open, setOpen] = useState(false)
   const [filteredPopups, setFilteredPopups] = useState<Popup[]>([])
+  const pathname = usePathname()
 
   useEffect(() => {
     // Filter out popups that the user has chosen not to see again
@@ -24,10 +27,10 @@ const PopupClient = ({ popups }: Props) => {
     setFilteredPopups(visiblePopups)
 
     // Only open the dialog if there are popups to show
-    if (visiblePopups.length > 0) {
+    if (visiblePopups.length > 0 && !HIDDEN_POPUP_PATHS.includes(pathname)) {
       setOpen(true)
     }
-  }, [popups])
+  }, [popups, pathname])
 
   const getHiddenPopupIds = (): string[] => {
     if (typeof window === 'undefined') return []

@@ -37,44 +37,76 @@ const AppointmentsClientPage = ({ locale }: { locale: Locale }) => {
   const [hasMoreUpcoming, setHasMoreUpcoming] = useState(true)
   const [hasMorePast, setHasMorePast] = useState(true)
 
+  // Load initial upcoming appointments
   useEffect(() => {
-    setLoadingUpcoming(true)
-    fetchUpcomingAppointments(locale, 1).then((data) => {
-      setUpcomingAppointments(data.docs)
-      setHasMoreUpcoming(data.hasNextPage)
-      setUpcomingPage(data.page)
-      setLoadingUpcoming(false)
-    })
-  }, [locale])
+    const loadInitialUpcoming = async () => {
+      setLoadingUpcoming(true)
+      try {
+        const data = await fetchUpcomingAppointments(locale, 1)
+        setUpcomingAppointments(data.docs)
+        setHasMoreUpcoming(data.hasNextPage)
+        setUpcomingPage(1)
+      } catch (error) {
+        console.error('Error loading upcoming appointments:', error)
+      } finally {
+        setLoadingUpcoming(false)
+      }
+    }
 
+    loadInitialUpcoming()
+  }, [locale]) // Only reload when locale changes
+
+  // Load initial past appointments
   useEffect(() => {
-    setLoadingPast(true)
-    fetchPastAppointments(locale, 1).then((data) => {
-      setPastAppointments(data.docs)
-      setHasMorePast(data.hasNextPage)
-      setPastPage(data.page)
-      setLoadingPast(false)
-    })
-  }, [locale])
+    const loadInitialPast = async () => {
+      setLoadingPast(true)
+      try {
+        const data = await fetchPastAppointments(locale, 1)
+        setPastAppointments(data.docs)
+        setHasMorePast(data.hasNextPage)
+        setPastPage(1)
+      } catch (error) {
+        console.error('Error loading past appointments:', error)
+      } finally {
+        setLoadingPast(false)
+      }
+    }
+
+    loadInitialPast()
+  }, [locale]) // Only reload when locale changes
 
   const loadMoreUpcoming = async () => {
+    if (!hasMoreUpcoming || loadingMoreUpcoming) return
+
     setLoadingMoreUpcoming(true)
-    const nextPage = upcomingPage + 1
-    const data = await fetchUpcomingAppointments(locale, nextPage)
-    setUpcomingAppointments((prev) => [...prev, ...data.docs])
-    setUpcomingPage(data.page)
-    setHasMoreUpcoming(data.hasNextPage)
-    setLoadingMoreUpcoming(false)
+    try {
+      const nextPage = upcomingPage + 1
+      const data = await fetchUpcomingAppointments(locale, nextPage)
+      setUpcomingAppointments((prev) => [...prev, ...data.docs])
+      setHasMoreUpcoming(data.hasNextPage)
+      setUpcomingPage(nextPage)
+    } catch (error) {
+      console.error('Error loading more upcoming appointments:', error)
+    } finally {
+      setLoadingMoreUpcoming(false)
+    }
   }
 
   const loadMorePast = async () => {
+    if (!hasMorePast || loadingMorePast) return
+
     setLoadingMorePast(true)
-    const nextPage = pastPage + 1
-    const data = await fetchPastAppointments(locale, nextPage)
-    setPastAppointments((prev) => [...prev, ...data.docs])
-    setPastPage(data.page)
-    setHasMorePast(data.hasNextPage)
-    setLoadingMorePast(false)
+    try {
+      const nextPage = pastPage + 1
+      const data = await fetchPastAppointments(locale, nextPage)
+      setPastAppointments((prev) => [...prev, ...data.docs])
+      setHasMorePast(data.hasNextPage)
+      setPastPage(nextPage)
+    } catch (error) {
+      console.error('Error loading more past appointments:', error)
+    } finally {
+      setLoadingMorePast(false)
+    }
   }
 
   const t = useTranslations('AppointmentsPage')
@@ -300,6 +332,7 @@ const fetchPastAppointments = async (
     },
     { addQueryPrefix: true },
   )
+
   const response = await fetch(`/api/appointments${stringifiedQuery}`)
   if (!response.ok) throw new Error('Failed to fetch past appointments')
   const data = await response.json()

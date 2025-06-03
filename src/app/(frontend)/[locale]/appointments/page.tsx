@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import { Locale } from '@/types'
 import React from 'react'
