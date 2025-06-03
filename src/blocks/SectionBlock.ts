@@ -34,17 +34,23 @@ export const SectionBlock: Block = {
       label: 'Content',
       required: true,
       admin: {
-        description: 'The content of the section',
+        description: 'The content of the section. ',
       },
       localized: true,
     },
     {
-      name: 'image',
       type: 'upload',
-      relationTo: 'media',
+      name: 'image',
+      label: 'Image',
+      required: true,
+      admin: {
+        description:
+          'The image for the section. Aspect ratio of 2:1 is recommended. Example: 1200x600px.',
+      },
       filterOptions: {
         mimeType: { contains: 'image' },
       },
+      relationTo: 'media',
     },
   ],
 }

@@ -45,6 +45,12 @@ export const HeroBlock: Block = {
       filterOptions: {
         mimeType: { contains: 'image' },
       },
+      admin: {
+        description: 'The hero image. Recommended aspect ratio is 4:5. Example: 1200x1500px.',
+        condition: (_, siblingData) => {
+          return siblingData?.text?.length > 0
+        },
+      },
       required: true,
     },
   ],

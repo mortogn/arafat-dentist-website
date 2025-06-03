@@ -217,7 +217,10 @@ export interface HeroBlock {
     };
     [k: string]: unknown;
   };
-  image: string | Media;
+  /**
+   * The hero image. Recommended aspect ratio is 4:5. Example: 1200x1500px.
+   */
+  image?: (string | null) | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero';
@@ -622,7 +625,7 @@ export interface SectionBlock {
     [k: string]: unknown;
   };
   /**
-   * The content of the section
+   * The content of the section.
    */
   content: {
     root: {
@@ -639,7 +642,10 @@ export interface SectionBlock {
     };
     [k: string]: unknown;
   };
-  image?: (string | null) | Media;
+  /**
+   * The image for the section. Aspect ratio of 2:1 is recommended. Example: 1200x600px.
+   */
+  image: string | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'section';
