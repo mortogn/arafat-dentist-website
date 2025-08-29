@@ -22,7 +22,7 @@ export const SectionBlock: Block = {
       name: 'description',
       label: 'Description',
       type: 'richText',
-      required: true,
+      required: false,
       localized: true,
       admin: {
         description: 'The description of the section',
