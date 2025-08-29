@@ -609,7 +609,7 @@ export interface SectionBlock {
   /**
    * The description of the section
    */
-  description: {
+  description?: {
     root: {
       type: string;
       children: {
@@ -623,7 +623,7 @@ export interface SectionBlock {
       version: number;
     };
     [k: string]: unknown;
-  };
+  } | null;
   /**
    * The content of the section.
    */

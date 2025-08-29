@@ -17,9 +17,9 @@ const SectionBlockComponent: React.FC<Props> = ({ data }) => {
     <MaxWidthWrapper element="section" className="flex flex-col items-center my-10 md:my-20">
       <SectionTitle title={data.title} description={data.description} />
 
-      <div className="flex flex-col lg:flex-row items-start justify-between gap-4 lg:gap-10 w-full">
+      <div className="flex flex-col lg:flex-row items-start justify-between gap-4 mt-6 lg:mt-10 lg:gap-10 w-full">
         <div className="lg:w-1/2">
-          <RichTextContent className="mt-8" data={data.content} />
+          <RichTextContent className="mt-2 lg:mt-8" data={data.content} />
         </div>
 
         <div
