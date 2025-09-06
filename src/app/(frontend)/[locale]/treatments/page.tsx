@@ -42,6 +42,11 @@ const getTreatments = async (locale: Locale) => {
     depth: 1,
     limit: 100,
     sort: `-sort`,
+    where: {
+      isNotListed: {
+        equals: false,
+      },
+    },
     select: {
       title: true,
       description: true,

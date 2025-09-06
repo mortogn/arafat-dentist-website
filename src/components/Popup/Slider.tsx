@@ -5,6 +5,7 @@ import Media from '../Media'
 import { Link } from '@/i18n/routing'
 import { Button } from '@/components/ui/button'
 import { MoveLeftIcon, MoveRightIcon, XCircleIcon } from 'lucide-react'
+import { isValidUrl } from '@/utilities/validateURL'
 
 type Props = {
   popups: Popup[]
@@ -60,16 +61,30 @@ const Slider: FC<Props> = ({ popups, setDialogOpen, onHidePopup }) => {
     setDialogOpen(false)
   }
 
+  const handleLinkClick = () => {
+    setDialogOpen(false)
+  }
+
   return (
     <Carousel setApi={setApi} opts={{ loop: true }}>
       <CarouselContent>
-        {popups.map((popup) => (
-          <CarouselItem key={popup.id}>
-            <Link href={popup.url} onClick={() => setDialogOpen(false)}>
-              <Media resource={popup.image} height={650} width={650} />
-            </Link>
-          </CarouselItem>
-        ))}
+        {popups.map((popup) => {
+          const hasValidUrl = popup.url && isValidUrl(popup.url)
+
+          const imageElement = <Media resource={popup.image} height={650} width={650} />
+
+          return (
+            <CarouselItem key={popup.id}>
+              {hasValidUrl ? (
+                <Link href={popup.url} onClick={handleLinkClick}>
+                  {imageElement}
+                </Link>
+              ) : (
+                <div className="cursor-default">{imageElement}</div>
+              )}
+            </CarouselItem>
+          )
+        })}
       </CarouselContent>
 
       <div className="justify-center flex items-center gap-2 mb-2">

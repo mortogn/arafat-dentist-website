@@ -2,51 +2,79 @@
 
 import { Popup } from '@/payload-types'
 import React, { useEffect, useState } from 'react'
+import { usePathname } from '@/i18n/routing'
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog'
 import Slider from './Slider'
-import { usePathname } from '@/i18n/routing'
+import { isValidUrl } from '@/utilities/validateURL'
 
 type Props = {
   popups: Popup[]
 }
 
 const HIDDEN_POPUPS_KEY = 'hidden-popups'
-const HIDDEN_POPUP_PATHS = ['/appointments']
+const HIDDEN_POPUP_PATHS = ['/appointments', '/not-found']
 
 const PopupClient = ({ popups }: Props) => {
   const [open, setOpen] = useState(false)
   const [filteredPopups, setFilteredPopups] = useState<Popup[]>([])
+  const [isClient, setIsClient] = useState(false)
   const pathname = usePathname()
 
+  // Ensure client-side only rendering to prevent hydration mismatches
   useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isClient) return
+
+    const getHiddenPopupIds = (): string[] => {
+      if (typeof window === 'undefined') return []
+
+      try {
+        const savedIds = localStorage.getItem(HIDDEN_POPUPS_KEY)
+        return savedIds ? JSON.parse(savedIds) : []
+      } catch (error) {
+        console.error('Error getting hidden popups from localStorage:', error)
+        return []
+      }
+    }
+
     // Filter out popups that the user has chosen not to see again
     const hiddenPopupIds = getHiddenPopupIds()
-    const visiblePopups = popups.filter((popup) => !hiddenPopupIds.includes(popup.id))
 
-    setFilteredPopups(visiblePopups)
+    // Filter out popups with invalid URLs and hidden popups
+    const validPopups = popups.filter((popup) => {
+      const isNotHidden = !hiddenPopupIds.includes(popup.id)
+      const hasValidUrl = popup.url && isValidUrl(popup.url)
+      return isNotHidden && hasValidUrl
+    })
 
-    // Only open the dialog if there are popups to show
-    if (visiblePopups.length > 0 && !HIDDEN_POPUP_PATHS.includes(pathname)) {
-      setOpen(true)
+    setFilteredPopups(validPopups)
+
+    // Check if we should show popups on this page
+    const shouldShowPopups =
+      !HIDDEN_POPUP_PATHS.some((path) => pathname.includes(path)) &&
+      !pathname.includes('not-found') &&
+      validPopups.length > 0
+
+    if (shouldShowPopups) {
+      // Add a small delay to prevent immediate opening which might cause issues
+      const timer = setTimeout(() => {
+        setOpen(true)
+      }, 100)
+
+      return () => clearTimeout(timer)
     }
-  }, [popups, pathname])
+  }, [popups, pathname, isClient])
 
-  const getHiddenPopupIds = (): string[] => {
-    if (typeof window === 'undefined') return []
+  const handleHidePopup = (popupId: string) => {
+    if (!isClient || typeof window === 'undefined') return
 
     try {
       const savedIds = localStorage.getItem(HIDDEN_POPUPS_KEY)
-      return savedIds ? JSON.parse(savedIds) : []
-    } catch (error) {
-      console.error('Error getting hidden popups from localStorage:', error)
-      return []
-    }
-  }
-
-  const handleHidePopup = (popupId: string) => {
-    try {
-      const hiddenPopupIds = getHiddenPopupIds()
+      const hiddenPopupIds = savedIds ? JSON.parse(savedIds) : []
       const updatedHiddenIds = [...hiddenPopupIds, popupId]
       localStorage.setItem(HIDDEN_POPUPS_KEY, JSON.stringify(updatedHiddenIds))
 
@@ -57,8 +85,8 @@ const PopupClient = ({ popups }: Props) => {
     }
   }
 
-  // Don't render anything if there are no popups to show
-  if (filteredPopups.length === 0) {
+  // Don't render anything if not on client or no popups to show
+  if (!isClient || filteredPopups.length === 0) {
     return null
   }
 

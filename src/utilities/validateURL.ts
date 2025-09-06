@@ -28,3 +28,32 @@ export function validateURL(value?: string | string[] | null) {
     return 'Please enter a valid URL (e.g., https://example.com) or pathname (e.g., /about)'
   }
 }
+
+export const isValidUrl = (url: string): boolean => {
+  if (!url || typeof url !== 'string') return false
+
+  try {
+    // Check if it's a relative path (starts with /)
+    if (url.startsWith('/')) {
+      return url.length > 1 && !url.includes('..') && !/\s/.test(url)
+    }
+
+    // Check if it's a valid absolute URL
+    new URL(url)
+    return true
+  } catch {
+    return false
+  }
+}
+
+export const isInternalUrl = (url: string): boolean => {
+  if (url.startsWith('/')) return true
+
+  try {
+    const urlObj = new URL(url)
+    const currentDomain = typeof window !== 'undefined' ? window.location.hostname : ''
+    return urlObj.hostname === currentDomain
+  } catch {
+    return false
+  }
+}
