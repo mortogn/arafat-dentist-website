@@ -17,11 +17,10 @@ const HIDDEN_POPUPS_KEY = 'hidden-popups'
 const HIDDEN_POPUP_PATHS = ['/appointments', '/not-found']
 
 const PopupClient = ({ popups }: Props) => {
-  const [open, setOpen] = useState(false)
   const [filteredPopups, setFilteredPopups] = useState<Popup[]>([])
   const [isClient, setIsClient] = useState(false)
   const pathname = usePathname()
-  const { hasPopupBeenShown, markPopupsAsShown } = usePopupContext()
+  const { open, handlePopupClose, setOpen, hasAlreadyClosedBefore } = usePopupContext()
 
   // Ensure client-side only rendering to prevent hydration mismatches
   useEffect(() => {
@@ -29,6 +28,8 @@ const PopupClient = ({ popups }: Props) => {
   }, [])
 
   useEffect(() => {
+    if (hasAlreadyClosedBefore) return
+
     if (!isClient) return
 
     const getHiddenPopupIds = (): string[] => {
@@ -46,13 +47,10 @@ const PopupClient = ({ popups }: Props) => {
     // Filter out popups that the user has chosen not to see again
     const hiddenPopupIds = getHiddenPopupIds()
 
-    // Filter out popups with invalid URLs, hidden popups, and already shown popups in this session
-    const validPopups = popups.filter((popup) => {
-      const isNotHidden = !hiddenPopupIds.includes(popup.id)
-      const isNotShownInSession = !hasPopupBeenShown(popup.id)
-      const hasValidUrl = popup.url && isValidUrl(popup.url)
-      return isNotHidden && isNotShownInSession && hasValidUrl
-    })
+    // Filter out popups with invalid URLs, hidden popups
+    const validPopups = popups.filter(
+      (popup) => !hiddenPopupIds.includes(popup.id) && isValidUrl(popup.url || ''),
+    )
 
     setFilteredPopups(validPopups)
 
@@ -63,17 +61,9 @@ const PopupClient = ({ popups }: Props) => {
       validPopups.length > 0
 
     if (shouldShowPopups) {
-      // Add a small delay to prevent immediate opening which might cause issues
-      const timer = setTimeout(() => {
-        // Mark these popups as shown right before opening
-        markPopupsAsShown(validPopups.map((popup) => popup.id))
-        setOpen(true)
-      }, 100)
-
-      return () => clearTimeout(timer)
+      setOpen(true)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [popups, pathname, isClient])
+  }, [popups, pathname, isClient, setOpen, hasAlreadyClosedBefore])
 
   const handleHidePopup = (popupId: string) => {
     if (!isClient || typeof window === 'undefined') return
@@ -97,7 +87,7 @@ const PopupClient = ({ popups }: Props) => {
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handlePopupClose}>
       <DialogHeader>
         <DialogTitle className="sr-only">Promotional Popup</DialogTitle>
         <DialogDescription className="sr-only">

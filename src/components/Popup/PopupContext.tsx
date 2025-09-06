@@ -1,12 +1,11 @@
 'use client'
-
 import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react'
 
 interface PopupContextType {
-  shownPopupIds: string[]
-  markPopupAsShown: (popupId: string) => void
-  markPopupsAsShown: (popupIds: string[]) => void
-  hasPopupBeenShown: (popupId: string) => boolean
+  open: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  handlePopupClose: () => void
+  hasAlreadyClosedBefore: boolean
 }
 
 const PopupContext = createContext<PopupContextType | undefined>(undefined)
@@ -24,32 +23,19 @@ interface PopupProviderProps {
 }
 
 export const PopupProvider = ({ children }: PopupProviderProps) => {
-  const [shownPopupIds, setShownPopupIds] = useState<string[]>([])
+  const [open, setOpen] = useState(true)
+  const [hasAlreadyClosedBefore, setHasAlreadyClosedBefore] = useState(false)
 
-  const markPopupAsShown = useCallback((popupId: string) => {
-    setShownPopupIds((prev) => {
-      if (prev.includes(popupId)) return prev
-      return [...prev, popupId]
-    })
+  const handlePopupClose = useCallback(() => {
+    setHasAlreadyClosedBefore(true)
+    setOpen(false)
   }, [])
-
-  const markPopupsAsShown = useCallback((popupIds: string[]) => {
-    setShownPopupIds((prev) => {
-      const newIds = popupIds.filter((id) => !prev.includes(id))
-      if (newIds.length === 0) return prev
-      return [...prev, ...newIds]
-    })
-  }, [])
-
-  const hasPopupBeenShown = useCallback((popupId: string) => {
-    return shownPopupIds.includes(popupId)
-  }, [shownPopupIds])
 
   const value: PopupContextType = {
-    shownPopupIds,
-    markPopupAsShown,
-    markPopupsAsShown,
-    hasPopupBeenShown,
+    open,
+    handlePopupClose,
+    setOpen,
+    hasAlreadyClosedBefore,
   }
 
   return <PopupContext.Provider value={value}>{children}</PopupContext.Provider>
