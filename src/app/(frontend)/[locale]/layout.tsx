@@ -16,6 +16,7 @@ import UmamiAnalytics from '@/components/UmamiAnalytics'
 import { draftMode } from 'next/headers'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 import Popup from '@/components/Popup'
+import { PopupProvider } from '@/components/Popup/PopupContext'
 
 const playfair_display = Playfair_Display({
   display: 'swap',
@@ -76,21 +77,23 @@ export default async function MainLayout({
             [`${anek_bangla_heading.variable} ${anek_bangla_body.variable}`]: locale === 'bn-BD',
           })}
         >
-          <AdminBar adminBarProps={{ preview: isEnabled }} />
+          <PopupProvider>
+            <AdminBar adminBarProps={{ preview: isEnabled }} />
 
-          <Header locale={locale} />
-          <main>{children}</main>
-          <ScrollToTop />
+            <Header locale={locale} />
+            <main>{children}</main>
+            <ScrollToTop />
 
-          <MobileBottomBar />
+            <MobileBottomBar />
 
-          <Footer locale={locale} />
+            <Footer locale={locale} />
 
-          <Toaster position="bottom-center" richColors />
+            <Toaster position="bottom-center" richColors />
 
-          <Popup locale={locale} />
+            <Popup locale={locale} />
 
-          <UmamiAnalytics />
+            <UmamiAnalytics />
+          </PopupProvider>
         </body>
       </NextIntlClientProvider>
     </html>

@@ -10,7 +10,7 @@ export const Popup: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', '_status', 'createdAt'],
+    defaultColumns: ['title', 'isActive', 'createdAt'],
   },
   access: {
     read: () => true,
@@ -19,6 +19,16 @@ export const Popup: CollectionConfig = {
     afterChange: [revalidateCache],
   },
   fields: [
+    {
+      type: 'checkbox',
+      name: 'isActive',
+      label: 'Is Active',
+      defaultValue: false,
+      admin: {
+        description: 'Enable or disable the popup',
+        position: 'sidebar',
+      },
+    },
     {
       type: 'text',
       name: 'title',

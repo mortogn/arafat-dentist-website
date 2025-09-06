@@ -7,6 +7,7 @@ import { usePathname } from '@/i18n/routing'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog'
 import Slider from './Slider'
 import { isValidUrl } from '@/utilities/validateURL'
+import { usePopupContext } from './PopupContext'
 
 type Props = {
   popups: Popup[]
@@ -20,6 +21,7 @@ const PopupClient = ({ popups }: Props) => {
   const [filteredPopups, setFilteredPopups] = useState<Popup[]>([])
   const [isClient, setIsClient] = useState(false)
   const pathname = usePathname()
+  const { hasPopupBeenShown, markPopupsAsShown } = usePopupContext()
 
   // Ensure client-side only rendering to prevent hydration mismatches
   useEffect(() => {
@@ -44,11 +46,12 @@ const PopupClient = ({ popups }: Props) => {
     // Filter out popups that the user has chosen not to see again
     const hiddenPopupIds = getHiddenPopupIds()
 
-    // Filter out popups with invalid URLs and hidden popups
+    // Filter out popups with invalid URLs, hidden popups, and already shown popups in this session
     const validPopups = popups.filter((popup) => {
       const isNotHidden = !hiddenPopupIds.includes(popup.id)
+      const isNotShownInSession = !hasPopupBeenShown(popup.id)
       const hasValidUrl = popup.url && isValidUrl(popup.url)
-      return isNotHidden && hasValidUrl
+      return isNotHidden && isNotShownInSession && hasValidUrl
     })
 
     setFilteredPopups(validPopups)
@@ -62,11 +65,14 @@ const PopupClient = ({ popups }: Props) => {
     if (shouldShowPopups) {
       // Add a small delay to prevent immediate opening which might cause issues
       const timer = setTimeout(() => {
+        // Mark these popups as shown right before opening
+        markPopupsAsShown(validPopups.map((popup) => popup.id))
         setOpen(true)
       }, 100)
 
       return () => clearTimeout(timer)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [popups, pathname, isClient])
 
   const handleHidePopup = (popupId: string) => {

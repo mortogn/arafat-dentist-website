@@ -31,6 +31,9 @@ const fetchPopup = async (locale: Locale) => {
       collection: 'popup',
       locale: locale,
       sort: '-createdAt',
+      where: {
+        isActive: { equals: true },
+      },
       depth: 1,
     })()
 

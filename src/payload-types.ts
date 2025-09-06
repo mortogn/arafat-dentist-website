@@ -859,6 +859,10 @@ export interface Appointment {
 export interface Popup {
   id: string;
   /**
+   * Enable or disable the popup
+   */
+  isActive?: boolean | null;
+  /**
    * The title of the popup
    */
   title: string;
@@ -1309,6 +1313,7 @@ export interface DoctorsSelect<T extends boolean = true> {
  * via the `definition` "popup_select".
  */
 export interface PopupSelect<T extends boolean = true> {
+  isActive?: T;
   title?: T;
   image?: T;
   url?: T;
