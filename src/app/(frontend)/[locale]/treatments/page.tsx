@@ -44,7 +44,7 @@ const getTreatments = async (locale: Locale) => {
     sort: `-sort`,
     where: {
       isNotListed: {
-        equals: false,
+        not_equals: true,
       },
     },
     select: {
