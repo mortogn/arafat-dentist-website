@@ -29,14 +29,16 @@ const nextConfig = {
       },
     ]
   },
-  async rewrites() {
-    return [
-      {
-        source: '/track/:path*',
-        destination: process.env.NEXT_PUBLIC_UMAMI_URL + '/:path*',
-      },
-    ]
-  },
+  // async rewrites() {
+  //   // Umami analytics proxy is temporarily disabled.
+  //   // To re-enable, uncomment this block.
+  //   return [
+  //     {
+  //       source: '/track/:path*',
+  //       destination: process.env.NEXT_PUBLIC_UMAMI_URL + '/:path*',
+  //     },
+  //   ]
+  // },
 }
 
 export default withPayload(withNextIntl(nextConfig))
