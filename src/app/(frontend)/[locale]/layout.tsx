@@ -69,7 +69,6 @@ export default async function MainLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <RefreshRouteOnSave />
       <NextIntlClientProvider messages={messages}>
         <body
           className={cn({
@@ -77,6 +76,7 @@ export default async function MainLayout({
             [`${anek_bangla_heading.variable} ${anek_bangla_body.variable}`]: locale === 'bn-BD',
           })}
         >
+          <RefreshRouteOnSave />
           <PopupProvider>
             <AdminBar adminBarProps={{ preview: isEnabled }} />
 
