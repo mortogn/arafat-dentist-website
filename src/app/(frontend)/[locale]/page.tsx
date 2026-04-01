@@ -1,4 +1,3 @@
-import { getPageBySlug } from '@/utilities/getPageBySlug'
 import { setRequestLocale } from 'next-intl/server'
 import { renderer } from './_renderer'
 import { cache } from 'react'
@@ -30,15 +29,11 @@ const getHomePageData = cache(async (locale: Locale) => {
   return home.docs[0]
 })
 
-const getHomePage = cache((locale: Locale) => {
-  return getPageBySlug('home', 2, locale)
-})
-
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
 
   const homePageData = await getHomePageData(locale)
-  return generateSEO(homePageData.meta)
+  return generateSEO(homePageData?.meta)
 }
 
 export default async function Home({ params }: { params: Promise<{ locale: 'en-US' | 'bn-BD' }> }) {
@@ -47,6 +42,8 @@ export default async function Home({ params }: { params: Promise<{ locale: 'en-U
   setRequestLocale(locale)
 
   const homePage = await getHomePageData(locale)
+
+  if (!homePage) return null
 
   return homePage.layout?.map((block) => renderer(block, locale))
 }

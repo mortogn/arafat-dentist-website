@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
 
   const treatmentsPage = await getTreatmentsPageData(locale)
 
-  return generateSEO(treatmentsPage.meta)
+  return generateSEO(treatmentsPage?.meta)
 }
 
 export default async function Treatments({ params }: { params: Promise<{ locale: Locale }> }) {
@@ -86,7 +86,7 @@ export default async function Treatments({ params }: { params: Promise<{ locale:
 
         {treatments.length > 0 && <TreatmentWrapper className="my-10" treatments={treatments} />}
       </MaxWidthWrapper>
-      {treatmentsPage.layout?.map((block) => renderer(block, locale))}
+      {treatmentsPage?.layout?.map((block) => renderer(block, locale))}
     </>
   )
 }

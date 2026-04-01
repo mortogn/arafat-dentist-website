@@ -39,7 +39,7 @@ export async function generateMetadata({
 
   const aboutPage = await getAboutPageData(locale)
 
-  return generateSEO(aboutPage.meta)
+  return generateSEO(aboutPage?.meta)
 }
 
 export default async function About({ params }: { params: Promise<{ locale: Locale }> }) {
@@ -48,6 +48,8 @@ export default async function About({ params }: { params: Promise<{ locale: Loca
   setRequestLocale(locale)
 
   const aboutPage = await getAboutPageData(locale)
+
+  if (!aboutPage) return null
 
   return aboutPage.layout?.map((block) => renderer(block, locale))
 }
