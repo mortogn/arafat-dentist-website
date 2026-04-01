@@ -25,6 +25,28 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Make Railway service variables available during next build
+ARG DATABASE_URI
+ARG PAYLOAD_SECRET
+ARG BASE_URL
+ARG NEXT_PUBLIC_BASE_URL
+ARG R2_ACCESS_TOKEN
+ARG R2_SECRET_TOKEN
+ARG R2_ENDPOINT
+ARG R2_BUCKET
+ARG NEXT_PUBLIC_UMAMI_TRACK_CODE
+ARG NEXT_PUBLIC_UMAMI_URL
+ENV DATABASE_URI=$DATABASE_URI \
+    PAYLOAD_SECRET=$PAYLOAD_SECRET \
+    BASE_URL=$BASE_URL \
+    NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL \
+    R2_ACCESS_TOKEN=$R2_ACCESS_TOKEN \
+    R2_SECRET_TOKEN=$R2_SECRET_TOKEN \
+    R2_ENDPOINT=$R2_ENDPOINT \
+    R2_BUCKET=$R2_BUCKET \
+    NEXT_PUBLIC_UMAMI_TRACK_CODE=$NEXT_PUBLIC_UMAMI_TRACK_CODE \
+    NEXT_PUBLIC_UMAMI_URL=$NEXT_PUBLIC_UMAMI_URL
+
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
