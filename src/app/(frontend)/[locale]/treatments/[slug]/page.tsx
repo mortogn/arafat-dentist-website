@@ -30,11 +30,13 @@ export async function generateStaticParams() {
   for (const locale of locales) {
     const treatments = await getTreatmentSlugs(locale)
 
-    // Map the treatments for current locale
-    const localeParams = treatments.map(({ slug }) => ({
-      locale,
-      slug,
-    }))
+    // Map the treatments for current locale, filtering out any with missing slugs
+    const localeParams = treatments
+      .filter(({ slug }) => typeof slug === 'string' && slug.length > 0)
+      .map(({ slug }) => ({
+        locale,
+        slug: slug as string,
+      }))
 
     params.push(...localeParams)
   }
