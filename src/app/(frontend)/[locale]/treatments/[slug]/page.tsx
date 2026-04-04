@@ -11,11 +11,16 @@ import { Treatment } from '@/payload-types'
 import { locales } from '@/const/locale'
 import { draftMode } from 'next/headers'
 
+export const dynamicParams = true
+
 const getTreatmentSlugs = async (locale: Locale) => {
   const treatments = await getCollection({
     collection: 'treatments',
     locale,
     limit: 1000,
+    where: {
+      _status: { equals: 'published' },
+    },
     select: {
       slug: true,
     } as Partial<Record<keyof Treatment, true>>,
@@ -27,18 +32,21 @@ const getTreatmentSlugs = async (locale: Locale) => {
 export async function generateStaticParams() {
   const params: { locale: Locale; slug: string }[] = []
 
-  for (const locale of locales) {
-    const treatments = await getTreatmentSlugs(locale)
+  try {
+    for (const locale of locales) {
+      const treatments = await getTreatmentSlugs(locale)
 
-    // Map the treatments for current locale, filtering out any with missing slugs
-    const localeParams = treatments
-      .filter(({ slug }) => typeof slug === 'string' && slug.length > 0)
-      .map(({ slug }) => ({
-        locale,
-        slug: slug as string,
-      }))
+      const localeParams = treatments
+        .filter(({ slug }) => typeof slug === 'string' && slug.length > 0)
+        .map(({ slug }) => ({
+          locale,
+          slug: slug as string,
+        }))
 
-    params.push(...localeParams)
+      params.push(...localeParams)
+    }
+  } catch (err) {
+    console.error('[generateStaticParams] Failed to fetch treatment slugs:', err)
   }
 
   return params
