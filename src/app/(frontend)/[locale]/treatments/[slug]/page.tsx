@@ -84,7 +84,8 @@ export default async function TreatmentPage({ params }: PageProps) {
           <RichTextContent
             data={pageData.content}
             converters={treatmentJsxConverter}
-            className="lg:prose-lg xl:prose-xl w-full max-w-screen-lg mx-auto"
+            proseSize="compact"
+            className="w-full max-w-screen-lg mx-auto"
           />
         ) : (
           <div className="text-center py-10">
