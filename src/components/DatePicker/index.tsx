@@ -7,12 +7,14 @@ import { CalendarIcon } from 'lucide-react'
 type Props = {
   calenderProps: CalendarProps
   placeholder?: ReactNode
+  /** How many days ahead the visitor can book. Defaults to 10. */
+  maxDaysAhead?: number
 }
 
-const DatePicker: FC<Props> = ({ calenderProps, placeholder }) => {
+const DatePicker: FC<Props> = ({ calenderProps, placeholder, maxDaysAhead = 10 }) => {
   const today = new Date()
   const maxDate = new Date(today)
-  maxDate.setDate(today.getDate() + 10)
+  maxDate.setDate(today.getDate() + maxDaysAhead)
 
   return (
     <Popover>

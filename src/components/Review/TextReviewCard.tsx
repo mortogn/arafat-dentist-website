@@ -16,10 +16,7 @@ const TextReviewCard = ({ data, className, ...props }: Props) => {
     >
       <div>
         <h3 className="font-semibold text-foreground">{data?.title}</h3>
-        <RichTextContent
-          data={data?.description}
-          className="prose md:prose lg:prose xl:prose 2xl:prose"
-        />
+        <RichTextContent data={data?.description} proseSize="card" />
       </div>
       <div className="flex items-center gap-2">
         <Media resource={data?.patient.image} height={50} width={50} />

@@ -7,6 +7,9 @@ import { useSelectedLayoutSegments } from 'next/navigation'
 import { PayloadAdminBar } from 'payload-admin-bar'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+import { CalendarDays } from 'lucide-react'
+import { Link } from '@/i18n/routing'
 import MaxWidthWrapper from '../MaxWidthWrapper'
 
 const baseClass = 'admin-bar'
@@ -43,6 +46,7 @@ export const AdminBar: React.FC<{
   const [show, setShow] = useState(false)
   const collection = collectionLabels?.[segments?.[1]] ? segments?.[1] : 'pages'
   const router = useRouter()
+  const t = useTranslations('AdminBar')
 
   const onAuthChange = React.useCallback((user: unknown) => {
     if (user && typeof user === 'object' && 'role' in user && Array.isArray(user.role)) {
@@ -58,35 +62,44 @@ export const AdminBar: React.FC<{
       })}
     >
       <MaxWidthWrapper>
-        <PayloadAdminBar
-          {...adminBarProps}
-          className="py-2 text-white"
-          classNames={{
-            controls: 'font-medium text-white',
-            logo: 'text-white',
-            user: 'text-white',
-          }}
-          cmsURL={process.env.NEXT_PUBLIC_BASE_URL}
-          collection={collection}
-          collectionLabels={{
-            plural: collectionLabels[collection]?.plural || 'Pages',
-            singular: collectionLabels[collection]?.singular || 'Page',
-          }}
-          logo={<Title />}
-          onAuthChange={onAuthChange}
-          onPreviewExit={() => {
-            fetch('/next/exit-preview').then(() => {
-              router.push('/')
-              router.refresh()
-            })
-          }}
-          style={{
-            backgroundColor: 'transparent',
-            padding: 0,
-            position: 'relative',
-            zIndex: 'unset',
-          }}
-        />
+        <div className="flex items-center justify-between gap-4">
+          <PayloadAdminBar
+            {...adminBarProps}
+            className="py-2 text-white"
+            classNames={{
+              controls: 'font-medium text-white',
+              logo: 'text-white',
+              user: 'text-white',
+            }}
+            cmsURL={process.env.NEXT_PUBLIC_BASE_URL}
+            collection={collection}
+            collectionLabels={{
+              plural: collectionLabels[collection]?.plural || 'Pages',
+              singular: collectionLabels[collection]?.singular || 'Page',
+            }}
+            logo={<Title />}
+            onAuthChange={onAuthChange}
+            onPreviewExit={() => {
+              fetch('/next/exit-preview').then(() => {
+                router.push('/')
+                router.refresh()
+              })
+            }}
+            style={{
+              backgroundColor: 'transparent',
+              padding: 0,
+              position: 'relative',
+              zIndex: 'unset',
+            }}
+          />
+          <Link
+            href="/appointments"
+            className="flex items-center gap-1.5 font-medium text-white whitespace-nowrap hover:underline"
+          >
+            <CalendarDays className="size-4" />
+            {t('viewAppointments')}
+          </Link>
+        </div>
       </MaxWidthWrapper>
     </div>
   )

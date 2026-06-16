@@ -60,13 +60,15 @@ const Header = async ({ locale }: HeaderProps) => {
                   treatments={treatments.docs as Treatment[]}
                 />
               </div>
-              <Link href={'/'} className="flex-shrink-0">
-                <Logo
-                  src={(headerData.logo as Media).url!}
-                  alt={(headerData.logo as Media).alt}
-                  className="h-[65px]"
-                />
-              </Link>
+              {headerData.logo && (
+                <Link href={'/'} className="flex-shrink-0">
+                  <Logo
+                    src={(headerData.logo as Media).url!}
+                    alt={(headerData.logo as Media).alt}
+                    className="h-[65px]"
+                  />
+                </Link>
+              )}
             </div>
 
             <div className="hidden lg:block">

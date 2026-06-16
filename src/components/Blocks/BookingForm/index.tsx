@@ -43,25 +43,30 @@ const BookingForm: FC<BookingFormProps> = async ({ data, locale }) => {
   }
 
   return (
-    <div className="flex items-stretch my-10 rounded-md border border-border overflow-hidden shadow-md min-h-[58rem]">
-      <div className="w-full md:w-1/2 px-10 flex flex-col items-center justify-center gap-5 py-10">
-        <div className="space-y-2 text-center max-w-[450px]">
-          <h1 className="text-3xl font-medium tracking-tighter">{data.title}</h1>
-          <p className="text-muted-foreground tracking-wide">{data.subtitle}</p>
-        </div>
-        <ActualBookForm treatments={treatments} />
-      </div>
-
-      <div className="relative w-1/2 hidden md:flex">
+    <section className="my-10 md:my-16">
+      {/* Editorial banner: the image sets the mood, the title leads */}
+      <div className="relative h-56 overflow-hidden rounded-2xl md:h-72">
         <Media
           resource={data.image}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
+          sizes="100vw"
           className="object-cover"
           fill
           priority
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/10" />
+        <div className="absolute inset-x-0 bottom-0 p-6 md:p-10">
+          <div className="max-w-2xl space-y-2">
+            <h1 className="font-heading text-3xl tracking-tight md:text-5xl">{data.title}</h1>
+            <p className="text-muted-foreground md:text-lg">{data.subtitle}</p>
+          </div>
+        </div>
       </div>
-    </div>
+
+      {/* Form card sits below the banner with breathing room */}
+      <div className="relative z-10 mx-auto mt-6 max-w-4xl rounded-2xl border border-border bg-card p-6 shadow-sm md:mt-8 md:p-10">
+        <ActualBookForm treatments={treatments} />
+      </div>
+    </section>
   )
 }
 

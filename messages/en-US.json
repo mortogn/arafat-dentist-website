@@ -1,4 +1,7 @@
 {
+  "AdminBar": {
+    "viewAppointments": "Appointments"
+  },
   "BookingPage": {
     "form": {
       "fullname": "Full Name",
@@ -10,11 +13,32 @@
       "selectMultipleTreatments": "Select treatments according to your needs.",
       "searchTreatments": "Search treatments...",
       "noTreatmentsFound": "No treatments found",
+      "showMore": "Show more treatments",
       "date": "Preferred Date",
       "time": "Preferred Time",
       "notes": "Additional Notes",
+      "optional": "optional",
       "submit": "Book Appointment",
       "submitting": "Booking Appointment",
+      "phoneHint": "Bangladeshi mobile number, e.g. 01712345678",
+      "sections": {
+        "details": "Your details",
+        "visit": "Your visit",
+        "extra": "Anything else"
+      },
+      "timeOptions": {
+        "morning": "Morning",
+        "afternoon": "Afternoon",
+        "evening": "Evening",
+        "night": "Night"
+      },
+      "summary": {
+        "title": "Your appointment",
+        "empty": "Fill in the form and your appointment details will appear here.",
+        "treatments": "Treatments",
+        "date": "Date",
+        "time": "Time"
+      },
       "placeholders": {
         "fullname": "Enter your full name",
         "phone": "Enter your phone number",
@@ -22,6 +46,21 @@
         "notes": "Any special requirements or concerns?",
         "treatment": "Choose your treatment",
         "treatments": "Select one or more treatments"
+      },
+      "validation": {
+        "fullname": "Please enter your full name.",
+        "phone": "Please enter a valid Bangladeshi mobile number.",
+        "email": "Please enter a valid email address.",
+        "treatments": "Please select at least one treatment.",
+        "date": "Please choose a date.",
+        "message": "Please keep notes under 250 characters."
+      },
+      "confirmation": {
+        "title": "You're booked in",
+        "message": "Thank you, {name}. We've received your request and will call you shortly to confirm.",
+        "whatsNext": "What happens next",
+        "whatsNextDetail": "Our team will contact you on the number you provided to confirm your time.",
+        "bookAnother": "Book another appointment"
       },
       "success": {
         "title": "Appointment Booked",
@@ -69,11 +108,38 @@
   "AppointmentsPage": {
     "title": "Appointments",
     "description": "Manage your appointments here",
-    "upcoming": "Upcoming Appointments",
-    "past": "Past Appointments",
+    "upcoming": "Upcoming",
+    "past": "Past",
     "noUpcoming": "No upcoming appointments",
     "noPast": "No past appointments",
     "loadMore": "Load More",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "searchPlaceholder": "Search by name or phone",
+    "filterStatus": "Status",
+    "allStatuses": "All statuses",
+    "noResults": "No appointments match your filters",
+    "openInAdmin": "Open in admin",
+    "pendingCount": "{count} pending",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "yesterday": "Yesterday",
+    "approve": "Approve",
+    "email": "Email",
+    "note": "Note",
+    "addNote": "Add note",
+    "editNote": "Edit note",
+    "saveNote": "Save note",
+    "cancel": "Cancel",
+    "noNote": "No note yet",
+    "statusUpdated": "Status updated",
+    "noteSaved": "Note saved",
+    "updateError": "Couldn't save changes. Please try again.",
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled",
+      "completed": "Completed",
+      "no-show": "No show"
+    }
   }
 }
